@@ -3,6 +3,16 @@ let monacoEditors = {}; // Object to store editor instances
 let pyodide;
 let monacoLoaded = false;
 let monacoLoadPromise = null;
+const isMobileDevice = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+  navigator.userAgent
+);
+
+// --- ADD: stdin support ---
+let stdinBuffer = [];
+
+window.setStdin = function (value) {
+  stdinBuffer = value.split("\n");
+};
 
 // Helper function to clean common invalid characters from code
 function sanitizeCode(code) {
@@ -279,9 +289,9 @@ window.monacoInterop = {
       // Register the Python completion provider globally (only once)
       registerPythonCompletionProvider();
 
-      // Prevent system keyboard on mobile devices
+      // Prevent system keyboard only on mobile devices
       const editorDomNode = editor.getDomNode();
-      if (editorDomNode) {
+      if (editorDomNode && isMobileDevice) {
         // Prevent focus events that trigger system keyboard
         editorDomNode.addEventListener('touchstart', (e) => {
           e.preventDefault();
@@ -665,6 +675,15 @@ window.pyodideInterop = {
       try {
         console.log('Loading Pyodide...');
         pyodide = await loadPyodide();
+
+        // --- ADD: override Python input() ---
+        pyodide.globals.set("input", (msg = "") => {
+          if (stdinBuffer.length === 0) {
+             return "";
+          }
+          return stdinBuffer.shift();
+        });
+
         
         // Set up proper output redirection using the modern Pyodide API
         pyodide.setStdout({
@@ -727,7 +746,7 @@ window.disableSystemKeyboard = function() {
 };
 
 // Auto-disable on mobile devices
-if (/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+if (isMobileDevice) {
   window.disableSystemKeyboard();
 }
 
