@@ -7,12 +7,24 @@ const isMobileDevice = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/
   navigator.userAgent
 );
 
-// --- ADD: stdin support ---
-let stdinBuffer = [];
+let onConsoleInputRequested = null;
+let pendingConsoleInputResolver = null;
 
-window.setStdin = function (value) {
-  stdinBuffer = value.split("\n");
-};
+function requestConsoleInput(promptText = "") {
+  return new Promise((resolve, reject) => {
+    if (pendingConsoleInputResolver) {
+      reject(new Error("Another input() request is already pending."));
+      return;
+    }
+
+    pendingConsoleInputResolver = resolve;
+
+    if (onConsoleInputRequested) {
+      onConsoleInputRequested(String(promptText ?? ""));
+    }
+  });
+}
+
 
 // Helper function to clean common invalid characters from code
 function sanitizeCode(code) {
@@ -670,19 +682,44 @@ window.moveCursor = function(editorId, direction) {
 };
 // --- Pyodide Interop ---
 window.pyodideInterop = {
+  setInputHandler: (onInputRequested) => {
+    onConsoleInputRequested = onInputRequested;
+  },
+
+  submitInput: (value) => {
+    if (!pendingConsoleInputResolver) {
+      return;
+    }
+
+    const normalizedValue = String(value ?? "");
+    pendingConsoleInputResolver(normalizedValue);
+    pendingConsoleInputResolver = null;
+  },
+
   init: (onOutput) => {
     return new Promise(async (resolve, reject) => {
       try {
         console.log('Loading Pyodide...');
         pyodide = await loadPyodide();
 
-        // --- ADD: override Python input() ---
-        pyodide.globals.set("input", (msg = "") => {
-          if (stdinBuffer.length === 0) {
-             return "";
+        pyodide.globals.set("__requestConsoleInput", async (msg = "") => {
+          const promptText = String(msg ?? "");
+
+          if (promptText) {
+            onOutput(promptText);
           }
-          return stdinBuffer.shift();
+
+          const value = await requestConsoleInput(promptText);
+          onOutput(`${value}\n`);
+          return value;
         });
+
+        await pyodide.runPythonAsync(`
+async def __console_input__(prompt=""):
+    value = await __requestConsoleInput(prompt)
+    return "" if value is None else str(value)
+        `);
+
 
         
         // Set up proper output redirection using the modern Pyodide API
@@ -719,7 +756,48 @@ window.pyodideInterop = {
     }
 
     try {
-      await pyodide.runPythonAsync(code);
+      const sourceCode = String(code ?? "");
+
+      if (/\binput\s*\(/.test(sourceCode)) {
+        pyodide.globals.set("__user_code_source__", sourceCode);
+        await pyodide.runPythonAsync(`
+import ast
+from pyodide.code import eval_code_async
+
+class _ConsoleInputTransformer(ast.NodeTransformer):
+    def visit_FunctionDef(self, node):
+        return node
+
+    def visit_ClassDef(self, node):
+        return node
+
+    def visit_Lambda(self, node):
+        return node
+
+    def visit_Call(self, node):
+        self.generic_visit(node)
+        if isinstance(node.func, ast.Name) and node.func.id == "input":
+            return ast.copy_location(
+                ast.Await(
+                    value=ast.Call(
+                        func=ast.Name(id="__console_input__", ctx=ast.Load()),
+                        args=node.args,
+                        keywords=node.keywords,
+                    )
+                ),
+                node,
+            )
+        return node
+
+_console_input_tree = ast.parse(__user_code_source__, mode="exec")
+_console_input_tree = _ConsoleInputTransformer().visit(_console_input_tree)
+ast.fix_missing_locations(_console_input_tree)
+
+await eval_code_async(ast.unparse(_console_input_tree), globals=globals())
+        `);
+      } else {
+        await pyodide.runPythonAsync(sourceCode);
+      }
       return null; // No error
     } catch (err) {
       return err.message; // Return error message
