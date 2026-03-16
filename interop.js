@@ -9,6 +9,8 @@ const isMobileDevice = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/
 
 let onConsoleInputRequested = null;
 let pendingConsoleInputResolver = null;
+let jediAvailable = false;
+let pyodideReady = false;
 
 function requestConsoleInput(promptText = "") {
   return new Promise((resolve, reject) => {
@@ -167,6 +169,122 @@ const pythonSuggestions = [
   { label: '__len__', kind: 2, insertText: 'def __len__(self):\n    return ${1:length}', insertTextRules: 4 }
 ];
 
+function mapCompletionKind(type) {
+  if (!window.monaco) {
+    return 9;
+  }
+
+  switch (type) {
+    case 'function':
+      return monaco.languages.CompletionItemKind.Function;
+    case 'class':
+      return monaco.languages.CompletionItemKind.Class;
+    case 'module':
+      return monaco.languages.CompletionItemKind.Module;
+    case 'instance':
+      return monaco.languages.CompletionItemKind.Variable;
+    case 'param':
+      return monaco.languages.CompletionItemKind.Variable;
+    case 'path':
+      return monaco.languages.CompletionItemKind.File;
+    case 'keyword':
+      return monaco.languages.CompletionItemKind.Keyword;
+    case 'statement':
+      return monaco.languages.CompletionItemKind.Keyword;
+    case 'property':
+      return monaco.languages.CompletionItemKind.Property;
+    default:
+      return monaco.languages.CompletionItemKind.Text;
+  }
+}
+
+function fallbackSuggestions(partialWord, range) {
+  return pythonSuggestions
+    .filter((suggestion) => !partialWord || suggestion.label.toLowerCase().startsWith(partialWord))
+    .map((suggestion) => ({ ...suggestion, range }));
+}
+
+async function ensureJediLoaded() {
+  if (!pyodide || jediAvailable) {
+    return jediAvailable;
+  }
+
+  try {
+    await pyodide.runPythonAsync('import jedi');
+    jediAvailable = true;
+    return true;
+  } catch (error) {
+    console.error('Jedi import failed:', error);
+    return false;
+  }
+}
+
+async function fetchJediCompletions(code, lineNumber, column) {
+  if (!pyodideReady) {
+    return [];
+  }
+
+  const hasJedi = await ensureJediLoaded();
+  if (!hasJedi) {
+    return [];
+  }
+
+  pyodide.globals.set("__completion_source__", String(code ?? ""));
+
+  const rawResult = await pyodide.runPythonAsync(`
+import json
+import jedi
+
+script = jedi.Script(__completion_source__)
+completions = script.complete(${lineNumber}, ${column})
+
+json.dumps([
+    {
+        "name": completion.name,
+        "type": completion.type,
+        "description": (completion.docstring() or "")[:180],
+    }
+    for completion in completions[:30]
+])
+  `);
+
+  return JSON.parse(rawResult);
+}
+
+async function fetchJediDefinitions(code) {
+  if (!pyodideReady) {
+    return [];
+  }
+
+  const hasJedi = await ensureJediLoaded();
+  if (!hasJedi) {
+    return [];
+  }
+
+  pyodide.globals.set("__analysis_source__", String(code ?? ""));
+
+  const rawResult = await pyodide.runPythonAsync(`
+import json
+import jedi
+
+script = jedi.Script(__analysis_source__)
+names = script.get_names(all_scopes=True, definitions=True)
+
+json.dumps([
+    {
+        "name": name.name,
+        "type": name.type,
+        "line": name.line or 0,
+        "column": name.column or 0,
+        "description": (name.docstring() or "")[:120],
+    }
+    for name in names[:50]
+])
+  `);
+
+  return JSON.parse(rawResult);
+}
+
 // Global flag to ensure completion provider is registered only once
 let pythonCompletionProviderRegistered = false;
 
@@ -177,9 +295,7 @@ function registerPythonCompletionProvider() {
   }
   
   monaco.languages.registerCompletionItemProvider('python', {
-    provideCompletionItems: function(model, position) {
-      console.log('Completion provider called at position:', position);
-      
+    provideCompletionItems: async function(model, position) {
       const word = model.getWordUntilPosition(position);
       const range = {
         startLineNumber: position.lineNumber,
@@ -188,25 +304,32 @@ function registerPythonCompletionProvider() {
         endColumn: word.endColumn
       };
 
-      // Get the partial word being typed (convert to lowercase for case-insensitive matching)
       const partialWord = word.word.toLowerCase();
-      console.log('Partial word:', partialWord);
 
-      // Quick return for empty input - show all suggestions
-      if (partialWord === '') {
-        console.log('Returning all suggestions');
-        return { 
-          suggestions: pythonSuggestions.map(s => ({...s, range}))
-        };
+      try {
+        const jediCompletions = await fetchJediCompletions(
+          model.getValue(),
+          position.lineNumber,
+          Math.max(0, position.column - 1)
+        );
+
+        if (jediCompletions.length > 0) {
+          return {
+            suggestions: jediCompletions.map((completion) => ({
+              label: completion.name,
+              kind: mapCompletionKind(completion.type),
+              insertText: completion.name,
+              detail: completion.type,
+              documentation: completion.description || '',
+              range
+            }))
+          };
+        }
+      } catch (error) {
+        console.error('Jedi completion error:', error);
       }
 
-      // Fast filtering using built-in array methods
-      const filteredSuggestions = pythonSuggestions
-        .filter(suggestion => suggestion.label.toLowerCase().startsWith(partialWord))
-        .map(suggestion => ({...suggestion, range}));
-
-      console.log('Filtered suggestions:', filteredSuggestions.length);
-      return { suggestions: filteredSuggestions };
+      return { suggestions: fallbackSuggestions(partialWord, range) };
     }
   });
   
@@ -301,15 +424,28 @@ window.monacoInterop = {
       // Register the Python completion provider globally (only once)
       registerPythonCompletionProvider();
 
-      // Prevent system keyboard only on mobile devices
+      // Prevent system keyboard and handle touch-to-set-cursor on mobile devices
       const editorDomNode = editor.getDomNode();
       if (editorDomNode && isMobileDevice) {
-        // Prevent focus events that trigger system keyboard
+        // Touch-to-set-cursor handler: sets cursor position at touch coordinates
+        const handleTouchToSetCursor = (e) => {
+          const touch = e.touches[0] || e.changedTouches[0];
+          if (touch) {
+            const target = editor.getTargetAtClientPoint(touch.clientX, touch.clientY);
+            if (target && target.position) {
+              editor.setPosition(target.position);
+              editor.focus();
+            }
+          }
+        };
+
+        // Prevent focus events that trigger system keyboard, but allow touch-to-set-cursor
         editorDomNode.addEventListener('touchstart', (e) => {
           e.preventDefault();
           e.stopPropagation();
+          handleTouchToSetCursor(e);
         }, { passive: false });
-        
+
         editorDomNode.addEventListener('touchend', (e) => {
           e.preventDefault();
           e.stopPropagation();
@@ -321,7 +457,7 @@ window.monacoInterop = {
           textArea.setAttribute('readonly', 'readonly');
           textArea.setAttribute('inputmode', 'none');
           textArea.style.caretColor = 'transparent';
-          
+
           // Remove readonly when we want to programmatically set content
           const originalSetValue = editor.setValue.bind(editor);
           editor.setValue = function(value) {
@@ -738,11 +874,14 @@ async def __console_input__(prompt=""):
         });
 
         console.log('Installing basic packages...');
-        // Only load essential packages, skip black for now
         await pyodide.loadPackage(['micropip']);
+        const micropip = pyodide.pyimport('micropip');
+        await micropip.install('jedi');
+        jediAvailable = true;
+        pyodideReady = true;
         
         console.log('Pyodide ready for Python execution!');
-        resolve('Pyodide initialized successfully!');
+        resolve('Pyodide initialized successfully with Jedi autocomplete!');
       } catch (err) {
         console.error('Error initializing Pyodide:', err);
         reject(err.toString());
@@ -801,6 +940,16 @@ await eval_code_async(ast.unparse(_console_input_tree), globals=globals())
       return null; // No error
     } catch (err) {
       return err.message; // Return error message
+    }
+  },
+
+  analyzeDefinitions: async (code) => {
+    try {
+      const definitions = await fetchJediDefinitions(code);
+      return JSON.stringify(definitions);
+    } catch (error) {
+      console.error('Definition analysis error:', error);
+      return JSON.stringify([]);
     }
   }
 };
