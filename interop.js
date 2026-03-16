@@ -11,6 +11,39 @@ let onConsoleInputRequested = null;
 let pendingConsoleInputResolver = null;
 let jediAvailable = false;
 let pyodideReady = false;
+let isVirtualKeyboardEnabled = false; // Track virtual keyboard state
+
+// Set virtual keyboard state from Flutter
+window.setVirtualKeyboardEnabled = function(enabled) {
+  isVirtualKeyboardEnabled = enabled;
+  console.log('Virtual keyboard mode:', enabled ? 'enabled' : 'disabled');
+  
+  // Update all existing editors
+  Object.values(monacoEditors).forEach(editor => {
+    updateEditorKeyboardMode(editor, enabled);
+  });
+};
+
+// Update a single editor's keyboard mode
+function updateEditorKeyboardMode(editor, virtualKeyboardEnabled) {
+  const editorDomNode = editor.getDomNode();
+  if (!editorDomNode) return;
+  
+  const textArea = editorDomNode.querySelector('textarea');
+  if (!textArea) return;
+  
+  if (virtualKeyboardEnabled) {
+    // Virtual keyboard mode: prevent system keyboard
+    textArea.setAttribute('readonly', 'readonly');
+    textArea.setAttribute('inputmode', 'none');
+    textArea.style.caretColor = 'transparent';
+  } else {
+    // Real keyboard mode: allow system keyboard
+    textArea.removeAttribute('readonly');
+    textArea.removeAttribute('inputmode');
+    textArea.style.caretColor = '';
+  }
+}
 
 function requestConsoleInput(promptText = "") {
   return new Promise((resolve, reject) => {
@@ -439,33 +472,28 @@ window.monacoInterop = {
           }
         };
 
-        // Prevent focus events that trigger system keyboard, but allow touch-to-set-cursor
+        // Add touch listeners that respect virtual keyboard setting
         editorDomNode.addEventListener('touchstart', (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          handleTouchToSetCursor(e);
+          if (isVirtualKeyboardEnabled) {
+            // Virtual keyboard mode: prevent system keyboard
+            e.preventDefault();
+            e.stopPropagation();
+            handleTouchToSetCursor(e);
+          }
+          // Real keyboard mode: let default behavior happen (system keyboard shows)
         }, { passive: false });
 
         editorDomNode.addEventListener('touchend', (e) => {
-          e.preventDefault();
-          e.stopPropagation();
+          if (isVirtualKeyboardEnabled) {
+            // Virtual keyboard mode: prevent system keyboard
+            e.preventDefault();
+            e.stopPropagation();
+          }
+          // Real keyboard mode: let default behavior happen
         }, { passive: false });
 
-        // Prevent input focus
-        const textArea = editorDomNode.querySelector('textarea');
-        if (textArea) {
-          textArea.setAttribute('readonly', 'readonly');
-          textArea.setAttribute('inputmode', 'none');
-          textArea.style.caretColor = 'transparent';
-
-          // Remove readonly when we want to programmatically set content
-          const originalSetValue = editor.setValue.bind(editor);
-          editor.setValue = function(value) {
-            textArea.removeAttribute('readonly');
-            originalSetValue(value);
-            textArea.setAttribute('readonly', 'readonly');
-          };
-        }
+        // Set initial keyboard mode
+        updateEditorKeyboardMode(editor, isVirtualKeyboardEnabled);
       }
 
       // Set up content change listener
@@ -956,9 +984,12 @@ await eval_code_async(ast.unparse(_console_input_tree), globals=globals())
 
 // Additional mobile keyboard prevention
 window.disableSystemKeyboard = function() {
+  // Only disable if virtual keyboard is enabled
+  if (!isVirtualKeyboardEnabled) return;
+  
   // Disable system keyboard globally on mobile
   document.addEventListener('touchstart', function(e) {
-    if (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT') {
+    if (isVirtualKeyboardEnabled && (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT')) {
       e.target.setAttribute('readonly', 'readonly');
       e.target.setAttribute('inputmode', 'none');
     }
@@ -966,16 +997,16 @@ window.disableSystemKeyboard = function() {
   
   // Prevent zoom on input focus (mobile Safari)
   document.addEventListener('touchend', function(e) {
-    if (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT') {
+    if (isVirtualKeyboardEnabled && (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT')) {
       e.target.blur();
     }
   });
 };
 
-// Auto-disable on mobile devices
-if (isMobileDevice) {
-  window.disableSystemKeyboard();
-}
+// Auto-disable on mobile devices - now called conditionally from Flutter
+// if (isMobileDevice) {
+//   window.disableSystemKeyboard();
+// }
 
 console.log('monacoInterop object created:', window.monacoInterop);
 console.log('pyodideInterop object created:', window.pyodideInterop);
