@@ -67,6 +67,51 @@ function sanitizeCode(code) {
   return code.replace(/\u00A0/g, " ").replace(/\u2028/g, "\n").replace(/\u2029/g, "\n");
 }
 
+function normalizeErrorText(err) {
+  if (err == null) {
+    return "Unknown Python error";
+  }
+
+  if (typeof err === "string") {
+    return err;
+  }
+
+  if (typeof err.message === "string" && err.message.trim()) {
+    return err.message;
+  }
+
+  return String(err);
+}
+
+function extractUserRelevantPythonError(err) {
+  const fullMessage = normalizeErrorText(err).replace(/\r\n/g, "\n").trim();
+
+  if (!fullMessage) {
+    return "Unknown Python error";
+  }
+
+  const execFrameIndex = fullMessage.indexOf('File "<exec>"');
+  if (execFrameIndex >= 0) {
+    return fullMessage.slice(execFrameIndex).trim();
+  }
+
+  const tracebackIndex = fullMessage.indexOf("Traceback");
+  if (tracebackIndex >= 0) {
+    return fullMessage.slice(tracebackIndex).trim();
+  }
+
+  const lines = fullMessage.split("\n");
+  const filteredLines = lines.filter((line) => {
+    return !(
+      line.includes('File "/lib/python') ||
+      line.includes("_pyodide") ||
+      line.includes("_base.py")
+    );
+  });
+
+  return filteredLines.join("\n").trim() || fullMessage;
+}
+
 // --- Helper function to format code using Black in Pyodide ---
 async function formatPythonCodeWithBlack(code) {
   if (!pyodide) {
@@ -981,7 +1026,7 @@ await eval_code_async(ast.unparse(_console_input_tree), globals=globals())
       }
       return null; // No error
     } catch (err) {
-      return err.message; // Return error message
+      return extractUserRelevantPythonError(err);
     }
   },
 
