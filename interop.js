@@ -665,6 +665,20 @@ window.monacoInterop = {
     }
   },
 
+  getSelectedText: (containerId) => {
+    const editor = monacoEditors[containerId];
+    if (!editor) {
+      return '';
+    }
+
+    const selection = editor.getSelection();
+    if (!selection || selection.isEmpty()) {
+      return '';
+    }
+
+    return editor.getModel().getValueInRange(selection);
+  },
+
   setAutocomplete: (containerId, enabled) => {
     const editor = monacoEditors[containerId];
     if (editor) {

@@ -6,6 +6,30 @@
     <meta content="IE=Edge" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Python Web IDE</title>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N4SPZTRL6H"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-N4SPZTRL6H');
+
+        window.trackAnalyticsEvent = function(eventName, eventParamsJson) {
+          if (typeof gtag !== 'function') {
+            return;
+          }
+
+          let parsedParams = {};
+          if (eventParamsJson) {
+            try {
+              parsedParams = JSON.parse(eventParamsJson);
+            } catch (error) {
+              console.warn('Failed to parse analytics event params', error);
+            }
+          }
+
+          gtag('event', eventName, parsedParams);
+        };
+    </script>
     <style>
         body {
             margin: 0;
