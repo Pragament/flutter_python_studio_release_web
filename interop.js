@@ -1038,6 +1038,57 @@ await eval_code_async(ast.unparse(_console_input_tree), globals=globals())
       console.error('Definition analysis error:', error);
       return JSON.stringify([]);
     }
+  },
+
+  installPackages: async (packages) => {
+    if (!pyodide || !pyodideReady) {
+      return {
+        success: false,
+        error: 'Pyodide not initialized',
+        installed: []
+      };
+    }
+
+    if (!packages || packages.length === 0) {
+      return {
+        success: true,
+        error: null,
+        installed: []
+      };
+    }
+
+    const installed = [];
+    const errors = [];
+
+    try {
+      // Get micropip
+      const micropip = pyodide.pyimport('micropip');
+
+      for (const package of packages) {
+        try {
+          console.log(`Installing package: ${package}`);
+          await micropip.install(package);
+          installed.push(package);
+          console.log(`Successfully installed: ${package}`);
+        } catch (pkgError) {
+          console.error(`Failed to install ${package}:`, pkgError);
+          errors.push(`${package}: ${pkgError.message || pkgError}`);
+        }
+      }
+
+      return {
+        success: errors.length === 0,
+        error: errors.length > 0 ? errors.join('; ') : null,
+        installed: installed
+      };
+    } catch (error) {
+      console.error('Package installation error:', error);
+      return {
+        success: false,
+        error: error.message || error.toString(),
+        installed: installed
+      };
+    }
   }
 };
 
