@@ -789,6 +789,20 @@ window.monacoInterop = {
     if (editor) {
       editor.trigger('keyboard', 'editor.action.triggerSuggest', {});
     }
+  },
+
+  // Scroll to specific line and column, and position cursor there
+  scrollToLineColumn: (containerId, line, column) => {
+    const editor = monacoEditors[containerId];
+    if (editor) {
+      const position = {
+        lineNumber: Math.max(1, line),
+        column: Math.max(1, column)
+      };
+      editor.setPosition(position);
+      editor.revealPositionInCenter(position);
+      editor.focus();
+    }
   }
 };
 
