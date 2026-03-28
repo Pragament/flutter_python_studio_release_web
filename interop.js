@@ -1120,3 +1120,47 @@ window.disableSystemKeyboard = function() {
 
 console.log('monacoInterop object created:', window.monacoInterop);
 console.log('pyodideInterop object created:', window.pyodideInterop);
+
+// --- PWA Install Prompt ---
+let deferredInstallPrompt = null;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  console.log('beforeinstallprompt event fired');
+  e.preventDefault();
+  deferredInstallPrompt = e;
+  window.pwaInstallAvailable = true;
+});
+
+window.addEventListener('appinstalled', () => {
+  console.log('PWA was installed');
+  deferredInstallPrompt = null;
+  window.pwaInstallAvailable = false;
+});
+
+window.pwaInterop = {
+  isInstallAvailable: () => {
+    return !!deferredInstallPrompt;
+  },
+  showInstallPrompt: async () => {
+    if (!deferredInstallPrompt) {
+      return { outcome: 'unavailable' };
+    }
+    deferredInstallPrompt.prompt();
+    const result = await deferredInstallPrompt.userChoice;
+    if (result.outcome === 'accepted') {
+      deferredInstallPrompt = null;
+    }
+    return result;
+  },
+  getInstalledRelatedApps: async () => {
+    if ('getInstalledRelatedApps' in navigator) {
+      return await navigator.getInstalledRelatedApps();
+    }
+    return [];
+  },
+  isStandalone: () => {
+    return window.matchMedia('(display-mode: standalone)').matches ||
+           window.navigator.standalone ||
+           document.referrer.includes('android-app://');
+  }
+};
