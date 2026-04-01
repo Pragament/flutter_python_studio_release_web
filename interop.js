@@ -22,6 +22,22 @@ window.setVirtualKeyboardEnabled = function(enabled) {
   Object.values(monacoEditors).forEach(editor => {
     updateEditorKeyboardMode(editor, enabled);
   });
+  
+  // Also set up a mutation observer to catch dynamically created textareas
+  if (enabled && !window._keyboardObserver) {
+    Object.values(monacoEditors).forEach(editor => {
+      const domNode = editor.getDomNode();
+      if (domNode && !domNode._hasKeyboardObserver) {
+        const observer = new MutationObserver((mutations) => {
+          if (isVirtualKeyboardEnabled) {
+            updateEditorKeyboardMode(editor, true);
+          }
+        });
+        observer.observe(domNode, { childList: true, subtree: true });
+        domNode._hasKeyboardObserver = true;
+      }
+    });
+  }
 };
 
 // Update a single editor's keyboard mode
@@ -29,20 +45,27 @@ function updateEditorKeyboardMode(editor, virtualKeyboardEnabled) {
   const editorDomNode = editor.getDomNode();
   if (!editorDomNode) return;
   
-  const textArea = editorDomNode.querySelector('textarea');
-  if (!textArea) return;
-  
-  if (virtualKeyboardEnabled) {
-    // Virtual keyboard mode: prevent system keyboard
-    textArea.setAttribute('readonly', 'readonly');
-    textArea.setAttribute('inputmode', 'none');
-    textArea.style.caretColor = 'transparent';
-  } else {
-    // Real keyboard mode: allow system keyboard
-    textArea.removeAttribute('readonly');
-    textArea.removeAttribute('inputmode');
-    textArea.style.caretColor = '';
-  }
+  const textAreas = editorDomNode.querySelectorAll('textarea');
+  textAreas.forEach(textArea => {
+    if (virtualKeyboardEnabled) {
+      // Virtual keyboard mode: prevent system keyboard
+      textArea.setAttribute('readonly', 'readonly');
+      textArea.setAttribute('inputmode', 'none');
+      textArea.style.caretColor = 'transparent';
+      // Also prevent focus from triggering keyboard
+      textArea.addEventListener('focus', (e) => {
+        if (isVirtualKeyboardEnabled) {
+          e.preventDefault();
+          textArea.blur();
+        }
+      }, { capture: true });
+    } else {
+      // Real keyboard mode: allow system keyboard
+      textArea.removeAttribute('readonly');
+      textArea.removeAttribute('inputmode');
+      textArea.style.caretColor = '';
+    }
+  });
 }
 
 function requestConsoleInput(promptText = "") {
@@ -512,7 +535,10 @@ window.monacoInterop = {
             const target = editor.getTargetAtClientPoint(touch.clientX, touch.clientY);
             if (target && target.position) {
               editor.setPosition(target.position);
-              editor.focus();
+              // Don't call editor.focus() when virtual keyboard is enabled - it triggers system keyboard
+              if (!isVirtualKeyboardEnabled) {
+                editor.focus();
+              }
             }
           }
         };
