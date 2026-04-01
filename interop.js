@@ -1164,6 +1164,45 @@ console.log('pyodideInterop object created:', window.pyodideInterop);
 // --- PWA Install Prompt ---
 let deferredInstallPrompt = null;
 
+function isStandalonePwa() {
+  return window.matchMedia('(display-mode: standalone)').matches ||
+         window.navigator.standalone ||
+         document.referrer.includes('android-app://');
+}
+
+function isWindowsChrome() {
+  const userAgent = navigator.userAgent || '';
+  const platform = navigator.userAgentData?.platform || navigator.platform || '';
+  const brands = navigator.userAgentData?.brands || [];
+  const isWindows = /Windows/i.test(platform) || /Windows/i.test(userAgent);
+  const isEdge = /Edg\//i.test(userAgent) ||
+    brands.some((brand) => /Edge/i.test(brand.brand));
+  const isOpera = /OPR\//i.test(userAgent) ||
+    brands.some((brand) => /Opera/i.test(brand.brand));
+  const isChromeBrand = /Chrome\//i.test(userAgent) ||
+    brands.some((brand) => /Chrome|Chromium/i.test(brand.brand));
+
+  return isWindows && isChromeBrand && !isEdge && !isOpera;
+}
+
+async function isSelfInstalledPwa() {
+  if (isStandalonePwa()) {
+    return true;
+  }
+
+  if (!('getInstalledRelatedApps' in navigator)) {
+    return false;
+  }
+
+  try {
+    const relatedApps = await navigator.getInstalledRelatedApps();
+    return relatedApps.some((app) => app.platform === 'webapp');
+  } catch (error) {
+    console.warn('Unable to detect installed related apps', error);
+    return false;
+  }
+}
+
 window.addEventListener('beforeinstallprompt', (e) => {
   console.log('beforeinstallprompt event fired');
   e.preventDefault();
@@ -1180,6 +1219,32 @@ window.addEventListener('appinstalled', () => {
 window.pwaInterop = {
   isInstallAvailable: () => {
     return !!deferredInstallPrompt;
+  },
+  getInstallContext: async () => {
+    const isSupportedBrowser = isWindowsChrome();
+    const isStandalone = isStandalonePwa();
+
+    if (!isSupportedBrowser) {
+      return {
+        action: 'none',
+        isSupportedBrowser,
+        isInstallAvailable: false,
+        isInstalled: false,
+        isStandalone,
+      };
+    }
+
+    const isInstalled = await isSelfInstalledPwa();
+    const isInstallAvailable = !!deferredInstallPrompt && !isInstalled && !isStandalone;
+    const action = isInstallAvailable ? 'install' : (isInstalled && !isStandalone ? 'open' : 'none');
+
+    return {
+      action,
+      isSupportedBrowser,
+      isInstallAvailable,
+      isInstalled,
+      isStandalone,
+    };
   },
   showInstallPrompt: async () => {
     if (!deferredInstallPrompt) {
@@ -1198,9 +1263,19 @@ window.pwaInterop = {
     }
     return [];
   },
+  openInApp: async () => {
+    const isInstalled = await isSelfInstalledPwa();
+    if (!isInstalled) {
+      return { opened: false, reason: 'not-installed' };
+    }
+
+    const targetUrl = new URL(window.location.href);
+    targetUrl.searchParams.set('source', 'open-in-app');
+    window.open(targetUrl.toString(), '_blank', 'noopener,noreferrer');
+
+    return { opened: true };
+  },
   isStandalone: () => {
-    return window.matchMedia('(display-mode: standalone)').matches ||
-           window.navigator.standalone ||
-           document.referrer.includes('android-app://');
+    return isStandalonePwa();
   }
 };

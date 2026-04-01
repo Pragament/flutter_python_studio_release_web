@@ -1,13 +1,21 @@
 {
     "name": "python_web_ide",
     "short_name": "python_web_ide",
-    "start_url": ".",
+    "id": "./",
+    "start_url": "./",
+    "scope": "./",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
     "description": "A new Flutter project.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
+    "related_applications": [
+        {
+            "platform": "webapp",
+            "url": "./manifest.json"
+        }
+    ],
     "icons": [
         {
             "src": "icons/Icon-192.png",
