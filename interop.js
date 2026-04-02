@@ -12,6 +12,18 @@ let pendingConsoleInputResolver = null;
 let jediAvailable = false;
 let pyodideReady = false;
 let isVirtualKeyboardEnabled = false; // Track virtual keyboard state
+let webllmModulePromise = null;
+let webllmEngine = null;
+let webllmLoadedModelId = null;
+let webllmProgressListener = null;
+const preferredWebLlmModelIds = [
+  "Llama-3.2-1B-Instruct-q4f32_1-MLC",
+  "Llama-3.2-3B-Instruct-q4f32_1-MLC",
+  "Qwen2.5-Coder-1.5B-Instruct-q4f32_1-MLC",
+  "Qwen2.5-1.5B-Instruct-q4f32_1-MLC",
+  "Phi-3.5-mini-instruct-q4f32_1-MLC",
+  "gemma-2-2b-it-q4f32_1-MLC",
+];
 
 // Set virtual keyboard state from Flutter
 window.setVirtualKeyboardEnabled = function(enabled) {
@@ -133,6 +145,117 @@ function extractUserRelevantPythonError(err) {
   });
 
   return filteredLines.join("\n").trim() || fullMessage;
+}
+
+async function ensureWebLlmModule() {
+  if (!webllmModulePromise) {
+    webllmModulePromise = import("https://esm.run/@mlc-ai/web-llm");
+  }
+
+  return webllmModulePromise;
+}
+
+function safeJsonCallback(callback, payload) {
+  if (!callback) {
+    return;
+  }
+
+  try {
+    callback(JSON.stringify(payload));
+  } catch (error) {
+    console.error("Failed to invoke WebLLM callback:", error);
+  }
+}
+
+function buildWebLlmProgressPayload(report) {
+  const rawProgress = typeof report?.progress === "number" ? report.progress : null;
+  const normalizedProgress =
+    rawProgress == null ? null : rawProgress > 1 ? rawProgress / 100 : rawProgress;
+
+  return {
+    text: report?.text || "Loading model...",
+    progress:
+      normalizedProgress != null && normalizedProgress >= 0 && normalizedProgress <= 1
+        ? normalizedProgress
+        : null,
+  };
+}
+
+function simplifyModelRecord(record) {
+  const requiredFeatures = Array.isArray(record?.required_features)
+    ? record.required_features
+    : [];
+  const vramMb =
+    typeof record?.vram_required_MB === "number" ? record.vram_required_MB : null;
+  const modelId = String(record?.model_id || "");
+
+  const badges = [];
+  if (record?.low_resource_required) {
+    badges.push("low resource");
+  }
+  if (vramMb != null) {
+    badges.push(`${Math.round(vramMb)}MB VRAM`);
+  }
+  if (requiredFeatures.length > 0) {
+    badges.push(requiredFeatures.join(", "));
+  }
+
+  return {
+    id: modelId,
+    label: modelId,
+    description: badges.join(" • "),
+  };
+}
+
+async function getRecommendedWebLlmModels() {
+  const webllm = await ensureWebLlmModule();
+  const modelList = Array.isArray(webllm?.prebuiltAppConfig?.model_list)
+    ? webllm.prebuiltAppConfig.model_list
+    : [];
+
+  const instructModels = modelList.filter((record) => {
+    const modelId = String(record?.model_id || "").toLowerCase();
+    return (
+      modelId &&
+      !modelId.includes("embedding") &&
+      !modelId.includes("vision") &&
+      !modelId.includes("audio")
+    );
+  });
+
+  const preferred = preferredWebLlmModelIds
+    .map((modelId) =>
+      instructModels.find((record) => String(record?.model_id || "") === modelId),
+    )
+    .filter(Boolean);
+
+  const fallback = instructModels
+    .filter(
+      (record) =>
+        !preferred.some(
+          (preferredRecord) => preferredRecord.model_id === record.model_id,
+        ),
+    )
+    .slice(0, 6);
+
+  return [...preferred, ...fallback].slice(0, 6).map(simplifyModelRecord);
+}
+
+async function ensureWebLlmEngine() {
+  const webllm = await ensureWebLlmModule();
+
+  if (!webllmEngine) {
+    webllmEngine = new webllm.MLCEngine({
+      initProgressCallback: (report) => {
+        safeJsonCallback(
+          webllmProgressListener,
+          buildWebLlmProgressPayload(report),
+        );
+      },
+    });
+  }
+
+  return webllmEngine;
 }
 
 // --- Helper function to format code using Black in Pyodide ---
@@ -723,7 +846,36 @@ window.monacoInterop = {
   insertText: (containerId, text) => {
     const editor = monacoEditors[containerId];
     if (editor) {
-      editor.trigger('keyboard', 'type', { text });
+      const model = editor.getModel();
+      const selection = editor.getSelection();
+      if (!model || !selection) {
+        return;
+      }
+
+      const normalizedText = String(text ?? "").replace(/\r\n/g, "\n");
+      const startOffset = model.getOffsetAt(selection.getStartPosition());
+      const endPosition = model.getPositionAt(startOffset + normalizedText.length);
+
+      editor.executeEdits('paste-code', [
+        {
+          range: selection,
+          text: normalizedText,
+          forceMoveMarkers: true,
+        },
+      ]);
+
+      if (endPosition) {
+        editor.setSelection(
+          new monaco.Selection(
+            endPosition.lineNumber,
+            endPosition.column,
+            endPosition.lineNumber,
+            endPosition.column
+          )
+        );
+      }
+
+      editor.focus();
     }
   },
 
@@ -1132,6 +1284,104 @@ await eval_code_async(ast.unparse(_console_input_tree), globals=globals())
   }
 };
 
+window.webllmInterop = {
+  isSupported: () => typeof navigator !== "undefined" && !!navigator.gpu,
+
+  getAvailableModels: async () => {
+    const models = await getRecommendedWebLlmModels();
+    return JSON.stringify(models);
+  },
+
+  loadModel: async (modelId, onProgress) => {
+    if (!navigator.gpu) {
+      throw new Error("WebLLM requires a WebGPU-capable browser.");
+    }
+
+    const normalizedModelId = String(modelId || "").trim();
+    if (!normalizedModelId) {
+      throw new Error("A model must be selected before loading WebLLM.");
+    }
+
+    webllmProgressListener = onProgress;
+    safeJsonCallback(onProgress, {
+      text: `Preparing ${normalizedModelId}...`,
+      progress: 0,
+    });
+
+    const engine = await ensureWebLlmEngine();
+    await engine.reload(normalizedModelId);
+    webllmLoadedModelId = normalizedModelId;
+
+    safeJsonCallback(onProgress, {
+      text: `${normalizedModelId} is ready.`,
+      progress: 1,
+    });
+
+    return JSON.stringify({
+      modelId: normalizedModelId,
+      status: "ready",
+    });
+  },
+
+  generateResponse: async (promptTemplate, code, output, onChunk) => {
+    if (!webllmEngine || !webllmLoadedModelId) {
+      throw new Error("Load a WebLLM model before asking AI.");
+    }
+
+    const selectedTask = String(promptTemplate || "").trim();
+    if (!selectedTask) {
+      throw new Error("Select a prompt before asking AI.");
+    }
+
+    const currentCode = String(code || "").trim() || "# The editor is currently empty.";
+    const currentOutput = String(output || "").trim() || "(No program output yet.)";
+
+    const messages = [
+      {
+        role: "system",
+        content:
+          "You are a focused Python coding assistant inside a browser IDE. Use the provided code and program output. Respond in plain Markdown. Be concrete, concise, and directly useful. When proposing code changes, include a Python code block.",
+      },
+      {
+        role: "user",
+        content:
+          `Task: ${selectedTask}\n\n` +
+          `Current Python code:\n\`\`\`python\n${currentCode}\n\`\`\`\n\n` +
+          `Current program output:\n\`\`\`\n${currentOutput}\n\`\`\`\n\n` +
+          "Please respond to the selected task using this exact context.",
+      },
+    ];
+
+    const chunks = await webllmEngine.chat.completions.create({
+      messages,
+      temperature: 0.2,
+      stream: true,
+    });
+
+    let reply = "";
+    for await (const chunk of chunks) {
+      const delta = chunk?.choices?.[0]?.delta?.content || "";
+      if (!delta) {
+        continue;
+      }
+
+      reply += delta;
+      safeJsonCallback(onChunk, {
+        text: reply,
+        delta,
+        done: false,
+      });
+    }
+
+    safeJsonCallback(onChunk, {
+      text: reply,
+      done: true,
+    });
+
+    return reply;
+  },
+};
+
 // Additional mobile keyboard prevention
 window.disableSystemKeyboard = function() {
   // Only disable if virtual keyboard is enabled
@@ -1160,6 +1410,7 @@ window.disableSystemKeyboard = function() {
 
 console.log('monacoInterop object created:', window.monacoInterop);
 console.log('pyodideInterop object created:', window.pyodideInterop);
+console.log('webllmInterop object created:', window.webllmInterop);
 
 // --- PWA Install Prompt ---
 let deferredInstallPrompt = null;
