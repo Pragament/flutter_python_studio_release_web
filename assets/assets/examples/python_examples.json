@@ -1,0 +1,991 @@
+{
+  "topics": [
+    {
+      "id": "variables",
+      "title": "Python Variables",
+      "examples": [
+        {
+          "id": "variables_student_intro",
+          "title": "Variables 1: Student Introduction",
+          "description": "Store student details in variables and print them.",
+          "starter_code": "# A variable stores a value so we can use it later.\nstudent_name = \"Aarav\"\nstudent_class = 6\nfavorite_subject = \"Science\"\n\nprint(\"Student name:\", student_name)\nprint(\"Class:\", student_class)\nprint(\"Favorite subject:\", favorite_subject)\n",
+          "practice_tasks": [
+            {
+              "id": "variables_add_school_name",
+              "title": "Add school name",
+              "instructions": "Keep the existing variables, add a new variable named school_name with the value \"Sunrise School\", and print it.",
+              "test_code": "assert school_name == \"Sunrise School\"\nprint(\"School:\", school_name)\nprint(\"Practice check complete\")\n",
+              "success_message": "You added school_name correctly."
+            },
+            {
+              "id": "variables_summary_line",
+              "title": "Create a summary sentence",
+              "instructions": "Create a variable named student_summary that contains exactly: \"Aarav is in class 6 and likes Science.\" Then print it.",
+              "test_code": "assert student_summary == \"Aarav is in class 6 and likes Science.\"\nprint(student_summary)\nprint(\"Practice check complete\")\n",
+              "success_message": "Your summary sentence is correct."
+            },
+            {
+              "id": "variables_change_subject",
+              "title": "Update favorite subject",
+              "instructions": "Change favorite_subject to \"Math\" and create a variable updated_message with exactly \"New favorite: Math\". Print updated_message.",
+              "test_code": "assert favorite_subject == \"Math\"\nassert updated_message == \"New favorite: Math\"\nprint(updated_message)\nprint(\"Practice check complete\")\n",
+              "success_message": "You updated the variable correctly."
+            }
+          ]
+        },
+        {
+          "id": "variables_marks_update",
+          "title": "Variables 3: Marks Update",
+          "description": "Update a variable and print the new result.",
+          "starter_code": "math_marks = 72\nprint(\"Old math marks:\", math_marks)\n\nmath_marks = 85\nprint(\"Updated math marks:\", math_marks)\n",
+          "practice_tasks": [
+            {
+              "id": "variables_total_marks",
+              "title": "Add science marks",
+              "instructions": "Add a variable science_marks with value 90. Then create total_marks and print it.",
+              "test_code": "assert science_marks == 90\nassert total_marks == math_marks + science_marks\nprint(\"Total marks:\", total_marks)\nprint(\"Practice check complete\")\n",
+              "success_message": "You calculated total_marks correctly."
+            },
+            {
+              "id": "variables_average_marks",
+              "title": "Calculate average",
+              "instructions": "Create a variable average_marks using math_marks and a new english_marks = 95. Print the average.",
+              "test_code": "assert english_marks == 95\nassert average_marks == (math_marks + english_marks) / 2\nprint(\"Average:\", average_marks)\nprint(\"Practice check complete\")\n",
+              "success_message": "You calculated average_marks correctly."
+            },
+            {
+              "id": "variables_pass_status",
+              "title": "Create pass status",
+              "instructions": "Create a variable passed_math that is True when math_marks is 50 or more. Print passed_math.",
+              "test_code": "assert passed_math is True\nprint(\"Passed math:\", passed_math)\nprint(\"Practice check complete\")\n",
+              "success_message": "You created the pass status correctly."
+            }
+          ]
+        },
+        {
+          "id": "variables_school_bag_items",
+          "title": "Variables 2: School Bag Items",
+          "difficulty": "beginner",
+          "description": "Change variable values while the program runs.",
+          "starter_code": "# Variables can change while the program runs.\n# We start with 4 notebooks and 1 water bottle.\nnotebooks = 4\nwater_bottle = 1\n\n# Add 2 more notebooks to the old value.\nnotebooks = notebooks + 2\n\n# Display the updated values.\nprint(\"Notebooks now:\", notebooks)\nprint(\"Water bottles:\", water_bottle)\n",
+          "practice_tasks": [
+            {
+              "id": "variables_bag_add_pencils",
+              "title": "Add pencil count",
+              "difficulty": "beginner",
+              "instructions": "Create a variable pencils with value 3 and a variable total_items equal to notebooks + water_bottle + pencils. Print total_items.",
+              "test_code": "assert pencils == 3\nassert total_items == notebooks + water_bottle + pencils\nprint(total_items)\nprint(\"Practice check complete\")\n",
+              "success_message": "You added the new bag items correctly."
+            },
+            {
+              "id": "variables_bag_double_notebooks",
+              "title": "Double the notebooks",
+              "difficulty": "intermediate",
+              "instructions": "Create a variable double_notebooks equal to notebooks * 2 and print it.",
+              "test_code": "assert double_notebooks == notebooks * 2\nprint(double_notebooks)\nprint(\"Practice check complete\")\n",
+              "success_message": "You used the updated notebook value correctly."
+            }
+          ]
+        },
+        {
+          "id": "variables_store_prices",
+          "title": "Variables 3: Shop Price Update",
+          "description": "Use variables to store prices and compute a total.",
+          "starter_code": "pen_price = 12\nnotebook_price = 35\n\nprint(\"Pen:\", pen_price)\nprint(\"Notebook:\", notebook_price)\n",
+          "practice_tasks": [
+            {
+              "id": "variables_shop_total",
+              "title": "Calculate bill total",
+              "instructions": "Add eraser_price = 8 and create bill_total equal to all three prices. Print bill_total.",
+              "test_code": "assert eraser_price == 8\nassert bill_total == pen_price + notebook_price + eraser_price\nprint(\"Bill total:\", bill_total)\nprint(\"Practice check complete\")\n",
+              "success_message": "You calculated the bill total correctly."
+            },
+            {
+              "id": "variables_apply_discount",
+              "title": "Apply a discount",
+              "instructions": "Create discounted_total equal to pen_price + notebook_price - 5. Print discounted_total.",
+              "test_code": "assert discounted_total == pen_price + notebook_price - 5\nprint(\"Discounted total:\", discounted_total)\nprint(\"Practice check complete\")\n",
+              "success_message": "You applied the discount correctly."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "data_types",
+      "title": "Python Data Types",
+      "examples": [
+        {
+          "id": "data_types_basic",
+          "title": "Data Types 1: Basic Types",
+          "description": "Work with strings, integers, floats, and booleans.",
+          "starter_code": "student_name = \"Meera\"\nage = 12\nheight = 4.8\nlikes_python = True\n\nprint(student_name, \"->\", type(student_name))\nprint(age, \"->\", type(age))\nprint(height, \"->\", type(height))\nprint(likes_python, \"->\", type(likes_python))\n",
+          "practice_tasks": [
+            {
+              "id": "data_types_add_city",
+              "title": "Add another string",
+              "instructions": "Create a variable named city with the value \"Delhi\" and print its type.",
+              "test_code": "assert city == \"Delhi\"\nassert type(city) is str\nprint(city, type(city))\nprint(\"Practice check complete\")\n",
+              "success_message": "You added the new string variable correctly."
+            },
+            {
+              "id": "data_types_convert_age",
+              "title": "Convert age to float",
+              "instructions": "Create a variable age_float using float(age). Print age_float.",
+              "test_code": "assert age_float == float(age)\nassert type(age_float) is float\nprint(age_float)\nprint(\"Practice check complete\")\n",
+              "success_message": "You converted the integer to a float correctly."
+            }
+          ]
+        },
+        {
+          "id": "data_types_subjects_list",
+          "title": "Data Types 2: List of Subjects",
+          "description": "Use a list to store multiple subject names.",
+          "starter_code": "subjects = [\"English\", \"Math\", \"Science\", \"Computer\"]\n\nprint(\"Subjects:\", subjects)\nprint(\"First subject:\", subjects[0])\nprint(\"How many subjects?\", len(subjects))\n",
+          "practice_tasks": [
+            {
+              "id": "data_types_add_subject",
+              "title": "Add one more subject",
+              "instructions": "Add \"Art\" to the end of subjects and print the updated list.",
+              "test_code": "assert subjects[-1] == \"Art\"\nassert len(subjects) == 5\nprint(subjects)\nprint(\"Practice check complete\")\n",
+              "success_message": "You added the new subject correctly."
+            },
+            {
+              "id": "data_types_subject_count",
+              "title": "Store the number of subjects",
+              "instructions": "Create a variable subject_count using len(subjects). Print subject_count.",
+              "test_code": "assert subject_count == len(subjects)\nprint(subject_count)\nprint(\"Practice check complete\")\n",
+              "success_message": "You stored the subject count correctly."
+            }
+          ]
+        },
+        {
+          "id": "data_types_student_record",
+          "title": "Data Types 3: Student Record",
+          "description": "Use a dictionary to store student information.",
+          "starter_code": "student = {\n    \"name\": \"Riya\",\n    \"class\": 7,\n    \"house\": \"Blue\"\n}\n\nprint(\"Student record:\", student)\nprint(\"Name:\", student[\"name\"])\nprint(\"House:\", student[\"house\"])\n",
+          "practice_tasks": [
+            {
+              "id": "data_types_add_age_key",
+              "title": "Add a new key",
+              "instructions": "Add an \"age\" key with value 13 to student and print student.",
+              "test_code": "assert student[\"age\"] == 13\nprint(student)\nprint(\"Practice check complete\")\n",
+              "success_message": "You added the new dictionary key correctly."
+            },
+            {
+              "id": "data_types_house_message",
+              "title": "Create a message from dictionary values",
+              "instructions": "Create a variable house_message equal to \"Riya is in Blue house\" using values from the dictionary. Print it.",
+              "test_code": "assert house_message == \"Riya is in Blue house\"\nprint(house_message)\nprint(\"Practice check complete\")\n",
+              "success_message": "You used dictionary values correctly."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "input_output",
+      "title": "Python Input and Output",
+      "examples": [
+        {
+          "id": "input_output_greeting",
+          "title": "Input Output 1: Friendly Greeting",
+          "description": "Ask the user for a name and print a greeting.",
+          "starter_code": "name = input(\"What is your name? \")\n\nprint(\"Hello,\", name)\nprint(\"Welcome to Python class!\")\n",
+          "practice_tasks": [
+            {
+              "id": "input_output_add_goodbye",
+              "title": "Add a goodbye line",
+              "instructions": "After the greeting lines, print exactly \"Goodbye, <name>\" using the same name variable.",
+              "test_code": "name = \"Asha\"\nassert True\nprint(\"Goodbye,\", name)\nprint(\"Practice check complete\")\n",
+              "success_message": "You added the goodbye output."
+            },
+            {
+              "id": "input_output_name_length",
+              "title": "Print name length",
+              "instructions": "Create a variable name_length using len(name) and print it.",
+              "test_code": "name = \"Asha\"\nassert name_length == 4\nprint(name_length)\nprint(\"Practice check complete\")\n",
+              "success_message": "You measured the name length correctly."
+            }
+          ]
+        },
+        {
+          "id": "input_output_age_next_year",
+          "title": "Input Output 2: Age Next Year",
+          "description": "Convert input to an integer and perform arithmetic.",
+          "starter_code": "age = int(input(\"Enter your age: \"))\n\nnext_year_age = age + 1\n\nprint(\"Your age next year will be\", next_year_age)\n",
+          "practice_tasks": [
+            {
+              "id": "input_output_age_in_five_years",
+              "title": "Age after five years",
+              "instructions": "Create a variable age_after_five equal to age + 5 and print it.",
+              "test_code": "age = 12\nassert age_after_five == 17\nprint(age_after_five)\nprint(\"Practice check complete\")\n",
+              "success_message": "You calculated the future age correctly."
+            },
+            {
+              "id": "input_output_is_teenager",
+              "title": "Check teenager status",
+              "instructions": "Create a boolean variable is_teenager that is True when age is between 13 and 19 inclusive. Print it.",
+              "test_code": "age = 12\nassert is_teenager is False\nprint(is_teenager)\nprint(\"Practice check complete\")\n",
+              "success_message": "You created the teenager check correctly."
+            }
+          ]
+        },
+        {
+          "id": "input_output_two_numbers",
+          "title": "Input Output 3: Two Numbers",
+          "description": "Read two numbers, add them, and print the sum.",
+          "starter_code": "first_number = int(input(\"Enter first number: \"))\nsecond_number = int(input(\"Enter second number: \"))\n\ntotal = first_number + second_number\nprint(\"The sum is\", total)\n",
+          "practice_tasks": [
+            {
+              "id": "input_output_difference",
+              "title": "Find the difference",
+              "instructions": "Create a variable difference equal to first_number - second_number and print it.",
+              "test_code": "first_number = 9\nsecond_number = 4\nassert difference == 5\nprint(difference)\nprint(\"Practice check complete\")\n",
+              "success_message": "You calculated the difference correctly."
+            },
+            {
+              "id": "input_output_product",
+              "title": "Find the product",
+              "instructions": "Create a variable product equal to first_number * second_number and print it.",
+              "test_code": "first_number = 9\nsecond_number = 4\nassert product == 36\nprint(product)\nprint(\"Practice check complete\")\n",
+              "success_message": "You calculated the product correctly."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "operators",
+      "title": "Python Operators",
+      "examples": [
+        {
+          "id": "operators_arithmetic",
+          "title": "Operators 1: Arithmetic Practice",
+          "description": "Use arithmetic operators to calculate results.",
+          "starter_code": "number1 = 18\nnumber2 = 6\n\nprint(\"Addition:\", number1 + number2)\nprint(\"Subtraction:\", number1 - number2)\nprint(\"Multiplication:\", number1 * number2)\nprint(\"Division:\", number1 / number2)\n",
+          "practice_tasks": [
+            {
+              "id": "operators_remainder",
+              "title": "Find the remainder",
+              "instructions": "Create a variable remainder using the modulus operator for number1 and number2. Print it.",
+              "test_code": "assert remainder == 0\nprint(remainder)\nprint(\"Practice check complete\")\n",
+              "success_message": "You used the modulus operator correctly."
+            },
+            {
+              "id": "operators_power",
+              "title": "Find the power",
+              "instructions": "Create a variable square_power equal to number2 raised to the power of 2. Print it.",
+              "test_code": "assert square_power == 36\nprint(square_power)\nprint(\"Practice check complete\")\n",
+              "success_message": "You used the power operator correctly."
+            }
+          ]
+        },
+        {
+          "id": "operators_comparison",
+          "title": "Operators 2: Comparison Check",
+          "description": "Compare values and work with boolean results.",
+          "starter_code": "english = 78\nscience = 78\n\nprint(\"English > Science:\", english > science)\nprint(\"English < Science:\", english < science)\nprint(\"English == Science:\", english == science)\n",
+          "practice_tasks": [
+            {
+              "id": "operators_not_equal",
+              "title": "Check not equal",
+              "instructions": "Create a variable marks_different using != and print it.",
+              "test_code": "assert marks_different is False\nprint(marks_different)\nprint(\"Practice check complete\")\n",
+              "success_message": "You used the not-equal operator correctly."
+            },
+            {
+              "id": "operators_greater_or_equal",
+              "title": "Check greater or equal",
+              "instructions": "Create a variable english_good using >= 75. Print english_good.",
+              "test_code": "assert english_good is True\nprint(english_good)\nprint(\"Practice check complete\")\n",
+              "success_message": "You used the >= operator correctly."
+            }
+          ]
+        },
+        {
+          "id": "operators_logical",
+          "title": "Operators 3: Logical Decisions",
+          "description": "Combine boolean values with logical operators.",
+          "starter_code": "finished_homework = True\nbrought_book = True\n\nprint(\"Can join activity:\", finished_homework and brought_book)\nprint(\"Missed one requirement:\", finished_homework and False)\nprint(\"At least one is ready:\", finished_homework or False)\n",
+          "practice_tasks": [
+            {
+              "id": "operators_ready_for_exam",
+              "title": "Ready for exam",
+              "instructions": "Create ready_for_exam using finished_homework and brought_book. Print it.",
+              "test_code": "assert ready_for_exam is True\nprint(ready_for_exam)\nprint(\"Practice check complete\")\n",
+              "success_message": "You combined the booleans correctly."
+            },
+            {
+              "id": "operators_need_help",
+              "title": "Need help",
+              "instructions": "Create need_help using not brought_book. Print it.",
+              "test_code": "assert need_help is False\nprint(need_help)\nprint(\"Practice check complete\")\n",
+              "success_message": "You used the not operator correctly."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "conditionals",
+      "title": "Python Conditional Statements",
+      "examples": [
+        {
+          "id": "conditionals_pass_or_improve",
+          "title": "Conditionals 2: Pass or Improve",
+          "description": "Use if and elif to print different messages based on marks.",
+          "starter_code": "marks = 67\n\nif marks >= 90:\n    print(\"Excellent work!\")\nelif marks >= 50:\n    print(\"You passed the test.\")\nelse:\n    print(\"Keep practicing and try again.\")\n",
+          "practice_tasks": [
+            {
+              "id": "conditionals_add_distinction",
+              "title": "Add distinction level",
+              "instructions": "Add a distinction_message variable. It should become \"Distinction\" when marks >= 75, otherwise \"No Distinction\". Print it.",
+              "test_code": "assert distinction_message == \"No Distinction\"\nprint(distinction_message)\nprint(\"Practice check complete\")\n",
+              "success_message": "Your distinction logic is correct."
+            },
+            {
+              "id": "conditionals_grade_label",
+              "title": "Create grade label",
+              "instructions": "Create a variable grade_label. Use \"A\" for 90+, \"B\" for 75+, \"C\" for 50+, otherwise \"D\". Print grade_label.",
+              "test_code": "assert grade_label == \"C\"\nprint(\"Grade:\", grade_label)\nprint(\"Practice check complete\")\n",
+              "success_message": "Your grade_label logic is correct."
+            },
+            {
+              "id": "conditionals_pass_boolean",
+              "title": "Create pass boolean",
+              "instructions": "Create a variable passed_test that is True when marks >= 50, otherwise False. Print passed_test.",
+              "test_code": "assert passed_test is True\nprint(passed_test)\nprint(\"Practice check complete\")\n",
+              "success_message": "Your pass boolean is correct."
+            }
+          ]
+        },
+        {
+          "id": "conditionals_voting_style_check",
+          "title": "Conditionals 1: Voting Style Check",
+          "difficulty": "beginner",
+          "description": "Check a condition and choose one of two paths.",
+          "starter_code": "# The program checks a condition and chooses a path.\nage = 14\n\n# If age is 18 or more, run the first block.\nif age >= 18:\n    print(\"You are an adult.\")\n# Otherwise, run the else block.\nelse:\n    print(\"You are not an adult yet.\")\n",
+          "practice_tasks": [
+            {
+              "id": "conditionals_voting_status",
+              "title": "Store voting status",
+              "difficulty": "beginner",
+              "instructions": "Create a variable status_message that stores the same result as the if/else block. Print status_message.",
+              "test_code": "assert status_message == \"You are not an adult yet.\"\nprint(status_message)\nprint(\"Practice check complete\")\n",
+              "success_message": "You stored the conditional result correctly."
+            },
+            {
+              "id": "conditionals_years_to_adult",
+              "title": "Years until adulthood",
+              "difficulty": "intermediate",
+              "instructions": "Create a variable years_to_adult equal to 18 - age and print it.",
+              "test_code": "assert years_to_adult == 4\nprint(years_to_adult)\nprint(\"Practice check complete\")\n",
+              "success_message": "You calculated the years remaining correctly."
+            }
+          ]
+        },
+        {
+          "id": "conditionals_rain_advice",
+          "title": "Conditionals 3: School Uniform Advice",
+          "description": "Choose a message using a boolean condition.",
+          "starter_code": "is_raining = True\n\nif is_raining:\n    print(\"Take an umbrella to school.\")\nelse:\n    print(\"Enjoy the sunny day.\")\n",
+          "practice_tasks": [
+            {
+              "id": "conditionals_bag_check",
+              "title": "Add bag advice",
+              "instructions": "Create a variable bag_item. If it is raining, set it to \"Raincoat\". Otherwise set it to \"Water bottle\". Print bag_item.",
+              "test_code": "assert bag_item == \"Raincoat\"\nprint(bag_item)\nprint(\"Practice check complete\")\n",
+              "success_message": "Your bag advice works."
+            },
+            {
+              "id": "conditionals_boolean_report",
+              "title": "Create weather report",
+              "instructions": "Create a variable weather_report. It should be exactly \"Wet day\" when is_raining is True, otherwise \"Dry day\". Print it.",
+              "test_code": "assert weather_report == \"Wet day\"\nprint(weather_report)\nprint(\"Practice check complete\")\n",
+              "success_message": "Your weather report is correct."
+            }
+          ]
+        },
+        {
+          "id": "conditionals_ticket_price",
+          "title": "Conditionals 3: Ticket Price",
+          "description": "Use age to decide a ticket price.",
+          "starter_code": "age = 10\n\nif age < 12:\n    print(\"Ticket: 20\")\nelse:\n    print(\"Ticket: 40\")\n",
+          "practice_tasks": [
+            {
+              "id": "conditionals_store_ticket_price",
+              "title": "Store ticket price in a variable",
+              "instructions": "Create a variable ticket_price with value 20 for ages below 12, otherwise 40. Print ticket_price.",
+              "test_code": "assert ticket_price == 20\nprint(ticket_price)\nprint(\"Practice check complete\")\n",
+              "success_message": "Your ticket price logic is correct."
+            },
+            {
+              "id": "conditionals_student_note",
+              "title": "Add a note for children",
+              "instructions": "Create note as \"Child ticket\" when age < 12, otherwise \"Regular ticket\". Print note.",
+              "test_code": "assert note == \"Child ticket\"\nprint(note)\nprint(\"Practice check complete\")\n",
+              "success_message": "Your ticket note is correct."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "loops",
+      "title": "Python Loops",
+      "examples": [
+        {
+          "id": "loops_counting_numbers",
+          "title": "Loops 1: Counting Numbers",
+          "description": "Use a for loop to count through numbers.",
+          "starter_code": "for number in range(1, 6):\n    print(\"Count:\", number)\n",
+          "practice_tasks": [
+            {
+              "id": "loops_store_total",
+              "title": "Store the total",
+              "instructions": "Create a variable named total_count and use the loop to add all numbers from 1 to 5. Print total_count after the loop.",
+              "test_code": "assert total_count == 15\nprint(\"Total:\", total_count)\nprint(\"Practice check complete\")\n",
+              "success_message": "Your total_count is correct."
+            },
+            {
+              "id": "loops_even_numbers",
+              "title": "Collect even numbers",
+              "instructions": "Create a list named even_numbers and fill it with the even numbers from 1 to 5 using a loop. Print the list.",
+              "test_code": "assert even_numbers == [2, 4]\nprint(even_numbers)\nprint(\"Practice check complete\")\n",
+              "success_message": "You collected the even numbers correctly."
+            }
+          ]
+        },
+        {
+          "id": "loops_print_fruit",
+          "title": "Loops 3: Print Each Fruit",
+          "description": "Loop through a list and print each item.",
+          "starter_code": "fruits = [\"apple\", \"banana\", \"mango\", \"orange\"]\n\nfor fruit in fruits:\n    print(\"I like\", fruit)\n",
+          "practice_tasks": [
+            {
+              "id": "loops_count_fruits",
+              "title": "Count the fruits",
+              "instructions": "Create a variable fruit_count and use the loop to count how many fruits are in the list. Print fruit_count.",
+              "test_code": "assert fruit_count == 4\nprint(\"Count:\", fruit_count)\nprint(\"Practice check complete\")\n",
+              "success_message": "Your fruit_count is correct."
+            },
+            {
+              "id": "loops_uppercase_list",
+              "title": "Create uppercase names",
+              "instructions": "Create a list named loud_fruits. Use the loop to add each fruit name in uppercase. Print loud_fruits.",
+              "test_code": "assert loud_fruits == [\"APPLE\", \"BANANA\", \"MANGO\", \"ORANGE\"]\nprint(loud_fruits)\nprint(\"Practice check complete\")\n",
+              "success_message": "Your uppercase fruit list is correct."
+            }
+          ]
+        },
+        {
+          "id": "loops_while_revision",
+          "title": "Loops 2: Revision with While",
+          "description": "Use a while loop to repeat until a condition changes.",
+          "starter_code": "chapter = 1\n\nwhile chapter <= 3:\n    print(\"Revise chapter\", chapter)\n    chapter = chapter + 1\n",
+          "practice_tasks": [
+            {
+              "id": "loops_while_count",
+              "title": "Count the revisions",
+              "instructions": "Create revision_count and increase it inside the while loop. Print revision_count after the loop.",
+              "test_code": "assert revision_count == 3\nprint(revision_count)\nprint(\"Practice check complete\")\n",
+              "success_message": "You counted the revisions correctly."
+            },
+            {
+              "id": "loops_last_chapter",
+              "title": "Store the last chapter number",
+              "instructions": "Create last_revised_chapter and update it inside the loop so it stores the latest chapter number. Print it after the loop.",
+              "test_code": "assert last_revised_chapter == 3\nprint(last_revised_chapter)\nprint(\"Practice check complete\")\n",
+              "success_message": "You tracked the last chapter correctly."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lists",
+      "title": "Python Lists",
+      "examples": [
+        {
+          "id": "lists_shopping",
+          "title": "Lists 1: Shopping Items",
+          "description": "Use a list to store shopping items.",
+          "starter_code": "items = [\"milk\", \"bread\", \"rice\"]\n\nprint(items)\nprint(\"First item:\", items[0])\n",
+          "practice_tasks": [
+            {
+              "id": "lists_add_item",
+              "title": "Add one more item",
+              "instructions": "Add \"eggs\" to items and print the updated list.",
+              "test_code": "assert items == [\"milk\", \"bread\", \"rice\", \"eggs\"]\nprint(items)\nprint(\"Practice check complete\")\n",
+              "success_message": "You added the new list item correctly."
+            },
+            {
+              "id": "lists_item_count",
+              "title": "Count shopping items",
+              "instructions": "Create item_count using len(items) and print it.",
+              "test_code": "assert item_count == len(items)\nprint(item_count)\nprint(\"Practice check complete\")\n",
+              "success_message": "You counted the items correctly."
+            }
+          ]
+        },
+        {
+          "id": "lists_scores",
+          "title": "Lists 2: Test Scores",
+          "description": "Store scores and compute statistics.",
+          "starter_code": "scores = [72, 85, 91, 68]\n\nprint(\"Scores:\", scores)\nprint(\"Highest:\", max(scores))\n",
+          "practice_tasks": [
+            {
+              "id": "lists_average_score",
+              "title": "Find the average score",
+              "instructions": "Create average_score using the scores list and print it.",
+              "test_code": "assert average_score == sum(scores) / len(scores)\nprint(average_score)\nprint(\"Practice check complete\")\n",
+              "success_message": "You found the average correctly."
+            },
+            {
+              "id": "lists_add_bonus",
+              "title": "Add a bonus score",
+              "instructions": "Add 5 to the first score and store the result in first_score_bonus. Print it.",
+              "test_code": "assert first_score_bonus == 77\nprint(first_score_bonus)\nprint(\"Practice check complete\")\n",
+              "success_message": "You added the bonus score correctly."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "strings",
+      "title": "Python Strings",
+      "examples": [
+        {
+          "id": "strings_message",
+          "title": "Strings 1: Greeting Message",
+          "description": "Store text in a string and use string methods.",
+          "starter_code": "message = \"hello python\"\n\nprint(message)\nprint(message.upper())\n",
+          "practice_tasks": [
+            {
+              "id": "strings_title_case",
+              "title": "Use title case",
+              "instructions": "Create title_message using message.title() and print it.",
+              "test_code": "assert title_message == \"Hello Python\"\nprint(title_message)\nprint(\"Practice check complete\")\n",
+              "success_message": "You converted the string to title case correctly."
+            },
+            {
+              "id": "strings_word_count",
+              "title": "Count the words",
+              "instructions": "Create word_count by splitting message into words and counting them. Print word_count.",
+              "test_code": "assert word_count == 2\nprint(word_count)\nprint(\"Practice check complete\")\n",
+              "success_message": "You counted the words correctly."
+            }
+          ]
+        },
+        {
+          "id": "strings_name_join",
+          "title": "Strings 2: Join Name Parts",
+          "description": "Combine strings using concatenation and formatting.",
+          "starter_code": "first_name = \"Rani\"\nlast_name = \"Sharma\"\n\nfull_name = first_name + \" \" + last_name\nprint(full_name)\n",
+          "practice_tasks": [
+            {
+              "id": "strings_initials",
+              "title": "Create initials",
+              "instructions": "Create a variable initials with exactly \"R.S.\" and print it using first_name and last_name.",
+              "test_code": "assert initials == \"R.S.\"\nprint(initials)\nprint(\"Practice check complete\")\n",
+              "success_message": "You created the initials correctly."
+            },
+            {
+              "id": "strings_formal_name",
+              "title": "Create a formal name",
+              "instructions": "Create formal_name equal to \"Sharma, Rani\" and print it.",
+              "test_code": "assert formal_name == \"Sharma, Rani\"\nprint(formal_name)\nprint(\"Practice check complete\")\n",
+              "success_message": "You formatted the name correctly."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dictionaries",
+      "title": "Python Dictionaries",
+      "examples": [
+        {
+          "id": "dict_book_info",
+          "title": "Dictionaries 1: Book Information",
+          "description": "Store book details in a dictionary.",
+          "starter_code": "book = {\n    \"title\": \"Python Basics\",\n    \"pages\": 120,\n    \"author\": \"Neha\"\n}\n\nprint(book)\nprint(book[\"title\"])\n",
+          "practice_tasks": [
+            {
+              "id": "dict_add_price",
+              "title": "Add a price field",
+              "instructions": "Add a \"price\" key with value 250 and print the dictionary.",
+              "test_code": "assert book[\"price\"] == 250\nprint(book)\nprint(\"Practice check complete\")\n",
+              "success_message": "You added the dictionary field correctly."
+            },
+            {
+              "id": "dict_book_summary",
+              "title": "Create a summary message",
+              "instructions": "Create book_summary with exactly \"Python Basics by Neha\" and print it.",
+              "test_code": "assert book_summary == \"Python Basics by Neha\"\nprint(book_summary)\nprint(\"Practice check complete\")\n",
+              "success_message": "You used dictionary values correctly."
+            }
+          ]
+        },
+        {
+          "id": "dict_scores_map",
+          "title": "Dictionaries 2: Subject Scores",
+          "description": "Store subject names and scores in a dictionary.",
+          "starter_code": "scores = {\n    \"math\": 88,\n    \"science\": 91,\n    \"english\": 84\n}\n\nprint(scores)\nprint(scores[\"science\"])\n",
+          "practice_tasks": [
+            {
+              "id": "dict_total_scores",
+              "title": "Add total score",
+              "instructions": "Create total_score equal to the sum of all values in scores. Print total_score.",
+              "test_code": "assert total_score == 263\nprint(total_score)\nprint(\"Practice check complete\")\n",
+              "success_message": "You summed the dictionary values correctly."
+            },
+            {
+              "id": "dict_add_history",
+              "title": "Add history score",
+              "instructions": "Add a new key \"history\" with value 79 and print the updated dictionary.",
+              "test_code": "assert scores[\"history\"] == 79\nprint(scores)\nprint(\"Practice check complete\")\n",
+              "success_message": "You added the new subject score correctly."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "functions",
+      "title": "Python Functions",
+      "examples": [
+        {
+          "id": "functions_add_numbers",
+          "title": "Functions 2: Add Two Numbers",
+          "description": "Write a function that uses parameters.",
+          "starter_code": "def add_numbers(a, b):\n    answer = a + b\n    print(\"Sum is\", answer)\n\nadd_numbers(5, 8)\nadd_numbers(12, 3)\n",
+          "practice_tasks": [
+            {
+              "id": "functions_return_sum",
+              "title": "Return instead of print",
+              "instructions": "Change add_numbers so it returns the answer. Then create a variable test_sum = add_numbers(10, 4) and print it.",
+              "test_code": "assert add_numbers(3, 7) == 10\nassert test_sum == 14\nprint(\"Practice check complete\")\n",
+              "success_message": "Your function now returns the sum correctly."
+            },
+            {
+              "id": "functions_make_difference",
+              "title": "Add a difference function",
+              "instructions": "Create a new function named subtract_numbers(a, b) that returns a - b. Then print subtract_numbers(9, 2).",
+              "test_code": "assert subtract_numbers(9, 2) == 7\nassert subtract_numbers(20, 5) == 15\nprint(\"Practice check complete\")\n",
+              "success_message": "Your subtract_numbers function is correct."
+            }
+          ]
+        },
+        {
+          "id": "functions_square",
+          "title": "Functions 3: Return a Result",
+          "description": "Return a value from a function and store it.",
+          "starter_code": "def square(number):\n    return number * number\n\nresult = square(7)\nprint(\"Square is\", result)\n",
+          "practice_tasks": [
+            {
+              "id": "functions_cube",
+              "title": "Add a cube function",
+              "instructions": "Create a function named cube(number) that returns the cube of the number. Then print cube(3).",
+              "test_code": "assert cube(3) == 27\nassert cube(2) == 8\nprint(\"Practice check complete\")\n",
+              "success_message": "Your cube function works correctly."
+            },
+            {
+              "id": "functions_square_list",
+              "title": "Use square on many numbers",
+              "instructions": "Create a list named squared_values that stores the square of 1, 2, and 3 by calling square(). Print squared_values.",
+              "test_code": "assert squared_values == [1, 4, 9]\nprint(squared_values)\nprint(\"Practice check complete\")\n",
+              "success_message": "You used square() correctly in a list."
+            }
+          ]
+        },
+        {
+          "id": "functions_greet_student",
+          "title": "Functions 1: Simple Greeting Function",
+          "description": "Define and call a simple function.",
+          "starter_code": "def greet_student():\n    print(\"Hello student!\")\n    print(\"Let us learn Python today.\")\n\ngreet_student()\n",
+          "practice_tasks": [
+            {
+              "id": "functions_second_greeting",
+              "title": "Add another greeting line",
+              "instructions": "Inside greet_student, add a third print line with exactly \"Be curious and keep coding!\".",
+              "test_code": "greet_student()\nprint(\"Practice check complete\")\n",
+              "success_message": "You expanded the greeting function."
+            },
+            {
+              "id": "functions_call_twice",
+              "title": "Call the function twice",
+              "instructions": "Call greet_student() one more time after the existing call.",
+              "test_code": "greet_student()\ngreet_student()\nprint(\"Practice check complete\")\n",
+              "success_message": "You called the function multiple times."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "machine_learning_basics",
+      "title": "Machine Learning Basics",
+      "examples": [
+        {
+          "id": "ml_pattern_finder",
+          "title": "ML 1: Simple Pattern Finder (Class 6)",
+          "difficulty": "intermediate",
+          "description": "Learn a simple pattern from examples and test predictions on new inputs.",
+          "starter_code": "# Machine Learning: Finding Patterns in Data\n# This example shows how a computer can learn a simple rule\n\ntraining_data = [\n    (1, 2),\n    (2, 4),\n    (3, 6),\n    (4, 8),\n    (5, 10)\n]\n\nprint(\"Learning the pattern...\")\n\ndef predict(number):\n    return number * 2\n\ntest_numbers = [6, 7, 10]\nprint(\"Testing predictions:\")\nfor num in test_numbers:\n    prediction = predict(num)\n    print(f\"If input is {num}, predicted output is {prediction}\")\n    print(f\"Check: {num} * 2 = {num * 2}\")\n",
+          "practice_tasks": [
+            {
+              "id": "ml_pattern_predict_twelve",
+              "title": "Predict for 12",
+              "difficulty": "beginner",
+              "instructions": "Create a variable prediction_12 by calling predict(12). Print prediction_12.",
+              "test_code": "assert prediction_12 == 24\nprint(prediction_12)\nprint(\"Practice check complete\")\n",
+              "success_message": "You used the learned pattern correctly."
+            },
+            {
+              "id": "ml_pattern_prediction_list",
+              "title": "Make a list of predictions",
+              "difficulty": "intermediate",
+              "instructions": "Create a list named prediction_list that stores predict(8), predict(9), and predict(11). Print prediction_list.",
+              "test_code": "assert prediction_list == [16, 18, 22]\nprint(prediction_list)\nprint(\"Practice check complete\")\n",
+              "success_message": "You built the prediction list correctly."
+            }
+          ]
+        },
+        {
+          "id": "ml_fruit_classifier",
+          "title": "ML 2: Fruit Classifier (Class 7)",
+          "difficulty": "intermediate",
+          "description": "Classify fruits based on weight and texture using simple decision rules.",
+          "starter_code": "# Machine Learning: Classification\n# Classifying fruits based on two features: weight and texture\n\ntraining_fruits = [\n    (150, 0, \"Apple\"),\n    (170, 0, \"Apple\"),\n    (140, 0, \"Apple\"),\n    (130, 1, \"Orange\"),\n    (160, 1, \"Orange\"),\n    (300, 1, \"Watermelon\"),\n    (320, 1, \"Watermelon\"),\n    (280, 1, \"Watermelon\")\n]\n\nprint(\"Training data shows fruits with their features:\")\nfor fruit in training_fruits:\n    weight, texture, name = fruit\n    texture_type = \"smooth\" if texture == 0 else \"rough\"\n    print(f\"  {name}: {weight}g, {texture_type} skin\")\n\ndef classify_fruit(weight, texture):\n    if weight > 200:\n        return \"Watermelon\"\n    elif texture == 1:\n        return \"Orange\"\n    else:\n        return \"Apple\"\n\nprint(\"Classifying new fruits:\")\ntest_fruits = [\n    (155, 0, \"Apple\"),\n    (135, 1, \"Orange\"),\n    (310, 1, \"Watermelon\")\n]\n\nfor weight, texture, actual in test_fruits:\n    prediction = classify_fruit(weight, texture)\n    correct = \"PASS\" if prediction == actual else \"FAIL\"\n    print(f\"  Fruit: {weight}g, texture={texture} -> Predicted: {prediction} [{correct}]\")\n",
+          "practice_tasks": [
+            {
+              "id": "ml_fruit_predict_orange",
+              "title": "Classify one fruit",
+              "difficulty": "beginner",
+              "instructions": "Create a variable guessed_fruit using classify_fruit(145, 1). Print guessed_fruit.",
+              "test_code": "assert guessed_fruit == \"Orange\"\nprint(guessed_fruit)\nprint(\"Practice check complete\")\n",
+              "success_message": "You classified the fruit correctly."
+            },
+            {
+              "id": "ml_fruit_prediction_batch",
+              "title": "Predict several fruits",
+              "difficulty": "intermediate",
+              "instructions": "Create a list named fruit_predictions using classify_fruit(150, 0), classify_fruit(120, 1), and classify_fruit(260, 1). Print fruit_predictions.",
+              "test_code": "assert fruit_predictions == [\"Apple\", \"Orange\", \"Watermelon\"]\nprint(fruit_predictions)\nprint(\"Practice check complete\")\n",
+              "success_message": "You applied the classifier to several fruits."
+            }
+          ]
+        },
+        {
+          "id": "ml_exam_score_predictor",
+          "title": "ML 3: Exam Score Predictor (Class 8)",
+          "difficulty": "intermediate",
+          "description": "Predict exam scores from study hours using a simple formula learned from data.",
+          "starter_code": "# Machine Learning: Simple Linear Prediction\n# Predicting exam scores based on study hours\n\ntraining_scores = [\n    (1, 35),\n    (2, 45),\n    (3, 55),\n    (4, 65),\n    (5, 75),\n    (6, 85)\n]\n\nprint(\"Training data shows relationship between study hours and scores:\")\nfor hours, score in training_scores:\n    print(f\"  {hours} hour(s) of study -> {score} marks\")\n\ndef predict_score(hours_studied):\n    base_score = 25\n    marks_per_hour = 10\n    predicted = base_score + (hours_studied * marks_per_hour)\n    return min(predicted, 100)\n\nprint(\"Predicting scores for different study hours:\")\ntest_hours = [2.5, 4, 7, 8]\nfor hours in test_hours:\n    prediction = predict_score(hours)\n    print(f\"  Study {hours} hours -> Predicted score: {prediction}/100\")\n\nprint(\"Advice for students:\")\ntarget_score = 80\nneeded_hours = (target_score - 25) / 10\nprint(f\"  To score {target_score} marks, study about {needed_hours:.1f} hours\")\n",
+          "practice_tasks": [
+            {
+              "id": "ml_score_predict_65_hours",
+              "title": "Predict another score",
+              "difficulty": "beginner",
+              "instructions": "Create a variable score_for_six_point_five equal to predict_score(6.5). Print score_for_six_point_five.",
+              "test_code": "assert score_for_six_point_five == 90.0\nprint(score_for_six_point_five)\nprint(\"Practice check complete\")\n",
+              "success_message": "You predicted the new score correctly."
+            },
+            {
+              "id": "ml_score_hours_for_95",
+              "title": "Find study hours for 95",
+              "difficulty": "challenge",
+              "instructions": "Create a variable hours_for_95 using the formula in the program to work out the study hours needed for a predicted score of 95. Print hours_for_95.",
+              "test_code": "assert hours_for_95 == 7.0\nprint(hours_for_95)\nprint(\"Practice check complete\")\n",
+              "success_message": "You worked out the required study hours correctly."
+            }
+          ]
+        },
+        {
+          "id": "ml_spam_detector",
+          "title": "ML 4: Spam Message Detector (Class 9)",
+          "difficulty": "challenge",
+          "description": "Detect likely spam messages by scoring words that often appear in spam.",
+          "starter_code": "# Machine Learning: Text Classification\n# Detecting spam messages using keyword matching\n\nspam_keywords = {\n    \"free\": 3,\n    \"win\": 3,\n    \"winner\": 4,\n    \"prize\": 3,\n    \"money\": 2,\n    \"cash\": 3,\n    \"urgent\": 2,\n    \"click\": 2,\n    \"buy\": 1,\n    \"now\": 1,\n    \"limited\": 2,\n    \"offer\": 2,\n    \"congratulations\": 3,\n    \"selected\": 2,\n    \"claim\": 3\n}\n\ntest_messages = [\n    (\"Hey, want to meet for lunch tomorrow?\", \"ham\"),\n    (\"Congratulations! You are a winner! Claim your free prize now!\", \"spam\"),\n    (\"Can you send me the homework notes?\", \"ham\"),\n    (\"URGENT: You have won cash money! Click here to claim!\", \"spam\"),\n    (\"Happy birthday! Have a great day!\", \"ham\")\n]\n\ndef detect_spam(message):\n    message_lower = message.lower()\n    spam_score = 0\n    found_keywords = []\n\n    for keyword, score in spam_keywords.items():\n        if keyword in message_lower:\n            spam_score += score\n            found_keywords.append(keyword)\n\n    threshold = 4\n    is_spam = spam_score >= threshold\n    return is_spam, spam_score, found_keywords\n\nprint(\"Spam Detection Results:\")\nprint(\"=\" * 50)\n\nfor message, actual_type in test_messages:\n    is_spam, score, keywords = detect_spam(message)\n    predicted_type = \"spam\" if is_spam else \"ham\"\n    correct = \"PASS\" if predicted_type == actual_type else \"FAIL\"\n    print(f\"Message: {message}\")\n    print(f\"Keywords found: {keywords}\")\n    print(f\"Spam score: {score}/10\")\n    print(f\"Prediction: {predicted_type} | Actual: {actual_type} [{correct}]\")\n    print(\"-\" * 50)\n",
+          "practice_tasks": [
+            {
+              "id": "ml_spam_score_message",
+              "title": "Test a spammy message",
+              "difficulty": "intermediate",
+              "instructions": "Create a variable sample_result using detect_spam(\"Free cash prize now!\"). Print sample_result.",
+              "test_code": "assert sample_result[0] is True\nassert sample_result[1] >= 4\nprint(sample_result)\nprint(\"Practice check complete\")\n",
+              "success_message": "You tested a spam message correctly."
+            },
+            {
+              "id": "ml_spam_score_normal_message",
+              "title": "Test a normal message",
+              "difficulty": "challenge",
+              "instructions": "Create a variable normal_result using detect_spam(\"Please bring your math notebook tomorrow.\"). Print normal_result.",
+              "test_code": "assert normal_result[0] is False\nassert normal_result[1] == 0\nprint(normal_result)\nprint(\"Practice check complete\")\n",
+              "success_message": "You confirmed the normal message is not spam."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "machine_learning_libraries",
+      "title": "Machine Learning with Libraries",
+      "examples": [
+        {
+          "id": "ml_statistics_library",
+          "title": "ML 5: Statistics - Mean and Median (Class 8)",
+          "difficulty": "intermediate",
+          "description": "Use the statistics library to summarize a set of student scores.",
+          "starter_code": "# Using the statistics library for data analysis\n# This is simpler than numpy and great for beginners\n\nimport statistics\n\ntest_scores = [65, 78, 82, 91, 55, 88, 72, 95, 68, 84]\n\nprint(\"Student Test Scores Analysis\")\nprint(\"=\" * 35)\nprint(f\"All scores: {test_scores}\")\nprint(f\"Number of students: {len(test_scores)}\")\n\nmean_score = statistics.mean(test_scores)\nmedian_score = statistics.median(test_scores)\nmode_score = statistics.mode(test_scores)\nstdev_score = statistics.stdev(test_scores)\n\nprint(f\"--- Central Tendency ---\")\nprint(f\"Mean (average): {mean_score:.2f}\")\nprint(f\"Median (middle value): {median_score}\")\nprint(f\"Mode (most common): {mode_score}\")\n\nprint(f\"--- Spread of Data ---\")\nprint(f\"Standard Deviation: {stdev_score:.2f}\")\nprint(f\"Minimum: {min(test_scores)}\")\nprint(f\"Maximum: {max(test_scores)}\")\nprint(f\"Range: {max(test_scores) - min(test_scores)}\")\n",
+          "practice_tasks": [
+            {
+              "id": "ml_statistics_range",
+              "title": "Store the score range",
+              "difficulty": "beginner",
+              "instructions": "Create a variable score_range equal to max(test_scores) - min(test_scores). Print score_range.",
+              "test_code": "assert score_range == 40\nprint(score_range)\nprint(\"Practice check complete\")\n",
+              "success_message": "You calculated the range correctly."
+            },
+            {
+              "id": "ml_statistics_above_mean",
+              "title": "Count scores above the mean",
+              "difficulty": "intermediate",
+              "instructions": "Create a variable above_mean_count that counts how many scores are greater than mean_score. Print above_mean_count.",
+              "test_code": "assert above_mean_count == 5\nprint(above_mean_count)\nprint(\"Practice check complete\")\n",
+              "success_message": "You counted the scores above the mean correctly."
+            }
+          ]
+        },
+        {
+          "id": "ml_linear_regression_sklearn",
+          "title": "ML 6: Linear Regression with sklearn (Class 9)",
+          "difficulty": "challenge",
+          "description": "Train a linear regression model with sklearn and inspect its predictions.",
+          "starter_code": "# Machine Learning: Linear Regression using sklearn\n# Predicting exam scores based on study hours\n\nimport numpy as np\nfrom sklearn.linear_model import LinearRegression\nfrom sklearn.model_selection import train_test_split\n\nX = np.array([[1], [2], [3], [4], [5], [6], [7], [8]])\ny = np.array([35, 45, 55, 65, 72, 80, 88, 95])\n\nprint(\"Training Data:\")\nprint(\"Study Hours -> Exam Score\")\nfor i in range(len(X)):\n    print(f\"  {X[i][0]} hour(s) -> {y[i]} marks\")\n\nX_train, X_test, y_train, y_test = train_test_split(\n    X, y, test_size=0.25, random_state=42\n)\n\nprint(f\"--- Model Training ---\")\nprint(f\"Training samples: {len(X_train)}\")\nprint(f\"Testing samples: {len(X_test)}\")\n\nmodel = LinearRegression()\nmodel.fit(X_train, y_train)\n\nslope = model.coef_[0]\nintercept = model.intercept_\n\nprint(f\"--- Learned Model ---\")\nprint(f\"Formula: Score = {slope:.2f} * Hours + {intercept:.2f}\")\nprint(f\"For every extra hour, score increases by {slope:.2f} marks\")\n\npredictions = model.predict(X_test)\n\nprint(f\"--- Testing Predictions ---\")\nfor i in range(len(X_test)):\n    actual = y_test[i]\n    predicted = predictions[i]\n    error = abs(actual - predicted)\n    print(f\"Hours: {X_test[i][0]} | Predicted: {predicted:.1f} | Actual: {actual} | Error: {error:.1f}\")\n",
+          "practice_tasks": [
+            {
+              "id": "ml_linear_predict_new_hours",
+              "title": "Predict a new score",
+              "difficulty": "intermediate",
+              "instructions": "Create a variable extra_prediction using model.predict(np.array([[9]])). Store the first predicted value and print it.",
+              "test_code": "assert extra_prediction > 90\nprint(extra_prediction)\nprint(\"Practice check complete\")\n",
+              "success_message": "You used the trained regression model correctly."
+            },
+            {
+              "id": "ml_linear_store_split_counts",
+              "title": "Store train and test counts",
+              "difficulty": "beginner",
+              "instructions": "Create train_count and test_count using len(X_train) and len(X_test). Print both values.",
+              "test_code": "assert train_count == len(X_train)\nassert test_count == len(X_test)\nprint(train_count, test_count)\nprint(\"Practice check complete\")\n",
+              "success_message": "You stored the split counts correctly."
+            }
+          ]
+        },
+        {
+          "id": "ml_pandas_analysis",
+          "title": "ML 7: Data Analysis with Pandas (Class 9)",
+          "difficulty": "challenge",
+          "description": "Analyze a student dataset with a pandas DataFrame.",
+          "starter_code": "# Machine Learning: Data Analysis with Pandas\n# Analyzing student performance data\n\nimport pandas as pd\nimport numpy as np\n\ndata = {\n    'Name': ['Aarav', 'Meera', 'Riya', 'Vihan', 'Sanya', 'Kabir', 'Tara'],\n    'Class': [8, 8, 9, 8, 9, 8, 9],\n    'Math': [85, 78, 92, 65, 88, 75, 90],\n    'Science': [88, 82, 85, 70, 90, 78, 92],\n    'English': [75, 88, 78, 72, 85, 80, 88],\n    'Study_Hours': [4, 5, 6, 3, 5, 4, 7]\n}\n\ndf = pd.DataFrame(data)\n\nprint(\"Student Performance Dataset\")\nprint(\"=\" * 40)\nprint(df)\nprint(f\"Dataset shape: {df.shape} (rows, columns)\")\n\nprint(f\"--- Subject Statistics ---\")\nprint(df[['Math', 'Science', 'English']].describe())\n\ndf['Total'] = df['Math'] + df['Science'] + df['English']\ndf['Average'] = df['Total'] / 3\n\nprint(f\"--- Student Rankings by Average ---\")\nranked = df.sort_values('Average', ascending=False)\nprint(ranked[['Name', 'Average']].to_string(index=False))\n",
+          "practice_tasks": [
+            {
+              "id": "ml_pandas_top_average",
+              "title": "Find the highest average",
+              "difficulty": "intermediate",
+              "instructions": "Create a variable top_average equal to df['Average'].max(). Print top_average.",
+              "test_code": "assert round(top_average, 6) == round(df['Average'].max(), 6)\nprint(top_average)\nprint(\"Practice check complete\")\n",
+              "success_message": "You found the highest average correctly."
+            },
+            {
+              "id": "ml_pandas_class_8_count",
+              "title": "Count class 8 students",
+              "difficulty": "beginner",
+              "instructions": "Create a variable class_8_count equal to the number of students in class 8. Print class_8_count.",
+              "test_code": "assert class_8_count == 4\nprint(class_8_count)\nprint(\"Practice check complete\")\n",
+              "success_message": "You counted the class 8 students correctly."
+            }
+          ]
+        },
+        {
+          "id": "ml_logistic_regression",
+          "title": "ML 8: Classification with Logistic Regression (Class 9)",
+          "difficulty": "challenge",
+          "description": "Use logistic regression to predict whether a student will pass or fail.",
+          "starter_code": "# Machine Learning: Classification using Logistic Regression\n# Predicting if a student will pass/fail based on study hours\n\nimport numpy as np\nfrom sklearn.linear_model import LogisticRegression\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.metrics import accuracy_score\n\nX = np.array([[1], [1.5], [2], [3], [4], [5], [6], [7], [8], [9]])\ny = np.array([0, 0, 0, 0, 1, 1, 1, 1, 1, 1])\n\nprint(\"Training Data:\")\nprint(\"Study Hours -> Result (0=Fail, 1=Pass)\")\nfor i in range(len(X)):\n    result = \"Pass\" if y[i] == 1 else \"Fail\"\n    print(f\"  {X[i][0]} hour(s) -> {y[i]} ({result})\")\n\nX_train, X_test, y_train, y_test = train_test_split(\n    X, y, test_size=0.3, random_state=42\n)\n\nprint(f\"--- Model Training ---\")\nprint(f\"Training samples: {len(X_train)}\")\nprint(f\"Testing samples: {len(X_test)}\")\n\nmodel = LogisticRegression()\nmodel.fit(X_train, y_train)\n\npredictions = model.predict(X_test)\naccuracy = accuracy_score(y_test, predictions)\n\nprint(f\"--- Model Performance ---\")\nprint(f\"Accuracy: {accuracy * 100:.1f}%\")\nprint(f\"(Correctly predicted {int(accuracy * len(y_test))} out of {len(y_test)} cases)\")\n",
+          "practice_tasks": [
+            {
+              "id": "ml_logistic_predict_student",
+              "title": "Predict one new student",
+              "difficulty": "intermediate",
+              "instructions": "Create a variable new_prediction using model.predict(np.array([[5.5]])). Store the first value and print it.",
+              "test_code": "assert new_prediction in [0, 1]\nprint(new_prediction)\nprint(\"Practice check complete\")\n",
+              "success_message": "You used the logistic model for a new prediction."
+            },
+            {
+              "id": "ml_logistic_accuracy_percent",
+              "title": "Store the accuracy percent",
+              "difficulty": "beginner",
+              "instructions": "Create a variable accuracy_percent equal to accuracy * 100. Print accuracy_percent.",
+              "test_code": "assert round(accuracy_percent, 6) == round(accuracy * 100, 6)\nprint(accuracy_percent)\nprint(\"Practice check complete\")\n",
+              "success_message": "You converted the accuracy to a percentage."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "revision_projects",
+      "title": "Python Revision Projects",
+      "examples": [
+        {
+          "id": "project_temperature_report",
+          "title": "Project 1: Temperature Report",
+          "description": "Combine variables, conditionals, and output in one mini project.",
+          "starter_code": "city = \"Jaipur\"\ntemperature = 34\n\nprint(\"City:\", city)\nprint(\"Temperature:\", temperature)\n\nif temperature >= 35:\n    print(\"Very hot day\")\nelse:\n    print(\"Pleasant day\")\n",
+          "practice_tasks": [
+            {
+              "id": "project_temperature_status",
+              "title": "Store a status variable",
+              "instructions": "Create a variable weather_status that stores the same message chosen by the if/else block. Print weather_status.",
+              "test_code": "assert weather_status == \"Pleasant day\"\nprint(weather_status)\nprint(\"Practice check complete\")\n",
+              "success_message": "You stored the weather status correctly."
+            },
+            {
+              "id": "project_temperature_warning",
+              "title": "Add a water reminder",
+              "instructions": "Create a variable water_reminder equal to \"Carry water\" when temperature is 30 or more, otherwise \"No reminder\". Print it.",
+              "test_code": "assert water_reminder == \"Carry water\"\nprint(water_reminder)\nprint(\"Practice check complete\")\n",
+              "success_message": "You added the water reminder correctly."
+            }
+          ]
+        },
+        {
+          "id": "project_attendance_tracker",
+          "title": "Project 2: Attendance Tracker",
+          "description": "Use lists and functions in a short school-themed project.",
+          "starter_code": "students_present = [\"Asha\", \"Rohan\", \"Meera\"]\n\ndef show_attendance():\n    print(\"Present students:\")\n    for name in students_present:\n        print(name)\n\nshow_attendance()\n",
+          "practice_tasks": [
+            {
+              "id": "project_attendance_count",
+              "title": "Count present students",
+              "instructions": "Create a variable present_count using the list and print it.",
+              "test_code": "assert present_count == 3\nprint(present_count)\nprint(\"Practice check complete\")\n",
+              "success_message": "You counted the present students correctly."
+            },
+            {
+              "id": "project_attendance_add_student",
+              "title": "Add another student",
+              "instructions": "Add \"Kabir\" to students_present and print the list.",
+              "test_code": "assert students_present[-1] == \"Kabir\"\nassert len(students_present) == 4\nprint(students_present)\nprint(\"Practice check complete\")\n",
+              "success_message": "You updated the attendance list correctly."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
