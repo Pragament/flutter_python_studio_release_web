@@ -986,6 +986,241 @@
           ]
         }
       ]
+    },
+    {
+      "id": "bipc_bioinformatics",
+      "title": "BiPC Bioinformatics",
+      "examples": [
+        {
+          "id": "bipc_dna_strings_intro",
+          "title": "BiPC 1: DNA as Strings",
+          "difficulty": "beginner",
+          "description": "Start with plain Python strings to measure DNA length, count bases, and calculate GC content.",
+          "starter_code": "dna = \"ATGCGCTA\"\n\nprint(\"DNA:\", dna)\nprint(\"Length:\", len(dna))\n\ng_count = dna.count(\"G\")\nc_count = dna.count(\"C\")\ngc_content = (g_count + c_count) / len(dna) * 100\n\nprint(\"GC Content:\", gc_content)\n",
+          "practice_tasks": [
+            {
+              "id": "bipc_dna_strings_base_counts",
+              "title": "Count each base",
+              "difficulty": "beginner",
+              "instructions": "Create variables a_count, t_count, g_count, and c_count using dna.count(). Print all four counts.",
+              "test_code": "assert a_count == dna.count(\"A\")\nassert t_count == dna.count(\"T\")\nassert g_count == dna.count(\"G\")\nassert c_count == dna.count(\"C\")\nprint(a_count, t_count, g_count, c_count)\nprint(\"Practice check complete\")\n",
+              "success_message": "You counted the DNA bases correctly."
+            },
+            {
+              "id": "bipc_dna_strings_slice",
+              "title": "Slice the sequence",
+              "difficulty": "beginner",
+              "instructions": "Create a variable first_codon equal to the first 3 letters of dna and a variable last_four equal to the last 4 letters. Print both.",
+              "test_code": "assert first_codon == dna[:3]\nassert last_four == dna[-4:]\nprint(first_codon)\nprint(last_four)\nprint(\"Practice check complete\")\n",
+              "success_message": "You used sequence slicing correctly."
+            },
+            {
+              "id": "bipc_dna_strings_start_codon",
+              "title": "Check for start codon",
+              "difficulty": "intermediate",
+              "instructions": "Create a boolean variable starts_with_atg that is True if dna starts with \"ATG\". Print the result.",
+              "test_code": "assert starts_with_atg == dna.startswith(\"ATG\")\nprint(starts_with_atg)\nprint(\"Practice check complete\")\n",
+              "success_message": "You checked the start codon correctly."
+            }
+          ]
+        },
+        {
+          "id": "bipc_biopython_sequence_objects",
+          "title": "BiPC 2: Biopython Sequence Objects",
+          "difficulty": "beginner",
+          "description": "Use Biopython Seq objects for complement, reverse complement, transcription, and translation.",
+          "required_packages": ["biopython"],
+          "starter_code": "from Bio.Seq import Seq\n\ndna = Seq(\"ATGCGT\")\n\nprint(\"DNA:\", dna)\nprint(\"Complement:\", dna.complement())\nprint(\"Reverse Complement:\", dna.reverse_complement())\nprint(\"RNA:\", dna.transcribe())\nprint(\"Protein:\", dna.translate())\n",
+          "practice_tasks": [
+            {
+              "id": "bipc_seq_create_new_sequence",
+              "title": "Create another sequence",
+              "difficulty": "beginner",
+              "instructions": "Create a Seq object named sample_dna with the value \"ATGAAATGA\". Print sample_dna and its length.",
+              "test_code": "from Bio.Seq import Seq\nassert isinstance(sample_dna, Seq)\nassert str(sample_dna) == \"ATGAAATGA\"\nprint(sample_dna)\nprint(len(sample_dna))\nprint(\"Practice check complete\")\n",
+              "success_message": "You created the Biopython sequence correctly."
+            },
+            {
+              "id": "bipc_seq_transcription_task",
+              "title": "Transcribe DNA to RNA",
+              "difficulty": "beginner",
+              "instructions": "Create a Seq object named sample_dna with the value \"ATGAAATGA\". Then create a variable rna from sample_dna using transcribe(). Print rna.",
+              "test_code": "from Bio.Seq import Seq\nassert isinstance(sample_dna, Seq)\nassert str(sample_dna) == \"ATGAAATGA\"\nassert str(rna) == str(sample_dna.transcribe())\nprint(rna)\nprint(\"Practice check complete\")\n",
+              "success_message": "You transcribed the DNA sequence correctly."
+            },
+            {
+              "id": "bipc_seq_translation_task",
+              "title": "Translate to protein",
+              "difficulty": "intermediate",
+              "instructions": "Create a Seq object named sample_dna with the value \"ATGAAATGA\". Then create a variable protein from sample_dna using translate(). Print protein.",
+              "test_code": "from Bio.Seq import Seq\nassert isinstance(sample_dna, Seq)\nassert str(sample_dna) == \"ATGAAATGA\"\nassert str(protein) == str(sample_dna.translate())\nprint(protein)\nprint(\"Practice check complete\")\n",
+              "success_message": "You translated the DNA sequence correctly."
+            }
+          ]
+        },
+        {
+          "id": "bipc_gc_motif_finding",
+          "title": "BiPC 3: GC Content and Motif Search",
+          "difficulty": "intermediate",
+          "description": "Measure GC content with Biopython and search for motifs such as start codons.",
+          "required_packages": ["biopython"],
+          "starter_code": "from Bio.Seq import Seq\nfrom Bio.SeqUtils import gc_fraction\n\ndna = Seq(\"ATGCGTATGACCATG\")\nmotif = \"ATG\"\n\nprint(\"DNA:\", dna)\nprint(\"GC %:\", gc_fraction(dna) * 100)\n\npositions = []\nfor i in range(len(dna) - len(motif) + 1):\n    if str(dna[i:i+len(motif)]) == motif:\n        positions.append(i)\n\nprint(\"Motif positions:\", positions)\n",
+          "practice_tasks": [
+            {
+              "id": "bipc_gc_store_value",
+              "title": "Store GC percentage",
+              "difficulty": "beginner",
+              "instructions": "Create a variable gc_percent equal to gc_fraction(dna) * 100 and print it.",
+              "test_code": "from Bio.SeqUtils import gc_fraction\nassert abs(gc_percent - (gc_fraction(dna) * 100)) < 0.0001\nprint(gc_percent)\nprint(\"Practice check complete\")\n",
+              "success_message": "You calculated GC percentage correctly."
+            },
+            {
+              "id": "bipc_motif_find_all_atg",
+              "title": "Find all start codons",
+              "difficulty": "intermediate",
+              "instructions": "Create a list named start_codons that stores every index where motif appears in dna. Print start_codons.",
+              "test_code": "expected = []\nfor i in range(len(dna) - len(motif) + 1):\n    if str(dna[i:i+len(motif)]) == motif:\n        expected.append(i)\nassert start_codons == expected\nprint(start_codons)\nprint(\"Practice check complete\")\n",
+              "success_message": "You found all of the start codons."
+            },
+            {
+              "id": "bipc_motif_count",
+              "title": "Count motif matches",
+              "difficulty": "intermediate",
+              "instructions": "Create a variable motif_count equal to the number of items in start_codons. Print motif_count.",
+              "test_code": "assert motif_count == len(start_codons)\nprint(motif_count)\nprint(\"Practice check complete\")\n",
+              "success_message": "You counted the motif matches correctly."
+            }
+          ]
+        },
+        {
+          "id": "bipc_fasta_parsing_intro",
+          "title": "BiPC 4: Reading FASTA Data",
+          "difficulty": "intermediate",
+          "description": "Create a small FASTA file, parse it with SeqIO, and print sequence name, length, and GC percentage.",
+          "required_packages": ["biopython"],
+          "starter_code": "from Bio import SeqIO\nfrom Bio.SeqUtils import gc_fraction\n\nfasta_text = \">seq1\\nATGCGCTA\\n>seq2\\nATTTGGCCAA\\n\"\n\nwith open(\"sequence.fasta\", \"w\") as handle:\n    handle.write(fasta_text)\n\nfor record in SeqIO.parse(\"sequence.fasta\", \"fasta\"):\n    gc = gc_fraction(record.seq) * 100\n    print(\"ID:\", record.id)\n    print(\"Sequence:\", record.seq)\n    print(\"Length:\", len(record.seq))\n    print(\"GC %:\", round(gc, 2))\n    print(\"-\")\n",
+          "practice_tasks": [
+            {
+              "id": "bipc_fasta_collect_ids",
+              "title": "Collect sequence IDs",
+              "difficulty": "beginner",
+              "instructions": "Create a list named sequence_ids containing all record.id values from sequence.fasta. Print the list.",
+              "test_code": "from Bio import SeqIO\nexpected = [record.id for record in SeqIO.parse(\"sequence.fasta\", \"fasta\")]\nassert sequence_ids == expected\nprint(sequence_ids)\nprint(\"Practice check complete\")\n",
+              "success_message": "You collected the FASTA IDs correctly."
+            },
+            {
+              "id": "bipc_fasta_lengths",
+              "title": "Store sequence lengths",
+              "difficulty": "intermediate",
+              "instructions": "Create a dictionary named sequence_lengths with record.id as the key and len(record.seq) as the value. Print the dictionary.",
+              "test_code": "from Bio import SeqIO\nexpected = {record.id: len(record.seq) for record in SeqIO.parse(\"sequence.fasta\", \"fasta\")}\nassert sequence_lengths == expected\nprint(sequence_lengths)\nprint(\"Practice check complete\")\n",
+              "success_message": "You stored the FASTA lengths correctly."
+            },
+            {
+              "id": "bipc_fasta_gc_report",
+              "title": "Build a GC report",
+              "difficulty": "challenge",
+              "instructions": "Create a dictionary named gc_report with each record.id mapped to its GC percentage rounded to 2 decimals. Print gc_report.",
+              "test_code": "from Bio import SeqIO\nfrom Bio.SeqUtils import gc_fraction\nexpected = {\n    record.id: round(gc_fraction(record.seq) * 100, 2)\n    for record in SeqIO.parse(\"sequence.fasta\", \"fasta\")\n}\nassert gc_report == expected\nprint(gc_report)\nprint(\"Practice check complete\")\n",
+              "success_message": "You built the FASTA GC report correctly."
+            }
+          ]
+        },
+        {
+          "id": "bipc_alignment_and_similarity",
+          "title": "BiPC 5: Sequence Alignment and Similarity",
+          "difficulty": "intermediate",
+          "description": "Compare two DNA sequences with PairwiseAligner and estimate a simple similarity score.",
+          "required_packages": ["biopython"],
+          "starter_code": "from Bio import Align\n\nseq1 = \"ATGCT\"\nseq2 = \"ATGTT\"\n\naligner = Align.PairwiseAligner()\nscore = aligner.score(seq1, seq2)\n\nprint(\"Sequence 1:\", seq1)\nprint(\"Sequence 2:\", seq2)\nprint(\"Alignment score:\", score)\n\nmatches = 0\nfor a, b in zip(seq1, seq2):\n    if a == b:\n        matches += 1\n\nsimilarity = matches / min(len(seq1), len(seq2)) * 100\nprint(\"Similarity %:\", similarity)\n",
+          "practice_tasks": [
+            {
+              "id": "bipc_alignment_match_count",
+              "title": "Count matching bases",
+              "difficulty": "beginner",
+              "instructions": "Create a variable match_count that counts how many positions have the same base in seq1 and seq2. Print match_count.",
+              "test_code": "expected = sum(1 for a, b in zip(seq1, seq2) if a == b)\nassert match_count == expected\nprint(match_count)\nprint(\"Practice check complete\")\n",
+              "success_message": "You counted the matching bases correctly."
+            },
+            {
+              "id": "bipc_alignment_similarity_score",
+              "title": "Calculate similarity percentage",
+              "difficulty": "intermediate",
+              "instructions": "Create a variable similarity_percent equal to match_count divided by the shorter sequence length times 100. Print similarity_percent.",
+              "test_code": "expected = sum(1 for a, b in zip(seq1, seq2) if a == b) / min(len(seq1), len(seq2)) * 100\nassert abs(similarity_percent - expected) < 0.0001\nprint(similarity_percent)\nprint(\"Practice check complete\")\n",
+              "success_message": "You calculated sequence similarity correctly."
+            }
+          ]
+        },
+        {
+          "id": "bipc_disease_risk_basics",
+          "title": "BiPC 6: Disease Risk with Logistic Regression",
+          "difficulty": "challenge",
+          "description": "Use a simple classification model to predict disease risk from a numeric lab feature.",
+          "required_packages": ["scikit-learn"],
+          "starter_code": "from sklearn.linear_model import LogisticRegression\n\nX = [[80], [120], [150], [200]]\ny = [0, 0, 1, 1]\n\nmodel = LogisticRegression()\nmodel.fit(X, y)\n\nprediction = model.predict([[130]])\nprint(\"Prediction for 130:\", prediction[0])\n",
+          "practice_tasks": [
+            {
+              "id": "bipc_ai_train_second_prediction",
+              "title": "Predict another value",
+              "difficulty": "beginner",
+              "instructions": "Create a variable prediction_170 using model.predict([[170]]) and print the first result.",
+              "test_code": "assert prediction_170[0] in [0, 1]\nprint(prediction_170[0])\nprint(\"Practice check complete\")\n",
+              "success_message": "You made a second prediction successfully."
+            },
+            {
+              "id": "bipc_ai_store_training_size",
+              "title": "Check dataset size",
+              "difficulty": "beginner",
+              "instructions": "Create a variable sample_count equal to len(X) and print it.",
+              "test_code": "assert sample_count == len(X)\nprint(sample_count)\nprint(\"Practice check complete\")\n",
+              "success_message": "You counted the training samples correctly."
+            },
+            {
+              "id": "bipc_ai_predict_risk_label",
+              "title": "Convert prediction to label",
+              "difficulty": "intermediate",
+              "instructions": "Create a variable risk_label that is \"High risk\" when prediction[0] is 1, otherwise \"Low risk\". Print risk_label.",
+              "test_code": "expected = \"High risk\" if prediction[0] == 1 else \"Low risk\"\nassert risk_label == expected\nprint(risk_label)\nprint(\"Practice check complete\")\n",
+              "success_message": "You converted the prediction into a readable label."
+            }
+          ]
+        },
+        {
+          "id": "bipc_bioinformatics_mini_project",
+          "title": "BiPC 7: Bioinformatics + AI Mini Project",
+          "difficulty": "challenge",
+          "description": "Combine Biopython sequence analysis with a simple ML prediction to build a starter bioinformatics tool.",
+          "required_packages": ["biopython", "scikit-learn"],
+          "starter_code": "from Bio.Seq import Seq\nfrom Bio.SeqUtils import gc_fraction\nfrom sklearn.linear_model import LogisticRegression\n\ndna = Seq(\"ATGCGCTAATG\")\nprint(\"Protein:\", dna.translate())\nprint(\"GC %:\", gc_fraction(dna) * 100)\n\nmotif = \"ATG\"\npositions = []\nfor i in range(len(dna) - len(motif) + 1):\n    if str(dna[i:i+len(motif)]) == motif:\n        positions.append(i)\nprint(\"Motif positions:\", positions)\n\nX = [[35], [45], [60], [75]]\ny = [0, 0, 1, 1]\nmodel = LogisticRegression()\nmodel.fit(X, y)\n\nrisk_prediction = model.predict([[52]])\nprint(\"Risk prediction:\", risk_prediction[0])\n",
+          "practice_tasks": [
+            {
+              "id": "bipc_project_gc_variable",
+              "title": "Store GC percentage",
+              "difficulty": "beginner",
+              "instructions": "Create a variable gc_percent equal to gc_fraction(dna) * 100 and print it.",
+              "test_code": "from Bio.SeqUtils import gc_fraction\nassert abs(gc_percent - (gc_fraction(dna) * 100)) < 0.0001\nprint(gc_percent)\nprint(\"Practice check complete\")\n",
+              "success_message": "You stored the GC percentage correctly."
+            },
+            {
+              "id": "bipc_project_start_codon_count",
+              "title": "Count start codons",
+              "difficulty": "intermediate",
+              "instructions": "Create a variable start_codon_count equal to len(positions). Print start_codon_count.",
+              "test_code": "assert start_codon_count == len(positions)\nprint(start_codon_count)\nprint(\"Practice check complete\")\n",
+              "success_message": "You counted the start codons correctly."
+            },
+            {
+              "id": "bipc_project_risk_label",
+              "title": "Show readable risk result",
+              "difficulty": "intermediate",
+              "instructions": "Create a variable risk_label that is \"High risk\" when risk_prediction[0] is 1, otherwise \"Low risk\". Print risk_label.",
+              "test_code": "expected = \"High risk\" if risk_prediction[0] == 1 else \"Low risk\"\nassert risk_label == expected\nprint(risk_label)\nprint(\"Practice check complete\")\n",
+              "success_message": "You created a readable project output."
+            }
+          ]
+        }
+      ]
     }
   ]
 }

@@ -1222,6 +1222,154 @@ await eval_code_async(ast.unparse(_console_input_tree), globals=globals())
     }
   },
 
+  traceLineByLine: async (code) => {
+    if (!pyodide) {
+      throw new Error('Pyodide not initialized');
+    }
+
+    try {
+      const sourceCode = String(code ?? "");
+
+      if (/\binput\s*\(/.test(sourceCode)) {
+        return JSON.stringify([{
+          line: null,
+          output: "",
+          event: "error",
+          error: "Line-by-line mode does not support input() yet. Use Run for interactive input."
+        }]);
+      }
+
+      pyodide.globals.set("__line_trace_source__", sourceCode);
+      return await pyodide.runPythonAsync(`
+import io
+import json
+import sys
+import traceback
+
+__line_trace_stdout = io.StringIO()
+__line_trace_steps = []
+__line_trace_filename = "<python_web_ide_line_trace>"
+__line_trace_prev_lines = {}
+
+def __line_trace_value(value):
+    try:
+        rendered = repr(value)
+    except Exception:
+        rendered = "<unrepresentable>"
+
+    if len(rendered) > 180:
+        rendered = rendered[:177] + "..."
+
+    return {
+        "type": type(value).__name__,
+        "repr": rendered,
+    }
+
+def __line_trace_variables(mapping):
+    values = []
+    for name, value in sorted(mapping.items()):
+        if name.startswith("__"):
+            continue
+        if name.startswith("_ConsoleInputTransformer") or name.startswith("_line_trace"):
+            continue
+        if name in ("ast", "io", "json", "sys", "traceback"):
+            continue
+
+        rendered = __line_trace_value(value)
+        values.append({
+            "name": name,
+            "type": rendered["type"],
+            "repr": rendered["repr"],
+        })
+    return values
+
+def __line_trace_stack(frame):
+    frames = []
+    current = frame
+    while current is not None:
+        if current.f_code.co_filename == __line_trace_filename:
+            frames.append({
+                "name": current.f_code.co_name,
+                "line": current.f_lineno,
+                "locals": __line_trace_variables(current.f_locals),
+            })
+        current = current.f_back
+    frames.reverse()
+    return frames
+
+def __record_line_trace_step(line_number, frame):
+    if len(__line_trace_steps) >= 1000:
+        raise RuntimeError("Line-by-line step limit reached (1000 steps).")
+
+    __line_trace_steps.append({
+        "line": line_number,
+        "output": __line_trace_stdout.getvalue(),
+        "event": "line",
+        "error": None,
+        "stack": __line_trace_stack(frame),
+    })
+
+def __line_trace(frame, event, arg):
+    if frame.f_code.co_filename != __line_trace_filename:
+        return __line_trace
+
+    frame_id = id(frame)
+    if event == "line":
+        previous = __line_trace_prev_lines.get(frame_id)
+        if previous is not None:
+            __record_line_trace_step(previous, frame)
+        __line_trace_prev_lines[frame_id] = frame.f_lineno
+    elif event in ("return", "exception"):
+        previous = __line_trace_prev_lines.pop(frame_id, None)
+        if previous is not None:
+            __record_line_trace_step(previous, frame)
+
+    return __line_trace
+
+__line_trace_old_stdout = sys.stdout
+__line_trace_old_stderr = sys.stderr
+__line_trace_old_trace = sys.gettrace()
+__line_trace_error = None
+
+try:
+    __line_trace_code = compile(__line_trace_source__, __line_trace_filename, "exec")
+    __line_trace_globals = {"__name__": "__main__"}
+    sys.stdout = __line_trace_stdout
+    sys.stderr = __line_trace_stdout
+    sys.settrace(__line_trace)
+    exec(__line_trace_code, __line_trace_globals, __line_trace_globals)
+except Exception:
+    current_frame = sys._getframe()
+    for previous in list(__line_trace_prev_lines.values()):
+        if previous is not None and len(__line_trace_steps) < 1000:
+            __record_line_trace_step(previous, current_frame)
+    __line_trace_prev_lines.clear()
+    __line_trace_error = traceback.format_exc()
+finally:
+    sys.settrace(__line_trace_old_trace)
+    sys.stdout = __line_trace_old_stdout
+    sys.stderr = __line_trace_old_stderr
+
+__line_trace_steps.append({
+    "line": None,
+    "output": __line_trace_stdout.getvalue(),
+    "event": "done" if __line_trace_error is None else "error",
+    "error": __line_trace_error,
+    "stack": [],
+})
+
+json.dumps(__line_trace_steps)
+      `);
+    } catch (err) {
+      return JSON.stringify([{
+        line: null,
+        output: "",
+        event: "error",
+        error: extractUserRelevantPythonError(err)
+      }]);
+    }
+  },
+
   analyzeDefinitions: async (code) => {
     try {
       const definitions = await fetchJediDefinitions(code);
