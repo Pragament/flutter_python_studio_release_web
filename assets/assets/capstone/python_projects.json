@@ -1,0 +1,216 @@
+{
+  "metadata": {
+    "description": "Python coding capstone projects mapped to CBSE Class 5–8 Math & Science topics. Designed for a Class 6 student who has learned Input/Output, with hints provided.",
+    "filterable_fields": ["category", "class_level", "subject", "difficulty"],
+    "sortable_fields": ["name", "difficulty", "class_level"],
+    "categories": {
+      "input_output": "Projects using only print() and input() with arithmetic operations.",
+      "input_output_conditionals": "Projects using print(), input() and if/elif/else statements.",
+      "input_output_conditionals_loops": "Projects using print(), input(), conditionals and for/while loops."
+    }
+  },
+  "projects": [
+    {
+      "id": "p1",
+      "name": "Rectangle Area & Perimeter",
+      "category": "input_output",
+      "class_level": [5, 6],
+      "subject": "Mathematics",
+      "topic": "Mensuration",
+      "difficulty": 1,
+      "description": "Write a program that asks the user for the length and breadth of a rectangle and prints its area and perimeter.",
+      "hint": "Use input() to get length and breadth (convert to float or int). Calculate perimeter = 2 * (length + breadth) and area = length * breadth. Print the results with clear labels.",
+      "prerequisites": ["print", "input", "arithmetic operators"],
+      "learning_objectives": [
+        "Accept multiple numeric inputs",
+        "Apply arithmetic formulas",
+        "Display formatted output"
+      ]
+    },
+    {
+      "id": "p2",
+      "name": "Celsius to Fahrenheit Converter",
+      "category": "input_output",
+      "class_level": [7, 8],
+      "subject": "Science",
+      "topic": "Heat (Physics)",
+      "difficulty": 1,
+      "description": "Write a program that takes a temperature in Celsius and converts it to Fahrenheit.",
+      "hint": "Use input() to get Celsius. Apply the formula: Fahrenheit = (Celsius * 9/5) + 32. Print the converted temperature.",
+      "prerequisites": ["print", "input", "arithmetic operators"],
+      "learning_objectives": [
+        "Work with floating-point numbers",
+        "Understand and apply a conversion formula"
+      ]
+    },
+    {
+      "id": "p3",
+      "name": "Average of Three Marks",
+      "category": "input_output",
+      "class_level": [6, 7],
+      "subject": "Mathematics",
+      "topic": "Data Handling",
+      "difficulty": 1,
+      "description": "Write a program that takes marks obtained in three subjects as input and prints the average marks.",
+      "hint": "Take three inputs, add them, and divide the sum by 3. Use float division to get a decimal average.",
+      "prerequisites": ["print", "input", "arithmetic operators"],
+      "learning_objectives": [
+        "Compute arithmetic mean",
+        "Handle multiple variables"
+      ]
+    },
+    {
+      "id": "p4",
+      "name": "Speed Calculator",
+      "category": "input_output",
+      "class_level": [7, 8],
+      "subject": "Science",
+      "topic": "Motion (Physics)",
+      "difficulty": 1,
+      "description": "Write a program that takes distance (in km) and time (in hours) and calculates the speed in km/h.",
+      "hint": "Use input() for distance and time. Speed = distance / time. Print the speed.",
+      "prerequisites": ["print", "input", "arithmetic operators"],
+      "learning_objectives": [
+        "Apply the speed formula",
+        "Perform division"
+      ]
+    },
+    {
+      "id": "p5",
+      "name": "Even or Odd Number",
+      "category": "input_output_conditionals",
+      "class_level": [6, 7],
+      "subject": "Mathematics",
+      "topic": "Integers / Playing with Numbers",
+      "difficulty": 2,
+      "description": "Write a program that takes an integer as input and prints whether it is 'Even' or 'Odd'.",
+      "hint": "Take input, convert to int. Use the modulo operator (%) to check if number % 2 == 0. Use if-else to print the appropriate message.",
+      "prerequisites": ["print", "input", "if-else", "modulo operator"],
+      "learning_objectives": [
+        "Use conditional statements",
+        "Apply the modulo operator",
+        "Make decisions in code"
+      ]
+    },
+    {
+      "id": "p6",
+      "name": "Profit or Loss Calculator",
+      "category": "input_output_conditionals",
+      "class_level": [7, 8],
+      "subject": "Mathematics",
+      "topic": "Comparing Quantities",
+      "difficulty": 2,
+      "description": "Write a program that takes the Cost Price (CP) and Selling Price (SP) of an item and prints whether it is a profit or loss, along with the amount.",
+      "hint": "Take CP and SP. If SP > CP, profit = SP - CP. Else if CP > SP, loss = CP - SP. Else, no profit no loss. Print the result with the amount.",
+      "prerequisites": ["print", "input", "if-elif-else"],
+      "learning_objectives": [
+        "Apply profit/loss formulas",
+        "Use nested conditionals",
+        "Real-world math application"
+      ]
+    },
+    {
+      "id": "p7",
+      "name": "Triangle Type Classifier",
+      "category": "input_output_conditionals",
+      "class_level": [7, 8],
+      "subject": "Mathematics",
+      "topic": "Geometry – Triangles",
+      "difficulty": 2,
+      "description": "Write a program that takes the lengths of three sides of a triangle and classifies it as 'Equilateral', 'Isosceles', or 'Scalene'.",
+      "hint": "Take three side lengths. Compare them: if all equal -> equilateral; else if any two equal -> isosceles; else -> scalene. (Assume valid triangle sides).",
+      "prerequisites": ["print", "input", "nested if-else", "comparison operators"],
+      "learning_objectives": [
+        "Apply logical comparisons",
+        "Classify geometric shapes",
+        "Handle multiple conditions"
+      ]
+    },
+    {
+      "id": "p8",
+      "name": "Acid, Base or Neutral? (pH Checker)",
+      "category": "input_output_conditionals",
+      "class_level": [7, 8],
+      "subject": "Science",
+      "topic": "Acids, Bases and Salts (Chemistry)",
+      "difficulty": 2,
+      "description": "Write a program that takes a pH value (0–14) as input and prints whether the substance is 'Acidic' (pH < 7), 'Basic' (pH > 7), or 'Neutral' (pH = 7).",
+      "hint": "Take pH as a float. Use if-elif-else to check the value range and print the corresponding type.",
+      "prerequisites": ["print", "input", "if-elif-else"],
+      "learning_objectives": [
+        "Understand pH scale",
+        "Apply range comparisons",
+        "Map scientific concepts to code"
+      ]
+    },
+    {
+      "id": "p9",
+      "name": "Multiplication Table Generator",
+      "category": "input_output_conditionals_loops",
+      "class_level": [6, 7],
+      "subject": "Mathematics",
+      "topic": "Playing with Numbers / Integers",
+      "difficulty": 3,
+      "description": "Write a program that takes a number and prints its multiplication table from 1 to 10.",
+      "hint": "Take the number. Use a for loop (or while loop) from 1 to 10. In each iteration, print the number multiplied by the loop variable.",
+      "prerequisites": ["print", "input", "for loop", "range()"],
+      "learning_objectives": [
+        "Use loops for repetitive tasks",
+        "Generate tabular data",
+        "Practice multiplication"
+      ]
+    },
+    {
+      "id": "p10",
+      "name": "Sum of First N Natural Numbers",
+      "category": "input_output_conditionals_loops",
+      "class_level": [6, 7],
+      "subject": "Mathematics",
+      "topic": "Algebra / Number Systems",
+      "difficulty": 3,
+      "description": "Write a program that takes a positive integer N and calculates the sum of all integers from 1 to N.",
+      "hint": "Take N. Initialize a variable 'total' to 0. Use a loop from 1 to N, add each number to 'total'. Print the final total.",
+      "prerequisites": ["print", "input", "for loop", "accumulator pattern"],
+      "learning_objectives": [
+        "Implement an accumulator",
+        "Understand sequence summation",
+        "Loop control"
+      ]
+    },
+    {
+      "id": "p11",
+      "name": "Average of N Numbers",
+      "category": "input_output_conditionals_loops",
+      "class_level": [6, 7],
+      "subject": "Mathematics",
+      "topic": "Data Handling",
+      "difficulty": 3,
+      "description": "Write a program that first asks how many numbers the user wants to enter, then takes those numbers one by one, and finally prints their average.",
+      "hint": "Take N first. Then run a loop N times. Inside the loop, ask for each number, add it to a running total. After the loop, divide total by N to get average.",
+      "prerequisites": ["print", "input", "for loop", "accumulator", "type conversion"],
+      "learning_objectives": [
+        "Dynamic loop count",
+        "Aggregate data",
+        "Compute mean"
+      ]
+    },
+    {
+      "id": "p12",
+      "name": "Prime Number Checker",
+      "category": "input_output_conditionals_loops",
+      "class_level": [6, 8],
+      "subject": "Mathematics",
+      "topic": "Playing with Numbers / Factors",
+      "difficulty": 4,
+      "description": "Write a program that takes a positive integer and prints whether it is a prime number or not.",
+      "hint": "Take the number. If it's less than 2, print 'Not Prime'. Use a loop from 2 to the square root of the number. If the number is divisible by any i in that range, it's not prime. Use a flag variable to track divisibility.",
+      "prerequisites": ["print", "input", "for loop", "if-else", "break", "math.sqrt"],
+      "learning_objectives": [
+        "Apply loop with early exit",
+        "Use a flag variable",
+        "Understand prime number logic",
+        "Optimize using square root"
+      ]
+    }
+  ]
+}

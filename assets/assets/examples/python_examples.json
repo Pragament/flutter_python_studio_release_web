@@ -252,6 +252,93 @@
               "success_message": "You calculated the product correctly."
             }
           ]
+        },
+        {
+          "id": "input_output_math_calculator",
+          "title": "Math Calculator: Add Two Integers",
+          "description": "Read two integers and compute sum, difference, and product. (CBSE Class 6 - Integers)",
+          "starter_code": "num1 = int(input(\"Enter first integer: \"))\nnum2 = int(input(\"Enter second integer: \"))\n\nprint(\"Sum:\", num1 + num2)\nprint(\"Difference:\", num1 - num2)\nprint(\"Product:\", num1 * num2)\n",
+          "practice_tasks": [
+            {
+              "id": "input_output_math_calc_quotient",
+              "title": "Compute quotient and remainder",
+              "instructions": "Create variables quotient and remainder using integer division (//) and modulus (%). Print them.",
+              "test_code": "num1=10; num2=3\nassert quotient == 3\nassert remainder == 1\nprint(quotient, remainder)\nprint(\"Practice check complete\")\n",
+              "success_message": "You computed quotient and remainder correctly."
+            },
+            {
+              "id": "input_output_math_calc_abs",
+              "title": "Find absolute difference",
+              "instructions": "Create a variable abs_diff equal to the absolute value of num1 - num2 using abs(). Print it.",
+              "test_code": "num1=5; num2=8\nassert abs_diff == 3\nprint(abs_diff)\nprint(\"Practice check complete\")\n",
+              "success_message": "You found the absolute difference."
+            },
+            {
+              "id": "input_output_math_calc_greater",
+              "title": "Determine which number is greater",
+              "instructions": "Create a variable greater that stores the larger of num1 and num2. Use an if statement or max(). Print greater.",
+              "test_code": "num1=7; num2=3\nassert greater == 7\nprint(greater)\nprint(\"Practice check complete\")\n",
+              "success_message": "You compared the numbers correctly."
+            }
+          ]
+        },
+        {
+          "id": "input_output_math_area_perimeter",
+          "title": "Area and Perimeter of a Rectangle",
+          "description": "Read length and breadth, compute area, perimeter, and diagonal. (CBSE Class 6 - Mensuration)",
+          "starter_code": "length = float(input(\"Enter length: \"))\nbreadth = float(input(\"Enter breadth: \"))\n\narea = length * breadth\nperimeter = 2 * (length + breadth)\nprint(\"Area:\", area)\nprint(\"Perimeter:\", perimeter)\n",
+          "practice_tasks": [
+            {
+              "id": "input_output_math_diagonal",
+              "title": "Compute diagonal (Pythagoras)",
+              "instructions": "Import math and compute diagonal = sqrt(length^2 + breadth^2). Store in diagonal and print.",
+              "test_code": "import math\nlength=3; breadth=4\nassert abs(diagonal - 5.0) < 1e-9\nprint(diagonal)\nprint(\"Practice check complete\")\n",
+              "success_message": "You computed the diagonal correctly."
+            },
+            {
+              "id": "input_output_math_is_square",
+              "title": "Check if it is a square",
+              "instructions": "Create a variable is_square that is True if length == breadth else False. Print it.",
+              "test_code": "length=5; breadth=5\nassert is_square is True\nprint(is_square)\nprint(\"Practice check complete\")\n",
+              "success_message": "You checked if it's a square."
+            },
+            {
+              "id": "input_output_math_missing_side",
+              "title": "Find breadth given area and length",
+              "instructions": "Given area = 20 and length = 5, compute breadth_missing = area / length. Print it.",
+              "test_code": "area=20; length=5\nassert breadth_missing == 4.0\nprint(breadth_missing)\nprint(\"Practice check complete\")\n",
+              "success_message": "You found the missing side."
+            }
+          ]
+        },
+        {
+          "id": "input_output_math_simple_interest",
+          "title": "Simple Interest Calculator",
+          "description": "Read principal, rate, time and compute simple interest. (CBSE Class 7 - Comparing Quantities)",
+          "starter_code": "principal = float(input(\"Enter principal: \"))\nrate = float(input(\"Enter rate (percent per year): \"))\ntime = float(input(\"Enter time (years): \"))\n\nsi = (principal * rate * time) / 100\nprint(\"Simple Interest:\", si)\n",
+          "practice_tasks": [
+            {
+              "id": "input_output_math_amount",
+              "title": "Compute total amount",
+              "instructions": "Create a variable amount equal to principal + si. Print it.",
+              "test_code": "assert amount == principal + si\nprint(amount)\nprint(\"Practice check complete\")\n",
+              "success_message": "You computed the total amount."
+            },
+            {
+              "id": "input_output_math_ci_one_year",
+              "title": "Compound interest for 1 year (same rate)",
+              "instructions": "Compute compound interest for 1 year: amount_ci = principal * (1 + rate/100)**time, ci = amount_ci - principal. Store in ci and print.",
+              "test_code": "expected_ci = principal * (1 + rate / 100) ** time - principal\nassert abs(ci - expected_ci) < 1e-9\nprint(ci)\nprint(\"Practice check complete\")\n",
+              "success_message": "You computed compound interest for 1 year."
+            },
+            {
+              "id": "input_output_math_rate_from_si",
+              "title": "Find rate from given SI, principal, time",
+              "instructions": "Given si=150, principal=1000, time=3, compute rate = (si * 100) / (principal * time). Store in rate_found and print.",
+              "test_code": "expected_rate = (si * 100) / (principal * time)\nassert abs(rate_found - expected_rate) < 1e-9\nprint(rate_found)\nprint(\"Practice check complete\")\n",
+              "success_message": "You found the rate."
+            }
+          ]
         }
       ]
     },
@@ -428,6 +515,93 @@
               "success_message": "Your ticket note is correct."
             }
           ]
+        },
+        {
+          "id": "conditionals_math_profit_loss",
+          "title": "Profit or Loss Calculator",
+          "description": "Read cost price and selling price, determine profit or loss and percentage. (CBSE Class 7 - Comparing Quantities)",
+          "starter_code": "cp = float(input(\"Enter cost price: \"))\nsp = float(input(\"Enter selling price: \"))\n\nif sp > cp:\n    profit = sp - cp\n    profit_percent = (profit / cp) * 100\n    print(f\"Profit: {profit_percent:.2f}%\")\nelse:\n    loss = cp - sp\n    loss_percent = (loss / cp) * 100\n    print(f\"Loss: {loss_percent:.2f}%\")\n",
+          "practice_tasks": [
+            {
+              "id": "conditionals_math_discount",
+              "title": "Compute discount percentage",
+              "instructions": "Given marked_price = 800, selling_price = 680, compute discount_percent = (marked_price - selling_price)/marked_price * 100. Store in discount_percent and print.",
+              "test_code": "marked_price=800; selling_price=680\nassert discount_percent == 15.0\nprint(discount_percent)\nprint(\"Practice check complete\")\n",
+              "success_message": "You computed discount percentage."
+            },
+            {
+              "id": "conditionals_math_profit_loss_boolean",
+              "title": "Store a boolean is_profit",
+              "instructions": "Create a variable is_profit that is True if sp > cp else False. Print it.",
+              "test_code": "cp=500; sp=600\nassert is_profit is True\nprint(is_profit)\nprint(\"Practice check complete\")\n",
+              "success_message": "You created the profit boolean."
+            },
+            {
+              "id": "conditionals_math_break_even",
+              "title": "Check if break-even (no profit no loss)",
+              "instructions": "Create a variable break_even that is True if cp == sp else False. Print it.",
+              "test_code": "cp=500; sp=500\nassert break_even is True\nprint(break_even)\nprint(\"Practice check complete\")\n",
+              "success_message": "You checked break-even."
+            }
+          ]
+        },
+        {
+          "id": "conditionals_math_grade_calculator",
+          "title": "Grade Calculator based on Marks",
+          "description": "Read marks and assign grade A, B, C, D, or F based on CBSE grading. (CBSE Class 6-8)",
+          "starter_code": "marks = int(input(\"Enter your marks: \"))\n\nif marks >= 90:\n    grade = \"A\"\nelif marks >= 75:\n    grade = \"B\"\nelif marks >= 50:\n    grade = \"C\"\nelif marks >= 35:\n    grade = \"D\"\nelse:\n    grade = \"F\"\n\nprint(\"Grade:\", grade)\n",
+          "practice_tasks": [
+            {
+              "id": "conditionals_math_grade_message",
+              "title": "Create a feedback message based on grade",
+              "instructions": "Create a variable feedback that is \"Excellent\" for A, \"Good\" for B, \"Average\" for C, \"Pass\" for D, \"Fail\" for F. Print feedback.",
+              "test_code": "marks=95\nassert feedback == \"Excellent\"\nprint(feedback)\nprint(\"Practice check complete\")\n",
+              "success_message": "You mapped grade to feedback."
+            },
+            {
+              "id": "conditionals_math_is_pass",
+              "title": "Determine if student passed (marks >= 35)",
+              "instructions": "Create a variable passed that is True if marks >= 35 else False. Print passed.",
+              "test_code": "marks=45\nassert passed is True\nprint(passed)\nprint(\"Practice check complete\")\n",
+              "success_message": "You determined pass status."
+            },
+            {
+              "id": "conditionals_math_grade_numeric",
+              "title": "Convert grade to numeric score (A=10, B=8, C=6, D=4, F=0)",
+              "instructions": "Create a variable grade_score using if-elif-else. Print it.",
+              "test_code": "marks=82\nassert grade_score == 8\nprint(grade_score)\nprint(\"Practice check complete\")\n",
+              "success_message": "You converted grade to numeric score."
+            }
+          ]
+        },
+        {
+          "id": "conditionals_math_compare_fractions",
+          "title": "Compare Two Fractions",
+          "description": "Read two fractions (numerator/denominator) and determine which is larger. (CBSE Class 6 - Fractions)",
+          "starter_code": "n1 = int(input(\"Enter numerator of first fraction: \"))\nd1 = int(input(\"Enter denominator of first fraction: \"))\nn2 = int(input(\"Enter numerator of second fraction: \"))\nd2 = int(input(\"Enter denominator of second fraction: \"))\n\n# Cross-multiply to compare: n1/d1  vs  n2/d2\nif n1 * d2 > n2 * d1:\n    print(\"First fraction is larger.\")\nelif n1 * d2 < n2 * d1:\n    print(\"Second fraction is larger.\")\nelse:\n    print(\"Both fractions are equal.\")\n",
+          "practice_tasks": [
+            {
+              "id": "conditionals_math_fraction_equality",
+              "title": "Check if fractions are equal",
+              "instructions": "Create a variable are_equal that is True if n1/d1 == n2/d2 else False. Print are_equal.",
+              "test_code": "n1=1; d1=2; n2=2; d2=4\nassert are_equal is True\nprint(are_equal)\nprint(\"Practice check complete\")\n",
+              "success_message": "You checked fraction equality."
+            },
+            {
+              "id": "conditionals_math_fraction_sum",
+              "title": "Compute sum of fractions as (n1*d2 + n2*d1)/(d1*d2)",
+              "instructions": "Create variables sum_num and sum_den for the sum and print them.",
+              "test_code": "n1=1; d1=2; n2=1; d2=3\nassert sum_num == 5\nassert sum_den == 6\nprint(sum_num, \"/\", sum_den)\nprint(\"Practice check complete\")\n",
+              "success_message": "You computed the sum of fractions."
+            },
+            {
+              "id": "conditionals_math_fraction_simplify",
+              "title": "Simplify the first fraction using math.gcd",
+              "instructions": "Import math and simplify n1/d1 by dividing both by gcd. Store simplified numerator in simp_n1 and denominator in simp_d1. Print them.",
+              "test_code": "import math\nn1=4; d1=8\ng = math.gcd(n1,d1)\nassert simp_n1 == 1\nassert simp_d1 == 2\nprint(simp_n1, \"/\", simp_d1)\nprint(\"Practice check complete\")\n",
+              "success_message": "You simplified the fraction."
+            }
+          ]
         }
       ]
     },
@@ -498,6 +672,122 @@
               "instructions": "Create last_revised_chapter and update it inside the loop so it stores the latest chapter number. Print it after the loop.",
               "test_code": "assert last_revised_chapter == 3\nprint(last_revised_chapter)\nprint(\"Practice check complete\")\n",
               "success_message": "You tracked the last chapter correctly."
+            }
+          ]
+        },
+        {
+          "id": "loops_math_sum_natural",
+          "title": "Sum of First n Natural Numbers",
+          "description": "Read n and compute sum using a loop. (CBSE Class 6 - Algebra, Class 7 - Simple Equations)",
+          "starter_code": "n = int(input(\"Enter a positive integer: \"))\nsum = 0\nfor i in range(1, n+1):\n    sum += i\nprint(\"Sum of first\", n, \"natural numbers:\", sum)\n",
+          "practice_tasks": [
+            {
+              "id": "loops_math_sum_squares",
+              "title": "Sum of squares of first n numbers",
+              "instructions": "Create a variable sum_squares using a loop to add i**2 for i from 1 to n. Print sum_squares.",
+              "test_code": "n=3\nsum_squares = 0\nfor i in range(1,n+1): sum_squares += i**2\nassert sum_squares == 14\nprint(sum_squares)\nprint(\"Practice check complete\")\n",
+              "success_message": "You computed sum of squares."
+            },
+            {
+              "id": "loops_math_sum_even",
+              "title": "Sum of even numbers up to n",
+              "instructions": "Create a variable sum_even that adds all even numbers from 2 to n (if n even). Use a loop or range step. Print sum_even.",
+              "test_code": "n=6\nsum_even = sum(i for i in range(2,n+1,2))\nassert sum_even == 12\nprint(sum_even)\nprint(\"Practice check complete\")\n",
+              "success_message": "You computed sum of even numbers."
+            },
+            {
+              "id": "loops_math_natural_formula",
+              "title": "Verify using formula n(n+1)/2",
+              "instructions": "Compute sum_formula = n*(n+1)//2 and check if it equals sum. Create a variable correct that is True if equal. Print correct.",
+              "test_code": "n=5\nsum_loop = 15\nsum_formula = n*(n+1)//2\nassert correct is True\nprint(correct)\nprint(\"Practice check complete\")\n",
+              "success_message": "You verified the formula."
+            }
+          ]
+        },
+        {
+          "id": "loops_math_multiplication_table",
+          "title": "Multiplication Table of a Number",
+          "description": "Read a number and print its table from 1 to 10. (CBSE Class 6 - Integers, Class 7 - Algebra)",
+          "starter_code": "num = int(input(\"Enter a number: \"))\nfor i in range(1, 11):\n    print(num, \"x\", i, \"=\", num * i)\n",
+          "practice_tasks": [
+            {
+              "id": "loops_math_table_list",
+              "title": "Store table in a list",
+              "instructions": "Create a list named table_list containing the products num*i for i=1..10. Print the list.",
+              "test_code": "num=3\nexpected = [3,6,9,12,15,18,21,24,27,30]\nassert table_list == expected\nprint(table_list)\nprint(\"Practice check complete\")\n",
+              "success_message": "You stored the table in a list."
+            },
+            {
+              "id": "loops_math_even_table",
+              "title": "Print only even products from the table",
+              "instructions": "Loop through table_list and print only the even numbers. Store them in a list even_products and print that list.",
+              "test_code": "num=4\ntable_list = [4,8,12,16,20,24,28,32,36,40]\nexpected = [8,16,24,32,40]\nassert even_products == expected\nprint(even_products)\nprint(\"Practice check complete\")\n",
+              "success_message": "You filtered even products."
+            },
+            {
+              "id": "loops_math_sum_table",
+              "title": "Sum of all products in the table",
+              "instructions": "Create a variable table_sum equal to sum(table_list). Print it.",
+              "test_code": "num=5\nassert table_sum == 5*55\nprint(table_sum)\nprint(\"Practice check complete\")\n",
+              "success_message": "You summed the table."
+            }
+          ]
+        },
+        {
+          "id": "loops_math_factors",
+          "title": "Find Factors of a Number",
+          "description": "Read a number and print all its factors. (CBSE Class 6 - Factors and Multiples, Class 8 - Squares and Square Roots)",
+          "starter_code": "n = int(input(\"Enter a positive integer: \"))\nprint(\"Factors of\", n, \"are:\")\nfor i in range(1, n+1):\n    if n % i == 0:\n        print(i, end=\" \")\nprint()\n",
+          "practice_tasks": [
+            {
+              "id": "loops_math_factors_list",
+              "title": "Store factors in a list",
+              "instructions": "Create a list named factor_list containing all factors of n. Print the list.",
+              "test_code": "n=12\nassert factor_list == [1,2,3,4,6,12]\nprint(factor_list)\nprint(\"Practice check complete\")\n",
+              "success_message": "You stored factors in a list."
+            },
+            {
+              "id": "loops_math_factor_count",
+              "title": "Count the number of factors",
+              "instructions": "Create a variable factor_count equal to len(factor_list). Print it.",
+              "test_code": "n=16\nassert factor_count == 5\nprint(factor_count)\nprint(\"Practice check complete\")\n",
+              "success_message": "You counted the factors."
+            },
+            {
+              "id": "loops_math_is_prime",
+              "title": "Check if number is prime (has exactly 2 factors)",
+              "instructions": "Create a variable is_prime that is True if factor_count == 2 else False. Print is_prime.",
+              "test_code": "n=7\nfactor_list=[1,7]\nis_prime = (len(factor_list)==2)\nassert is_prime is True\nprint(is_prime)\nprint(\"Practice check complete\")\n",
+              "success_message": "You checked primality."
+            }
+          ]
+        },
+        {
+          "id": "loops_math_sum_series",
+          "title": "Sum of an Arithmetic Series",
+          "description": "Compute sum of series a + (a+d) + (a+2d) + ... up to n terms. (CBSE Class 8 - Algebraic Expressions)",
+          "starter_code": "a = int(input(\"Enter first term: \"))\nd = int(input(\"Enter common difference: \"))\nn = int(input(\"Enter number of terms: \"))\nsum_series = 0\ncurrent = a\nfor i in range(n):\n    sum_series += current\n    current += d\nprint(\"Sum of series:\", sum_series)\n",
+          "practice_tasks": [
+            {
+              "id": "loops_math_series_terms",
+              "title": "Store terms in a list",
+              "instructions": "Create a list named terms containing all n terms of the series. Print the list.",
+              "test_code": "a=2; d=3; n=4\nassert terms == [2,5,8,11]\nprint(terms)\nprint(\"Practice check complete\")\n",
+              "success_message": "You stored the series terms."
+            },
+            {
+              "id": "loops_math_series_formula",
+              "title": "Verify sum using formula n/2*(2a + (n-1)d)",
+              "instructions": "Compute sum_formula = n/2 * (2*a + (n-1)*d). Create a variable correct_sum that is True if sum_series == sum_formula (use float comparison with tolerance). Print correct_sum.",
+              "test_code": "a=1; d=2; n=5\nsum_series=25\nsum_formula = n/2 * (2*a + (n-1)*d)\nassert correct_sum is True\nprint(correct_sum)\nprint(\"Practice check complete\")\n",
+              "success_message": "You verified the series sum formula."
+            },
+            {
+              "id": "loops_math_series_average",
+              "title": "Average of the series terms",
+              "instructions": "Create a variable series_avg equal to sum_series / n. Print it.",
+              "test_code": "a=3; d=2; n=4; sum_series=24\nassert series_avg == 6.0\nprint(series_avg)\nprint(\"Practice check complete\")\n",
+              "success_message": "You computed the average."
             }
           ]
         }

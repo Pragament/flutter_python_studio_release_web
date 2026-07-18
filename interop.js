@@ -595,7 +595,7 @@ window.monacoInterop = {
         quickSuggestions: true, // Enable for all contexts
         quickSuggestionsDelay: 0, // Instant suggestions
         suggestOnTriggerCharacters: true,
-        acceptSuggestionOnCommitCharacter: true,
+        acceptSuggestionOnCommitCharacter: false,
         acceptSuggestionOnEnter: 'on',
         wordBasedSuggestions: false, // Disable default word-based suggestions to prevent duplicates
         tabCompletion: 'on',
@@ -648,8 +648,20 @@ window.monacoInterop = {
       // Register the Python completion provider globally (only once)
       registerPythonCompletionProvider();
 
+      const notifyFlutterEditorFocus = () => {
+        window.dispatchEvent(new CustomEvent('monaco-editor-focused', {
+          detail: { editorId: containerId }
+        }));
+      };
+
+      editor.onDidFocusEditorText(notifyFlutterEditorFocus);
+      editor.onMouseDown(notifyFlutterEditorFocus);
+
       // Prevent system keyboard and handle touch-to-set-cursor on mobile devices
       const editorDomNode = editor.getDomNode();
+      if (editorDomNode) {
+        editorDomNode.addEventListener('pointerdown', notifyFlutterEditorFocus, true);
+      }
       if (editorDomNode && isMobileDevice) {
         // Touch-to-set-cursor handler: sets cursor position at touch coordinates
         const handleTouchToSetCursor = (e) => {
@@ -701,7 +713,7 @@ window.monacoInterop = {
           const word = model.getWordUntilPosition(position);
           
           // Trigger suggestions if user is typing a word (not deleting or just whitespace)
-          if (word.word.length > 0 && e.changes.some(change => change.text.length > 0)) {
+          if (word.word.length > 0 && e.changes.some(change => /\S/.test(change.text))) {
             setTimeout(() => {
               editor.trigger('keyboard', 'editor.action.triggerSuggest', {});
             }, 10);
@@ -913,7 +925,7 @@ window.monacoInterop = {
         } : false,
         quickSuggestionsDelay: 0, // Instant suggestions
         suggestOnTriggerCharacters: enabled,
-        acceptSuggestionOnCommitCharacter: enabled,
+        acceptSuggestionOnCommitCharacter: false,
         acceptSuggestionOnEnter: enabled ? 'on' : 'off',
         wordBasedSuggestions: enabled,
         parameterHints: { 
@@ -1001,18 +1013,39 @@ window.destroyMonacoEditor = function(elementId) {
 window.insertTextAtCursor = function(editorId, text) {
   const editor = monacoEditors[editorId];
   if (editor) {
+    const model = editor.getModel();
     const selection = editor.getSelection();
+    if (!model || !selection) {
+      return;
+    }
+
+    const normalizedText = String(text ?? "").replace(/\r\n/g, "\n");
     const range = new monaco.Range(
       selection.startLineNumber,
       selection.startColumn,
       selection.endLineNumber,
       selection.endColumn
     );
+    const startOffset = model.getOffsetAt(selection.getStartPosition());
     editor.executeEdits('keyboard-input', [{
       range: range,
-      text: text
+      text: normalizedText,
+      forceMoveMarkers: true
     }]);
-    editor.focus();
+
+    const endPosition = model.getPositionAt(startOffset + normalizedText.length);
+    editor.setSelection(
+      new monaco.Selection(
+        endPosition.lineNumber,
+        endPosition.column,
+        endPosition.lineNumber,
+        endPosition.column
+      )
+    );
+
+    if (!isVirtualKeyboardEnabled) {
+      editor.focus();
+    }
   }
 };
 
@@ -1219,6 +1252,30 @@ await eval_code_async(ast.unparse(_console_input_tree), globals=globals())
       return null; // No error
     } catch (err) {
       return extractUserRelevantPythonError(err);
+    }
+  },
+
+  runCodeWithResult: async (code, resultName) => {
+    if (!pyodide) {
+      throw new Error('Pyodide not initialized');
+    }
+
+    try {
+      if (resultName) {
+        pyodide.globals.delete(resultName);
+      }
+    } catch (_) {}
+
+    const error = await window.pyodideInterop.runCode(code);
+    if (error != null) {
+      return JSON.stringify({ error });
+    }
+
+    try {
+      const result = pyodide.globals.get(resultName);
+      return result == null ? "{}" : String(result);
+    } catch (err) {
+      return JSON.stringify({ error: extractUserRelevantPythonError(err) });
     }
   },
 
