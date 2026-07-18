@@ -1170,18 +1170,23 @@ async def __console_input__(prompt=""):
 
 
         
+        const emitConsoleLine = (text) => {
+          const output = String(text ?? "");
+          onOutput(output.endsWith("\n") ? output : `${output}\n`);
+        };
+
         // Set up proper output redirection using the modern Pyodide API
         pyodide.setStdout({
           batched: (text) => {
             console.log('Python output:', text);
-            onOutput(text);
+            emitConsoleLine(text);
           }
         });
         
         pyodide.setStderr({
           batched: (text) => {
             console.error('Python error:', text);
-            onOutput(text);
+            emitConsoleLine(text);
           }
         });
 
