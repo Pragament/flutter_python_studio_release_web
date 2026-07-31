@@ -1,12 +1,22 @@
 {
   "metadata": {
-    "description": "Python coding capstone projects mapped to CBSE Class 5–8 Math & Science topics. Designed for a Class 6 student who has learned Input/Output, with hints provided.",
-    "filterable_fields": ["category", "class_level", "subject", "difficulty"],
+    "description": "Python coding capstone projects mapped to CBSE Class 5–8 Math & Science topics. Designed for a Class 6 student who has learned Input/Output, with hints provided. Updated with comprehensive topic coverage covering all major missing areas.",
+    "filterable_fields": ["category", "class_level", "subject", "difficulty", "topic"],
     "sortable_fields": ["name", "difficulty", "class_level"],
     "categories": {
       "input_output": "Projects using only print() and input() with arithmetic operations.",
       "input_output_conditionals": "Projects using print(), input() and if/elif/else statements.",
       "input_output_conditionals_loops": "Projects using print(), input(), conditionals and for/while loops."
+    },
+    "topic_coverage": {
+      "math_class_5": ["Large Numbers", "Fractions", "Decimals", "Percentage", "Profit & Loss", "Time & Temperature", "Perimeter & Area", "Volume & Capacity", "Lines, Angles & Shapes", "Patterns & Symmetry", "Factors & Multiples"],
+      "math_class_6": ["Knowing Our Numbers", "Whole Numbers", "Fractions", "Decimals", "Ratio & Proportion", "Percentage", "Algebra", "Basic Geometry", "Data Handling", "Symmetry", "Practical Geometry"],
+      "math_class_7": ["Integers", "Fractions & Decimals", "Rational Numbers", "Simple Equations", "Lines & Angles", "Triangles", "Comparing Quantities", "Perimeter & Area", "Data Handling", "Symmetry", "Visualizing Solid Shapes"],
+      "math_class_8": ["Rational Numbers", "Linear Equations", "Quadrilaterals", "Practical Geometry", "Data Handling", "Squares & Square Roots", "Cubes & Cube Roots", "Comparing Quantities", "Algebraic Expressions", "Mensuration", "Exponents & Powers", "Direct & Inverse Proportions", "Factorization", "Introduction to Graphs"],
+      "science_class_5": ["Plants & Animals", "Body Systems", "Rocks & Minerals", "Air & Water", "Environment", "Earth, Sun & Moon"],
+      "science_class_6": ["Food Sources", "Fibre to Fabric", "Sorting Materials", "Separation", "Changes Around Us", "Body Movements", "Living Organisms", "Motion & Measurement", "Light & Shadows", "Electricity & Circuits", "Magnets"],
+      "science_class_7": ["Nutrition in Plants", "Nutrition in Animals", "Fibre to Fabric", "Heat", "Acids/Bases/Salts", "Physical/Chemical Changes", "Weather & Climate", "Winds & Storms", "Soil", "Respiration", "Transportation", "Reproduction", "Motion & Time", "Electric Current", "Light", "Water", "Forests", "Waste Water"],
+      "science_class_8": ["Crop Production", "Microorganisms", "Synthetic Fibres", "Metals & Non-metals", "Coal & Petroleum", "Combustion & Flame", "Conservation", "Cell Structure", "Reproduction", "Adolescence", "Force & Pressure", "Friction", "Sound", "Chemical Effects", "Natural Phenomena", "Light", "Stars & Solar System", "Pollution"]
     }
   },
   "projects": [
@@ -210,6 +220,364 @@
         "Use a flag variable",
         "Understand prime number logic",
         "Optimize using square root"
+      ]
+    },
+    {
+      "id": "p13",
+      "name": "LCM & HCF Finder",
+      "category": "input_output_conditionals_loops",
+      "class_level": [5, 6],
+      "subject": "Mathematics",
+      "topic": "Factors & Multiples",
+      "difficulty": 3,
+      "description": "Write a program that takes two numbers and finds their LCM and HCF.",
+      "hint": "Take two numbers. Use a loop to find HCF (Euclidean algorithm). LCM = (num1 * num2) // HCF.",
+      "prerequisites": ["print", "input", "for/while loop", "if-else"],
+      "learning_objectives": [
+        "Understand factors and multiples",
+        "Apply mathematical algorithms",
+        "Use loops for calculations"
+      ]
+    },
+    {
+      "id": "p14",
+      "name": "Percentage Calculator",
+      "category": "input_output_conditionals",
+      "class_level": [6, 7, 8],
+      "subject": "Mathematics",
+      "topic": "Comparing Quantities / Percentage",
+      "difficulty": 2,
+      "description": "Write a program that takes the total marks and obtained marks and calculates the percentage.",
+      "hint": "Take total marks and obtained marks. Percentage = (obtained / total) * 100. Print with clear formatting.",
+      "prerequisites": ["print", "input", "arithmetic operators"],
+      "learning_objectives": [
+        "Apply percentage formula",
+        "Work with floating-point precision"
+      ]
+    },
+    {
+      "id": "p15",
+      "name": "Simple Interest Calculator",
+      "category": "input_output",
+      "class_level": [7, 8],
+      "subject": "Mathematics",
+      "topic": "Comparing Quantities",
+      "difficulty": 2,
+      "description": "Write a program that calculates Simple Interest given Principal, Rate, and Time.",
+      "hint": "Take P, R, T as input. SI = (P * R * T) / 100. Print the interest amount.",
+      "prerequisites": ["print", "input", "arithmetic operators"],
+      "learning_objectives": [
+        "Apply financial formulas",
+        "Understand simple interest concept"
+      ]
+    },
+    {
+      "id": "p16",
+      "name": "Equation Solver - Linear",
+      "category": "input_output",
+      "class_level": [7, 8],
+      "subject": "Mathematics",
+      "topic": "Linear Equations",
+      "difficulty": 3,
+      "description": "Write a program that solves linear equations of the form ax + b = 0.",
+      "hint": "Take a and b as input. If a != 0, x = -b/a. If a == 0 and b == 0, infinite solutions. If a == 0 and b != 0, no solution.",
+      "prerequisites": ["print", "input", "if-elif-else", "arithmetic operators"],
+      "learning_objectives": [
+        "Solve algebraic equations",
+        "Handle special cases",
+        "Apply conditional logic"
+      ]
+    },
+    {
+      "id": "p17",
+      "name": "Circle Area & Circumference",
+      "category": "input_output",
+      "class_level": [7, 8],
+      "subject": "Mathematics",
+      "topic": "Mensuration",
+      "difficulty": 2,
+      "description": "Write a program that takes the radius of a circle and prints its area and circumference.",
+      "hint": "Take radius. Area = pi * r^2. Circumference = 2 * pi * r. Use pi = 3.14159.",
+      "prerequisites": ["print", "input", "arithmetic operators"],
+      "learning_objectives": [
+        "Apply mensuration formulas",
+        "Work with pi constant"
+      ]
+    },
+    {
+      "id": "p18",
+      "name": "Number Pattern Generator",
+      "category": "input_output_conditionals_loops",
+      "class_level": [5, 6, 7],
+      "subject": "Mathematics",
+      "topic": "Patterns",
+      "difficulty": 3,
+      "description": "Write a program that prints a right-angled triangle pattern of numbers.",
+      "hint": "Take number of rows N. Use nested loops: outer loop for rows, inner loop for columns. Print numbers in increasing order.",
+      "prerequisites": ["print", "input", "nested loops", "range()"],
+      "learning_objectives": [
+        "Understand nested loops",
+        "Generate patterns",
+        "Develop logical thinking"
+      ]
+    },
+    {
+      "id": "p19",
+      "name": "Electricity Bill Calculator",
+      "category": "input_output_conditionals",
+      "class_level": [7, 8],
+      "subject": "Science",
+      "topic": "Electricity (Physics)",
+      "difficulty": 2,
+      "description": "Write a program that calculates electricity bill based on units consumed.",
+      "hint": "Take units consumed. Apply slab rates: first 100 units at Rs.5, next 100 at Rs.7, beyond at Rs.10. Add fixed charge.",
+      "prerequisites": ["print", "input", "if-elif-else", "arithmetic operators"],
+      "learning_objectives": [
+        "Apply slab-based calculations",
+        "Real-world application of conditionals"
+      ]
+    },
+    {
+      "id": "p20",
+      "name": "Speed Distance Time Calculator",
+      "category": "input_output_conditionals",
+      "class_level": [7, 8],
+      "subject": "Science",
+      "topic": "Motion (Physics)",
+      "difficulty": 2,
+      "description": "Write a program that takes any two of speed, distance, and time and calculates the third.",
+      "hint": "Ask user what they want to calculate. Then take the two inputs. Apply formulas: speed = distance/time, distance = speed*time, time = distance/speed.",
+      "prerequisites": ["print", "input", "if-elif-else", "arithmetic operators"],
+      "learning_objectives": [
+        "Understand motion formulas",
+        "Handle missing variable cases"
+      ]
+    },
+    {
+      "id": "p21",
+      "name": "Body Mass Index (BMI) Calculator",
+      "category": "input_output_conditionals",
+      "class_level": [6, 7, 8],
+      "subject": "Science",
+      "topic": "Health & Nutrition",
+      "difficulty": 2,
+      "description": "Write a program that takes weight (kg) and height (m) and calculates BMI with health category.",
+      "hint": "Take weight and height. BMI = weight / (height^2). Classify: underweight (<18.5), normal (18.5-24.9), overweight (25-29.9), obese (>=30).",
+      "prerequisites": ["print", "input", "if-elif-else", "arithmetic operators"],
+      "learning_objectives": [
+        "Apply health formula",
+        "Classify based on ranges"
+      ]
+    },
+    {
+      "id": "p22",
+      "name": "Leap Year Checker",
+      "category": "input_output_conditionals",
+      "class_level": [6, 7, 8],
+      "subject": "Science / Mathematics",
+      "topic": "Time & Calendar",
+      "difficulty": 2,
+      "description": "Write a program that takes a year and prints whether it's a leap year or not.",
+      "hint": "A year is leap if divisible by 400, or divisible by 4 but not by 100. Use nested if-else.",
+      "prerequisites": ["print", "input", "nested if-else", "modulo operator"],
+      "learning_objectives": [
+        "Apply logical conditions",
+        "Understand calendar rules"
+      ]
+    },
+    {
+      "id": "p23",
+      "name": "Fractions Operations",
+      "category": "input_output_conditionals",
+      "class_level": [5, 6, 7],
+      "subject": "Mathematics",
+      "topic": "Fractions",
+      "difficulty": 3,
+      "description": "Write a program that takes two fractions and performs addition, subtraction, multiplication, or division.",
+      "hint": "Take numerator and denominator for two fractions. Ask for operation. Use cross-multiplication for addition/subtraction. Simplify if possible.",
+      "prerequisites": ["print", "input", "if-elif-else", "arithmetic operators"],
+      "learning_objectives": [
+        "Apply fraction operations",
+        "Understand LCM concept",
+        "Simplify fractions"
+      ]
+    },
+    {
+      "id": "p24",
+      "name": "Force & Pressure Calculator",
+      "category": "input_output",
+      "class_level": [8],
+      "subject": "Science",
+      "topic": "Force & Pressure (Physics)",
+      "difficulty": 2,
+      "description": "Write a program that takes force and area and calculates pressure.",
+      "hint": "Take force (N) and area (m²). Pressure = Force / Area. Print in Pascals.",
+      "prerequisites": ["print", "input", "arithmetic operators"],
+      "learning_objectives": [
+        "Apply pressure formula",
+        "Understand force and pressure concepts"
+      ]
+    },
+    {
+      "id": "p25",
+      "name": "Photosynthesis Word Equation",
+      "category": "input_output",
+      "class_level": [7, 8],
+      "subject": "Science",
+      "topic": "Nutrition in Plants (Biology)",
+      "difficulty": 1,
+      "description": "Write a program that prints the photosynthesis equation and asks for inputs to calculate glucose produced.",
+      "hint": "Use the formula: 6CO₂ + 6H₂O → C₆H₁₂O₆ + 6O₂. Take amount of CO₂ used, calculate glucose produced. (Simplified: glucose = CO₂/6)",
+      "prerequisites": ["print", "input", "arithmetic operators"],
+      "learning_objectives": [
+        "Understand photosynthesis formula",
+        "Apply stoichiometric ratios"
+      ]
+    },
+    {
+      "id": "p26",
+      "name": "Pythagorean Theorem Calculator",
+      "category": "input_output_conditionals",
+      "class_level": [7, 8],
+      "subject": "Mathematics",
+      "topic": "Triangles / Geometry",
+      "difficulty": 3,
+      "description": "Write a program that takes any two sides of a right-angled triangle and calculates the third side.",
+      "hint": "Ask user which side is missing. Use Pythagoras theorem: a² + b² = c². Use math.sqrt() to find the missing side.",
+      "prerequisites": ["print", "input", "if-elif-else", "math.sqrt"],
+      "learning_objectives": [
+        "Apply Pythagorean theorem",
+        "Use square root function"
+      ]
+    },
+    {
+      "id": "p27",
+      "name": "Bar Graph Data Plotter",
+      "category": "input_output_conditionals_loops",
+      "class_level": [6, 7, 8],
+      "subject": "Mathematics",
+      "topic": "Data Handling",
+      "difficulty": 3,
+      "description": "Write a program that takes N data points and prints a simple text-based bar graph.",
+      "hint": "Take N values. Find the maximum value. Scale each value. Print bars using '*' characters in proportion to the values.",
+      "prerequisites": ["print", "input", "loops", "comparison operators"],
+      "learning_objectives": [
+        "Visualize data",
+        "Scale and normalize data"
+      ]
+    },
+    {
+      "id": "p28",
+      "name": "Temperature Converter (All Scales)",
+      "category": "input_output_conditionals",
+      "class_level": [7, 8],
+      "subject": "Science",
+      "topic": "Heat (Physics)",
+      "difficulty": 2,
+      "description": "Write a program that converts temperature between Celsius, Fahrenheit, and Kelvin.",
+      "hint": "Ask user for scale to convert from and to. Apply formulas: C = (F - 32) * 5/9, K = C + 273.15.",
+      "prerequisites": ["print", "input", "if-elif-else", "arithmetic operators"],
+      "learning_objectives": [
+        "Apply multiple conversion formulas",
+        "Understand temperature scales"
+      ]
+    },
+    {
+      "id": "p29",
+      "name": "Average Speed Calculator (Multiple Legs)",
+      "category": "input_output_conditionals_loops",
+      "class_level": [7, 8],
+      "subject": "Science",
+      "topic": "Motion (Physics)",
+      "difficulty": 3,
+      "description": "Write a program that takes multiple distance-time pairs and calculates total average speed.",
+      "hint": "Use a loop to take distances and times for each leg. Calculate total distance and total time. Average speed = total distance / total time.",
+      "prerequisites": ["print", "input", "for loop", "accumulator pattern"],
+      "learning_objectives": [
+        "Aggregate data from multiple legs",
+        "Understand average speed concept"
+      ]
+    },
+    {
+      "id": "p30",
+      "name": "Electricity Units Usage Calculator",
+      "category": "input_output_conditionals_loops",
+      "class_level": [7, 8],
+      "subject": "Science",
+      "topic": "Electricity (Physics)",
+      "difficulty": 3,
+      "description": "Write a program that takes power rating and usage time for multiple appliances and calculates total units consumed.",
+      "hint": "For each appliance, ask power (W) and time (h). Calculate units = power * time / 1000. Sum all units. Print total units.",
+      "prerequisites": ["print", "input", "for loop", "accumulator"],
+      "learning_objectives": [
+        "Apply power consumption formula",
+        "Calculate total usage",
+        "Real-world electricity calculation"
+      ]
+    },
+    {
+      "id": "p31",
+      "name": "Quadratic Equation Solver",
+      "category": "input_output_conditionals",
+      "class_level": [8],
+      "subject": "Mathematics",
+      "topic": "Algebra / Quadratic Equations",
+      "difficulty": 4,
+      "description": "Write a program that solves a quadratic equation ax² + bx + c = 0.",
+      "hint": "Take a, b, c. Calculate discriminant = b² - 4ac. If positive, two real roots. If zero, one root. If negative, complex roots. Use math.sqrt().",
+      "prerequisites": ["print", "input", "if-elif-else", "math.sqrt", "complex numbers concept"],
+      "learning_objectives": [
+        "Apply quadratic formula",
+        "Handle multiple cases",
+        "Use discriminant concept"
+      ]
+    },
+    {
+      "id": "p32",
+      "name": "Solar System Distance Calculator",
+      "category": "input_output_conditionals",
+      "class_level": [8],
+      "subject": "Science",
+      "topic": "Stars & Solar System",
+      "difficulty": 2,
+      "description": "Write a program that takes planet name and prints its distance from the Sun.",
+      "hint": "Use if-elif-else or dictionary to map planet names to distances (in million km). Print the distance.",
+      "prerequisites": ["print", "input", "if-elif-else"],
+      "learning_objectives": [
+        "Learn planetary distances",
+        "Work with data mapping"
+      ]
+    },
+    {
+      "id": "p33",
+      "name": "Ratio and Proportion Solver",
+      "category": "input_output",
+      "class_level": [6, 7, 8],
+      "subject": "Mathematics",
+      "topic": "Ratio & Proportion",
+      "difficulty": 2,
+      "description": "Write a program that takes two ratios and checks if they are in proportion.",
+      "hint": "Take a:b and c:d. Check if a*d == b*c. Print whether they are proportional.",
+      "prerequisites": ["print", "input", "if-else", "arithmetic operators"],
+      "learning_objectives": [
+        "Understand proportion concept",
+        "Apply cross multiplication"
+      ]
+    },
+    {
+      "id": "p34",
+      "name": "Gravity Weight Calculator",
+      "category": "input_output",
+      "class_level": [8],
+      "subject": "Science",
+      "topic": "Force & Pressure / Gravitation",
+      "difficulty": 2,
+      "description": "Write a program that takes mass and calculates weight on Earth and Moon.",
+      "hint": "Take mass (kg). Weight on Earth = mass * 9.8. Weight on Moon = weight_on_earth / 6. Print both.",
+      "prerequisites": ["print", "input", "arithmetic operators"],
+      "learning_objectives": [
+        "Understand weight vs mass",
+        "Apply gravitational concepts"
       ]
     }
   ]
