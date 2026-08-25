@@ -1,22 +1,141 @@
 {
   "metadata": {
     "description": "Python coding capstone projects mapped to CBSE Class 5–8 Math & Science topics. Designed for a Class 6 student who has learned Input/Output, with hints provided. Updated with comprehensive topic coverage covering all major missing areas.",
-    "filterable_fields": ["category", "class_level", "subject", "difficulty", "topic"],
-    "sortable_fields": ["name", "difficulty", "class_level"],
+    "filterable_fields": [
+      "category",
+      "class_level",
+      "subject",
+      "difficulty",
+      "topic"
+    ],
+    "sortable_fields": [
+      "name",
+      "difficulty",
+      "class_level"
+    ],
     "categories": {
       "input_output": "Projects using only print() and input() with arithmetic operations.",
       "input_output_conditionals": "Projects using print(), input() and if/elif/else statements.",
-      "input_output_conditionals_loops": "Projects using print(), input(), conditionals and for/while loops."
+      "input_output_conditionals_loops": "Projects using print(), input(), conditionals and for/while loops.",
+      "output": "Projects using print() and fixed values without input()."
     },
     "topic_coverage": {
-      "math_class_5": ["Large Numbers", "Fractions", "Decimals", "Percentage", "Profit & Loss", "Time & Temperature", "Perimeter & Area", "Volume & Capacity", "Lines, Angles & Shapes", "Patterns & Symmetry", "Factors & Multiples"],
-      "math_class_6": ["Knowing Our Numbers", "Whole Numbers", "Fractions", "Decimals", "Ratio & Proportion", "Percentage", "Algebra", "Basic Geometry", "Data Handling", "Symmetry", "Practical Geometry"],
-      "math_class_7": ["Integers", "Fractions & Decimals", "Rational Numbers", "Simple Equations", "Lines & Angles", "Triangles", "Comparing Quantities", "Perimeter & Area", "Data Handling", "Symmetry", "Visualizing Solid Shapes"],
-      "math_class_8": ["Rational Numbers", "Linear Equations", "Quadrilaterals", "Practical Geometry", "Data Handling", "Squares & Square Roots", "Cubes & Cube Roots", "Comparing Quantities", "Algebraic Expressions", "Mensuration", "Exponents & Powers", "Direct & Inverse Proportions", "Factorization", "Introduction to Graphs"],
-      "science_class_5": ["Plants & Animals", "Body Systems", "Rocks & Minerals", "Air & Water", "Environment", "Earth, Sun & Moon"],
-      "science_class_6": ["Food Sources", "Fibre to Fabric", "Sorting Materials", "Separation", "Changes Around Us", "Body Movements", "Living Organisms", "Motion & Measurement", "Light & Shadows", "Electricity & Circuits", "Magnets"],
-      "science_class_7": ["Nutrition in Plants", "Nutrition in Animals", "Fibre to Fabric", "Heat", "Acids/Bases/Salts", "Physical/Chemical Changes", "Weather & Climate", "Winds & Storms", "Soil", "Respiration", "Transportation", "Reproduction", "Motion & Time", "Electric Current", "Light", "Water", "Forests", "Waste Water"],
-      "science_class_8": ["Crop Production", "Microorganisms", "Synthetic Fibres", "Metals & Non-metals", "Coal & Petroleum", "Combustion & Flame", "Conservation", "Cell Structure", "Reproduction", "Adolescence", "Force & Pressure", "Friction", "Sound", "Chemical Effects", "Natural Phenomena", "Light", "Stars & Solar System", "Pollution"]
+      "math_class_5": [
+        "Large Numbers",
+        "Fractions",
+        "Decimals",
+        "Percentage",
+        "Profit & Loss",
+        "Time & Temperature",
+        "Perimeter & Area",
+        "Volume & Capacity",
+        "Lines, Angles & Shapes",
+        "Patterns & Symmetry",
+        "Factors & Multiples"
+      ],
+      "math_class_6": [
+        "Knowing Our Numbers",
+        "Whole Numbers",
+        "Fractions",
+        "Decimals",
+        "Ratio & Proportion",
+        "Percentage",
+        "Algebra",
+        "Basic Geometry",
+        "Data Handling",
+        "Symmetry",
+        "Practical Geometry"
+      ],
+      "math_class_7": [
+        "Integers",
+        "Fractions & Decimals",
+        "Rational Numbers",
+        "Simple Equations",
+        "Lines & Angles",
+        "Triangles",
+        "Comparing Quantities",
+        "Perimeter & Area",
+        "Data Handling",
+        "Symmetry",
+        "Visualizing Solid Shapes"
+      ],
+      "math_class_8": [
+        "Rational Numbers",
+        "Linear Equations",
+        "Quadrilaterals",
+        "Practical Geometry",
+        "Data Handling",
+        "Squares & Square Roots",
+        "Cubes & Cube Roots",
+        "Comparing Quantities",
+        "Algebraic Expressions",
+        "Mensuration",
+        "Exponents & Powers",
+        "Direct & Inverse Proportions",
+        "Factorization",
+        "Introduction to Graphs"
+      ],
+      "science_class_5": [
+        "Plants & Animals",
+        "Body Systems",
+        "Rocks & Minerals",
+        "Air & Water",
+        "Environment",
+        "Earth, Sun & Moon"
+      ],
+      "science_class_6": [
+        "Food Sources",
+        "Fibre to Fabric",
+        "Sorting Materials",
+        "Separation",
+        "Changes Around Us",
+        "Body Movements",
+        "Living Organisms",
+        "Motion & Measurement",
+        "Light & Shadows",
+        "Electricity & Circuits",
+        "Magnets"
+      ],
+      "science_class_7": [
+        "Nutrition in Plants",
+        "Nutrition in Animals",
+        "Fibre to Fabric",
+        "Heat",
+        "Acids/Bases/Salts",
+        "Physical/Chemical Changes",
+        "Weather & Climate",
+        "Winds & Storms",
+        "Soil",
+        "Respiration",
+        "Transportation",
+        "Reproduction",
+        "Motion & Time",
+        "Electric Current",
+        "Light",
+        "Water",
+        "Forests",
+        "Waste Water"
+      ],
+      "science_class_8": [
+        "Crop Production",
+        "Microorganisms",
+        "Synthetic Fibres",
+        "Metals & Non-metals",
+        "Coal & Petroleum",
+        "Combustion & Flame",
+        "Conservation",
+        "Cell Structure",
+        "Reproduction",
+        "Adolescence",
+        "Force & Pressure",
+        "Friction",
+        "Sound",
+        "Chemical Effects",
+        "Natural Phenomena",
+        "Light",
+        "Stars & Solar System",
+        "Pollution"
+      ]
     }
   },
   "projects": [
@@ -24,561 +143,1138 @@
       "id": "p1",
       "name": "Rectangle Area & Perimeter",
       "category": "input_output",
-      "class_level": [5, 6],
+      "class_level": [
+        5,
+        6
+      ],
       "subject": "Mathematics",
       "topic": "Mensuration",
       "difficulty": 1,
       "description": "Write a program that asks the user for the length and breadth of a rectangle and prints its area and perimeter.",
       "hint": "Use input() to get length and breadth (convert to float or int). Calculate perimeter = 2 * (length + breadth) and area = length * breadth. Print the results with clear labels.",
-      "prerequisites": ["print", "input", "arithmetic operators"],
+      "prerequisites": [
+        "print",
+        "input",
+        "arithmetic operators"
+      ],
       "learning_objectives": [
         "Accept multiple numeric inputs",
         "Apply arithmetic formulas",
         "Display formatted output"
-      ]
+      ],
+      "code": "# Rectangle Area & Perimeter\n[[length]] = [[float]]([[input]](\"Enter length of rectangle: \"))\nbreadth = float(input(\"Enter breadth of rectangle: \"))\narea = length * breadth\nperimeter = 2 * (length + breadth)\n[[print]](f\"Area = {area}\")\nprint(f\"Perimeter = {perimeter}\")"
     },
     {
       "id": "p2",
       "name": "Celsius to Fahrenheit Converter",
       "category": "input_output",
-      "class_level": [7, 8],
+      "class_level": [
+        7,
+        8
+      ],
       "subject": "Science",
       "topic": "Heat (Physics)",
       "difficulty": 1,
       "description": "Write a program that takes a temperature in Celsius and converts it to Fahrenheit.",
       "hint": "Use input() to get Celsius. Apply the formula: Fahrenheit = (Celsius * 9/5) + 32. Print the converted temperature.",
-      "prerequisites": ["print", "input", "arithmetic operators"],
+      "prerequisites": [
+        "print",
+        "input",
+        "arithmetic operators"
+      ],
       "learning_objectives": [
         "Work with floating-point numbers",
         "Understand and apply a conversion formula"
-      ]
+      ],
+      "code": "# Celsius to Fahrenheit Converter\n[[celsius]] = [[float]]([[input]](\"Enter temperature in Celsius: \"))\nfahrenheit = (celsius * 9/5) + 32\n[[print]](f\"{celsius}°C is equal to {fahrenheit}°F\")"
     },
     {
       "id": "p3",
       "name": "Average of Three Marks",
       "category": "input_output",
-      "class_level": [6, 7],
+      "class_level": [
+        6,
+        7
+      ],
       "subject": "Mathematics",
       "topic": "Data Handling",
       "difficulty": 1,
       "description": "Write a program that takes marks obtained in three subjects as input and prints the average marks.",
       "hint": "Take three inputs, add them, and divide the sum by 3. Use float division to get a decimal average.",
-      "prerequisites": ["print", "input", "arithmetic operators"],
+      "prerequisites": [
+        "print",
+        "input",
+        "arithmetic operators"
+      ],
       "learning_objectives": [
         "Compute arithmetic mean",
         "Handle multiple variables"
-      ]
+      ],
+      "code": "# Average of Three Marks\n[[m1]] = [[float]]([[input]](\"Enter marks for subject 1: \"))\nm2 = float(input(\"Enter marks for subject 2: \"))\nm3 = float(input(\"Enter marks for subject 3: \"))\navg = (m1 + m2 + m3) / 3\n[[print]](f\"Average marks = {avg}\")"
     },
     {
       "id": "p4",
       "name": "Speed Calculator",
       "category": "input_output",
-      "class_level": [7, 8],
+      "class_level": [
+        7,
+        8
+      ],
       "subject": "Science",
       "topic": "Motion (Physics)",
       "difficulty": 1,
       "description": "Write a program that takes distance (in km) and time (in hours) and calculates the speed in km/h.",
       "hint": "Use input() for distance and time. Speed = distance / time. Print the speed.",
-      "prerequisites": ["print", "input", "arithmetic operators"],
+      "prerequisites": [
+        "print",
+        "input",
+        "arithmetic operators"
+      ],
       "learning_objectives": [
         "Apply the speed formula",
         "Perform division"
-      ]
+      ],
+      "code": "# Speed Calculator\n[[distance]] = [[float]]([[input]](\"Enter distance in km: \"))\ntime = float(input(\"Enter time in hours: \"))\nspeed = distance / time\n[[print]](f\"Speed = {speed} km/h\")"
     },
     {
       "id": "p5",
       "name": "Even or Odd Number",
       "category": "input_output_conditionals",
-      "class_level": [6, 7],
+      "class_level": [
+        6,
+        7
+      ],
       "subject": "Mathematics",
       "topic": "Integers / Playing with Numbers",
       "difficulty": 2,
       "description": "Write a program that takes an integer as input and prints whether it is 'Even' or 'Odd'.",
       "hint": "Take input, convert to int. Use the modulo operator (%) to check if number % 2 == 0. Use if-else to print the appropriate message.",
-      "prerequisites": ["print", "input", "if-else", "modulo operator"],
+      "prerequisites": [
+        "print",
+        "input",
+        "if-else",
+        "modulo operator"
+      ],
       "learning_objectives": [
         "Use conditional statements",
         "Apply the modulo operator",
         "Make decisions in code"
-      ]
+      ],
+      "code": "# Even or Odd Number\nnum = [[int]]([[input]](\"Enter an integer: \"))\n[[if]] num % 2 == 0:\n    [[print]](f\"{num} is Even\")\nelse:\n    print(f\"{num} is Odd\")"
     },
     {
       "id": "p6",
       "name": "Profit or Loss Calculator",
       "category": "input_output_conditionals",
-      "class_level": [7, 8],
+      "class_level": [
+        7,
+        8
+      ],
       "subject": "Mathematics",
       "topic": "Comparing Quantities",
       "difficulty": 2,
       "description": "Write a program that takes the Cost Price (CP) and Selling Price (SP) of an item and prints whether it is a profit or loss, along with the amount.",
       "hint": "Take CP and SP. If SP > CP, profit = SP - CP. Else if CP > SP, loss = CP - SP. Else, no profit no loss. Print the result with the amount.",
-      "prerequisites": ["print", "input", "if-elif-else"],
+      "prerequisites": [
+        "print",
+        "input",
+        "if-elif-else"
+      ],
       "learning_objectives": [
         "Apply profit/loss formulas",
         "Use nested conditionals",
         "Real-world math application"
-      ]
+      ],
+      "code": "# Profit or Loss Calculator\ncp = [[float]]([[input]](\"Enter Cost Price (CP): \"))\nsp = float(input(\"Enter Selling Price (SP): \"))\n[[if]] sp > cp:\n    profit = sp - cp\n    [[print]](f\"Profit of Rs. {profit}\")\nelif cp > sp:\n    loss = cp - sp\n    print(f\"Loss of Rs. {loss}\")\nelse:\n    print(\"No profit, no loss.\")"
     },
     {
       "id": "p7",
       "name": "Triangle Type Classifier",
       "category": "input_output_conditionals",
-      "class_level": [7, 8],
+      "class_level": [
+        7,
+        8
+      ],
       "subject": "Mathematics",
       "topic": "Geometry – Triangles",
       "difficulty": 2,
       "description": "Write a program that takes the lengths of three sides of a triangle and classifies it as 'Equilateral', 'Isosceles', or 'Scalene'.",
       "hint": "Take three side lengths. Compare them: if all equal -> equilateral; else if any two equal -> isosceles; else -> scalene. (Assume valid triangle sides).",
-      "prerequisites": ["print", "input", "nested if-else", "comparison operators"],
+      "prerequisites": [
+        "print",
+        "input",
+        "nested if-else",
+        "comparison operators"
+      ],
       "learning_objectives": [
         "Apply logical comparisons",
         "Classify geometric shapes",
         "Handle multiple conditions"
-      ]
+      ],
+      "code": "# Triangle Type Classifier\na = [[float]]([[input]](\"Enter side 1: \"))\nb = float(input(\"Enter side 2: \"))\nc = float(input(\"Enter side 3: \"))\n[[if]] a == b == c:\n    [[print]](\"Equilateral triangle\")\nelif a == b or b == c or a == c:\n    print(\"Isosceles triangle\")\nelse:\n    print(\"Scalene triangle\")"
     },
     {
       "id": "p8",
       "name": "Acid, Base or Neutral? (pH Checker)",
       "category": "input_output_conditionals",
-      "class_level": [7, 8],
+      "class_level": [
+        7,
+        8
+      ],
       "subject": "Science",
       "topic": "Acids, Bases and Salts (Chemistry)",
       "difficulty": 2,
       "description": "Write a program that takes a pH value (0–14) as input and prints whether the substance is 'Acidic' (pH < 7), 'Basic' (pH > 7), or 'Neutral' (pH = 7).",
       "hint": "Take pH as a float. Use if-elif-else to check the value range and print the corresponding type.",
-      "prerequisites": ["print", "input", "if-elif-else"],
+      "prerequisites": [
+        "print",
+        "input",
+        "if-elif-else"
+      ],
       "learning_objectives": [
         "Understand pH scale",
         "Apply range comparisons",
         "Map scientific concepts to code"
-      ]
+      ],
+      "code": "# Acid, Base or Neutral? (pH Checker)\npH = [[float]]([[input]](\"Enter pH value (0-14): \"))\n[[if]] pH < 7:\n    [[print]](\"Acidic\")\nelif pH > 7:\n    print(\"Basic\")\nelse:\n    print(\"Neutral\")"
     },
     {
       "id": "p9",
       "name": "Multiplication Table Generator",
       "category": "input_output_conditionals_loops",
-      "class_level": [6, 7],
+      "class_level": [
+        6,
+        7
+      ],
       "subject": "Mathematics",
       "topic": "Playing with Numbers / Integers",
       "difficulty": 3,
       "description": "Write a program that takes a number and prints its multiplication table from 1 to 10.",
       "hint": "Take the number. Use a for loop (or while loop) from 1 to 10. In each iteration, print the number multiplied by the loop variable.",
-      "prerequisites": ["print", "input", "for loop", "range()"],
+      "prerequisites": [
+        "print",
+        "input",
+        "for loop",
+        "range()"
+      ],
       "learning_objectives": [
         "Use loops for repetitive tasks",
         "Generate tabular data",
         "Practice multiplication"
-      ]
+      ],
+      "code": "# Multiplication Table Generator\nnum = [[int]]([[input]](\"Enter a number: \"))\n[[print]](f\"Multiplication table of {num}:\")\n[[for]] i in range(1, 11):\n    print(f\"{num} x {i} = {num * i}\")"
     },
     {
       "id": "p10",
       "name": "Sum of First N Natural Numbers",
       "category": "input_output_conditionals_loops",
-      "class_level": [6, 7],
+      "class_level": [
+        6,
+        7
+      ],
       "subject": "Mathematics",
       "topic": "Algebra / Number Systems",
       "difficulty": 3,
       "description": "Write a program that takes a positive integer N and calculates the sum of all integers from 1 to N.",
       "hint": "Take N. Initialize a variable 'total' to 0. Use a loop from 1 to N, add each number to 'total'. Print the final total.",
-      "prerequisites": ["print", "input", "for loop", "accumulator pattern"],
+      "prerequisites": [
+        "print",
+        "input",
+        "for loop",
+        "accumulator pattern"
+      ],
       "learning_objectives": [
         "Implement an accumulator",
         "Understand sequence summation",
         "Loop control"
-      ]
+      ],
+      "code": "# Sum of First N Natural Numbers\nN = [[int]]([[input]](\"Enter a positive integer N: \"))\ntotal = 0\n[[for]] i in range(1, N+1):\n    total += i\n[[print]](f\"Sum of first {N} natural numbers = {total}\")"
     },
     {
       "id": "p11",
       "name": "Average of N Numbers",
       "category": "input_output_conditionals_loops",
-      "class_level": [6, 7],
+      "class_level": [
+        6,
+        7
+      ],
       "subject": "Mathematics",
       "topic": "Data Handling",
       "difficulty": 3,
       "description": "Write a program that first asks how many numbers the user wants to enter, then takes those numbers one by one, and finally prints their average.",
       "hint": "Take N first. Then run a loop N times. Inside the loop, ask for each number, add it to a running total. After the loop, divide total by N to get average.",
-      "prerequisites": ["print", "input", "for loop", "accumulator", "type conversion"],
+      "prerequisites": [
+        "print",
+        "input",
+        "for loop",
+        "accumulator",
+        "type conversion"
+      ],
       "learning_objectives": [
         "Dynamic loop count",
         "Aggregate data",
         "Compute mean"
-      ]
+      ],
+      "code": "# Average of N Numbers\nN = [[int]]([[input]](\"How many numbers? \"))\ntotal = 0\nfor i in range(N):\n    num = [[float]](input(f\"Enter number {i+1}: \"))\n    total += num\naverage = total / N\n[[print]](f\"Average = {average}\")"
     },
     {
       "id": "p12",
       "name": "Prime Number Checker",
       "category": "input_output_conditionals_loops",
-      "class_level": [6, 8],
+      "class_level": [
+        6,
+        8
+      ],
       "subject": "Mathematics",
       "topic": "Playing with Numbers / Factors",
       "difficulty": 4,
       "description": "Write a program that takes a positive integer and prints whether it is a prime number or not.",
       "hint": "Take the number. If it's less than 2, print 'Not Prime'. Use a loop from 2 to the square root of the number. If the number is divisible by any i in that range, it's not prime. Use a flag variable to track divisibility.",
-      "prerequisites": ["print", "input", "for loop", "if-else", "break", "math.sqrt"],
+      "prerequisites": [
+        "print",
+        "input",
+        "for loop",
+        "if-else",
+        "break",
+        "math.sqrt"
+      ],
       "learning_objectives": [
         "Apply loop with early exit",
         "Use a flag variable",
         "Understand prime number logic",
         "Optimize using square root"
-      ]
+      ],
+      "code": "# Prime Number Checker\nimport math\nnum = [[int]]([[input]](\"Enter a positive integer: \"))\n[[if]] num < 2:\n    [[print]](\"Not Prime\")\nelse:\n    is_prime = True\n    for i in range(2, int(math.sqrt(num)) + 1):\n        if num % i == 0:\n            is_prime = False\n            break\n    if is_prime:\n        print(f\"{num} is Prime\")\n    else:\n        print(f\"{num} is Not Prime\")"
     },
     {
       "id": "p13",
       "name": "LCM & HCF Finder",
       "category": "input_output_conditionals_loops",
-      "class_level": [5, 6],
+      "class_level": [
+        5,
+        6
+      ],
       "subject": "Mathematics",
       "topic": "Factors & Multiples",
       "difficulty": 3,
       "description": "Write a program that takes two numbers and finds their LCM and HCF.",
       "hint": "Take two numbers. Use a loop to find HCF (Euclidean algorithm). LCM = (num1 * num2) // HCF.",
-      "prerequisites": ["print", "input", "for/while loop", "if-else"],
+      "prerequisites": [
+        "print",
+        "input",
+        "for/while loop",
+        "if-else"
+      ],
       "learning_objectives": [
         "Understand factors and multiples",
         "Apply mathematical algorithms",
         "Use loops for calculations"
-      ]
+      ],
+      "code": "# LCM & HCF Finder\na = [[int]]([[input]](\"Enter first number: \"))\nb = int(input(\"Enter second number: \"))\nx, y = a, b\n[[while]] y:\n    x, y = y, x % y\nhcf = x\nlcm = (a * b) // hcf\n[[print]](f\"HCF of {a} and {b} = {hcf}\")\nprint(f\"LCM of {a} and {b} = {lcm}\")"
     },
     {
       "id": "p14",
       "name": "Percentage Calculator",
       "category": "input_output_conditionals",
-      "class_level": [6, 7, 8],
+      "class_level": [
+        6,
+        7,
+        8
+      ],
       "subject": "Mathematics",
       "topic": "Comparing Quantities / Percentage",
       "difficulty": 2,
       "description": "Write a program that takes the total marks and obtained marks and calculates the percentage.",
       "hint": "Take total marks and obtained marks. Percentage = (obtained / total) * 100. Print with clear formatting.",
-      "prerequisites": ["print", "input", "arithmetic operators"],
+      "prerequisites": [
+        "print",
+        "input",
+        "arithmetic operators"
+      ],
       "learning_objectives": [
         "Apply percentage formula",
         "Work with floating-point precision"
-      ]
+      ],
+      "code": "# Percentage Calculator\n[[total]] = [[float]]([[input]](\"Enter total marks: \"))\nobtained = float(input(\"Enter obtained marks: \"))\npercentage = (obtained / total) * 100\n[[print]](f\"Percentage = {percentage:.2f}%\")"
     },
     {
       "id": "p15",
       "name": "Simple Interest Calculator",
       "category": "input_output",
-      "class_level": [7, 8],
+      "class_level": [
+        7,
+        8
+      ],
       "subject": "Mathematics",
       "topic": "Comparing Quantities",
       "difficulty": 2,
       "description": "Write a program that calculates Simple Interest given Principal, Rate, and Time.",
       "hint": "Take P, R, T as input. SI = (P * R * T) / 100. Print the interest amount.",
-      "prerequisites": ["print", "input", "arithmetic operators"],
+      "prerequisites": [
+        "print",
+        "input",
+        "arithmetic operators"
+      ],
       "learning_objectives": [
         "Apply financial formulas",
         "Understand simple interest concept"
-      ]
+      ],
+      "code": "# Simple Interest Calculator\n[[P]] = [[float]]([[input]](\"Enter Principal amount: \"))\nR = float(input(\"Enter Rate of interest (per annum): \"))\nT = float(input(\"Enter Time (in years): \"))\nSI = (P * R * T) / 100\n[[print]](f\"Simple Interest = Rs. {SI}\")"
     },
     {
       "id": "p16",
       "name": "Equation Solver - Linear",
       "category": "input_output",
-      "class_level": [7, 8],
+      "class_level": [
+        7,
+        8
+      ],
       "subject": "Mathematics",
       "topic": "Linear Equations",
       "difficulty": 3,
       "description": "Write a program that solves linear equations of the form ax + b = 0.",
       "hint": "Take a and b as input. If a != 0, x = -b/a. If a == 0 and b == 0, infinite solutions. If a == 0 and b != 0, no solution.",
-      "prerequisites": ["print", "input", "if-elif-else", "arithmetic operators"],
+      "prerequisites": [
+        "print",
+        "input",
+        "if-elif-else",
+        "arithmetic operators"
+      ],
       "learning_objectives": [
         "Solve algebraic equations",
         "Handle special cases",
         "Apply conditional logic"
-      ]
+      ],
+      "code": "# Equation Solver - Linear\na = [[float]]([[input]](\"Enter coefficient a: \"))\nb = float(input(\"Enter constant b: \"))\n[[if]] a != 0:\n    x = -b / a\n    [[print]](f\"Solution: x = {x}\")\nelif b == 0:\n    print(\"Infinite solutions (any x satisfies)\")\nelse:\n    print(\"No solution (contradiction)\")"
     },
     {
       "id": "p17",
       "name": "Circle Area & Circumference",
       "category": "input_output",
-      "class_level": [7, 8],
+      "class_level": [
+        7,
+        8
+      ],
       "subject": "Mathematics",
       "topic": "Mensuration",
       "difficulty": 2,
       "description": "Write a program that takes the radius of a circle and prints its area and circumference.",
       "hint": "Take radius. Area = pi * r^2. Circumference = 2 * pi * r. Use pi = 3.14159.",
-      "prerequisites": ["print", "input", "arithmetic operators"],
+      "prerequisites": [
+        "print",
+        "input",
+        "arithmetic operators"
+      ],
       "learning_objectives": [
         "Apply mensuration formulas",
         "Work with pi constant"
-      ]
+      ],
+      "code": "# Circle Area & Circumference\n[[import]] math\nradius = [[float]]([[input]](\"Enter radius of circle: \"))\narea = math.pi * radius ** 2\ncircumference = 2 * math.pi * radius\n[[print]](f\"Area = {area:.2f}\")\nprint(f\"Circumference = {circumference:.2f}\")"
     },
     {
       "id": "p18",
       "name": "Number Pattern Generator",
       "category": "input_output_conditionals_loops",
-      "class_level": [5, 6, 7],
+      "class_level": [
+        5,
+        6,
+        7
+      ],
       "subject": "Mathematics",
       "topic": "Patterns",
       "difficulty": 3,
       "description": "Write a program that prints a right-angled triangle pattern of numbers.",
       "hint": "Take number of rows N. Use nested loops: outer loop for rows, inner loop for columns. Print numbers in increasing order.",
-      "prerequisites": ["print", "input", "nested loops", "range()"],
+      "prerequisites": [
+        "print",
+        "input",
+        "nested loops",
+        "range()"
+      ],
       "learning_objectives": [
         "Understand nested loops",
         "Generate patterns",
         "Develop logical thinking"
-      ]
+      ],
+      "code": "# Number Pattern Generator\nN = [[int]]([[input]](\"Enter number of rows: \"))\n[[for]] i in range(1, N+1):\n    for j in range(1, i+1):\n        [[print]](j, end=\" \")\n    print()"
     },
     {
       "id": "p19",
       "name": "Electricity Bill Calculator",
       "category": "input_output_conditionals",
-      "class_level": [7, 8],
+      "class_level": [
+        7,
+        8
+      ],
       "subject": "Science",
       "topic": "Electricity (Physics)",
       "difficulty": 2,
       "description": "Write a program that calculates electricity bill based on units consumed.",
       "hint": "Take units consumed. Apply slab rates: first 100 units at Rs.5, next 100 at Rs.7, beyond at Rs.10. Add fixed charge.",
-      "prerequisites": ["print", "input", "if-elif-else", "arithmetic operators"],
+      "prerequisites": [
+        "print",
+        "input",
+        "if-elif-else",
+        "arithmetic operators"
+      ],
       "learning_objectives": [
         "Apply slab-based calculations",
         "Real-world application of conditionals"
-      ]
+      ],
+      "code": "# Electricity Bill Calculator\nunits = [[float]]([[input]](\"Enter units consumed: \"))\nfixed_charge = 50  # example\n[[if]] units <= 100:\n    bill = units * 5\nelif units <= 200:\n    bill = 100 * 5 + (units - 100) * 7\nelse:\n    bill = 100 * 5 + 100 * 7 + (units - 200) * 10\nbill += fixed_charge\n[[print]](f\"Total electricity bill = Rs. {bill}\")"
     },
     {
       "id": "p20",
       "name": "Speed Distance Time Calculator",
       "category": "input_output_conditionals",
-      "class_level": [7, 8],
+      "class_level": [
+        7,
+        8
+      ],
       "subject": "Science",
       "topic": "Motion (Physics)",
       "difficulty": 2,
       "description": "Write a program that takes any two of speed, distance, and time and calculates the third.",
       "hint": "Ask user what they want to calculate. Then take the two inputs. Apply formulas: speed = distance/time, distance = speed*time, time = distance/speed.",
-      "prerequisites": ["print", "input", "if-elif-else", "arithmetic operators"],
+      "prerequisites": [
+        "print",
+        "input",
+        "if-elif-else",
+        "arithmetic operators"
+      ],
       "learning_objectives": [
         "Understand motion formulas",
         "Handle missing variable cases"
-      ]
+      ],
+      "code": "# Speed Distance Time Calculator\n[[print]](\"What do you want to calculate?\")\nprint(\"1. Speed\")\nprint(\"2. Distance\")\nprint(\"3. Time\")\nchoice = [[int]]([[input]](\"Enter choice (1/2/3): \"))\nif choice == 1:\n    d = [[float]](input(\"Enter distance: \"))\n    t = float(input(\"Enter time: \"))\n    speed = d / t\n    print(f\"Speed = {speed}\")\nelif choice == 2:\n    s = float(input(\"Enter speed: \"))\n    t = float(input(\"Enter time: \"))\n    distance = s * t\n    print(f\"Distance = {distance}\")\nelif choice == 3:\n    d = float(input(\"Enter distance: \"))\n    s = float(input(\"Enter speed: \"))\n    time = d / s\n    print(f\"Time = {time}\")\nelse:\n    print(\"Invalid choice\")"
     },
     {
       "id": "p21",
       "name": "Body Mass Index (BMI) Calculator",
       "category": "input_output_conditionals",
-      "class_level": [6, 7, 8],
+      "class_level": [
+        6,
+        7,
+        8
+      ],
       "subject": "Science",
       "topic": "Health & Nutrition",
       "difficulty": 2,
       "description": "Write a program that takes weight (kg) and height (m) and calculates BMI with health category.",
       "hint": "Take weight and height. BMI = weight / (height^2). Classify: underweight (<18.5), normal (18.5-24.9), overweight (25-29.9), obese (>=30).",
-      "prerequisites": ["print", "input", "if-elif-else", "arithmetic operators"],
+      "prerequisites": [
+        "print",
+        "input",
+        "if-elif-else",
+        "arithmetic operators"
+      ],
       "learning_objectives": [
         "Apply health formula",
         "Classify based on ranges"
-      ]
+      ],
+      "code": "# Body Mass Index (BMI) Calculator\nweight = [[float]]([[input]](\"Enter weight in kg: \"))\nheight = float(input(\"Enter height in meters: \"))\nbmi = weight / (height ** 2)\n[[if]] bmi < 18.5:\n    category = \"Underweight\"\nelif 18.5 <= bmi < 25:\n    category = \"Normal\"\nelif 25 <= bmi < 30:\n    category = \"Overweight\"\nelse:\n    category = \"Obese\"\n[[print]](f\"BMI = {bmi:.2f}, Category: {category}\")"
     },
     {
       "id": "p22",
       "name": "Leap Year Checker",
       "category": "input_output_conditionals",
-      "class_level": [6, 7, 8],
+      "class_level": [
+        6,
+        7,
+        8
+      ],
       "subject": "Science / Mathematics",
       "topic": "Time & Calendar",
       "difficulty": 2,
       "description": "Write a program that takes a year and prints whether it's a leap year or not.",
       "hint": "A year is leap if divisible by 400, or divisible by 4 but not by 100. Use nested if-else.",
-      "prerequisites": ["print", "input", "nested if-else", "modulo operator"],
+      "prerequisites": [
+        "print",
+        "input",
+        "nested if-else",
+        "modulo operator"
+      ],
       "learning_objectives": [
         "Apply logical conditions",
         "Understand calendar rules"
-      ]
+      ],
+      "code": "# Leap Year Checker\nyear = [[int]]([[input]](\"Enter a year: \"))\n[[if]] (year % 400 == 0) or (year % 4 == 0 and year % 100 != 0):\n    [[print]](f\"{year} is a leap year\")\nelse:\n    print(f\"{year} is not a leap year\")"
     },
     {
       "id": "p23",
       "name": "Fractions Operations",
       "category": "input_output_conditionals",
-      "class_level": [5, 6, 7],
+      "class_level": [
+        5,
+        6,
+        7
+      ],
       "subject": "Mathematics",
       "topic": "Fractions",
       "difficulty": 3,
       "description": "Write a program that takes two fractions and performs addition, subtraction, multiplication, or division.",
       "hint": "Take numerator and denominator for two fractions. Ask for operation. Use cross-multiplication for addition/subtraction. Simplify if possible.",
-      "prerequisites": ["print", "input", "if-elif-else", "arithmetic operators"],
+      "prerequisites": [
+        "print",
+        "input",
+        "if-elif-else",
+        "arithmetic operators"
+      ],
       "learning_objectives": [
         "Apply fraction operations",
         "Understand LCM concept",
         "Simplify fractions"
-      ]
+      ],
+      "code": "# Fractions Operations\nimport math\nn1 = [[int]]([[input]](\"Numerator of first fraction: \"))\nd1 = int(input(\"Denominator of first fraction: \"))\nn2 = int(input(\"Numerator of second fraction: \"))\nd2 = int(input(\"Denominator of second fraction: \"))\n[[print]](\"Operation: +, -, *, /\")\nop = input(\"Enter operation: \")\n[[if]] op == '+':\n    num = n1*d2 + n2*d1\n    den = d1*d2\nelif op == '-':\n    num = n1*d2 - n2*d1\n    den = d1*d2\nelif op == '*':\n    num = n1*n2\n    den = d1*d2\nelif op == '/':\n    num = n1*d2\n    den = d1*n2\nelse:\n    print(\"Invalid operation\")\n    num = den = 0\nif den != 0:\n    gcd = math.gcd(num, den)\n    num //= gcd\n    den //= gcd\n    print(f\"Result: {num}/{den}\")"
     },
     {
       "id": "p24",
       "name": "Force & Pressure Calculator",
       "category": "input_output",
-      "class_level": [8],
+      "class_level": [
+        8
+      ],
       "subject": "Science",
       "topic": "Force & Pressure (Physics)",
       "difficulty": 2,
       "description": "Write a program that takes force and area and calculates pressure.",
       "hint": "Take force (N) and area (m²). Pressure = Force / Area. Print in Pascals.",
-      "prerequisites": ["print", "input", "arithmetic operators"],
+      "prerequisites": [
+        "print",
+        "input",
+        "arithmetic operators"
+      ],
       "learning_objectives": [
         "Apply pressure formula",
         "Understand force and pressure concepts"
-      ]
+      ],
+      "code": "# Force & Pressure Calculator\n[[force]] = [[float]]([[input]](\"Enter force in Newtons (N): \"))\narea = float(input(\"Enter area in square meters (m²): \"))\npressure = force / area\n[[print]](f\"Pressure = {pressure} Pa (Pascals)\")"
     },
     {
       "id": "p25",
       "name": "Photosynthesis Word Equation",
       "category": "input_output",
-      "class_level": [7, 8],
+      "class_level": [
+        7,
+        8
+      ],
       "subject": "Science",
       "topic": "Nutrition in Plants (Biology)",
       "difficulty": 1,
       "description": "Write a program that prints the photosynthesis equation and asks for inputs to calculate glucose produced.",
       "hint": "Use the formula: 6CO₂ + 6H₂O → C₆H₁₂O₆ + 6O₂. Take amount of CO₂ used, calculate glucose produced. (Simplified: glucose = CO₂/6)",
-      "prerequisites": ["print", "input", "arithmetic operators"],
+      "prerequisites": [
+        "print",
+        "input",
+        "arithmetic operators"
+      ],
       "learning_objectives": [
         "Understand photosynthesis formula",
         "Apply stoichiometric ratios"
-      ]
+      ],
+      "code": "# Photosynthesis Word Equation\n[[print]](\"Photosynthesis: 6CO₂ + 6H₂O → C₆H₁₂O₆ + 6O₂\")\n[[co2]] = [[float]]([[input]](\"Enter amount of CO₂ used (in moles): \"))\nglucose = co2 / 6\nprint(f\"Glucose produced = {glucose} moles\")"
     },
     {
       "id": "p26",
       "name": "Pythagorean Theorem Calculator",
       "category": "input_output_conditionals",
-      "class_level": [7, 8],
+      "class_level": [
+        7,
+        8
+      ],
       "subject": "Mathematics",
       "topic": "Triangles / Geometry",
       "difficulty": 3,
       "description": "Write a program that takes any two sides of a right-angled triangle and calculates the third side.",
       "hint": "Ask user which side is missing. Use Pythagoras theorem: a² + b² = c². Use math.sqrt() to find the missing side.",
-      "prerequisites": ["print", "input", "if-elif-else", "math.sqrt"],
+      "prerequisites": [
+        "print",
+        "input",
+        "if-elif-else",
+        "math.sqrt"
+      ],
       "learning_objectives": [
         "Apply Pythagorean theorem",
         "Use square root function"
-      ]
+      ],
+      "code": "# Pythagorean Theorem Calculator\nimport math\n[[print]](\"Which side is missing?\")\nprint(\"1. Hypotenuse (c)\")\nprint(\"2. Leg (a)\")\nprint(\"3. Leg (b)\")\nchoice = [[int]]([[input]](\"Enter choice (1/2/3): \"))\nif choice == 1:\n    a = [[float]](input(\"Enter leg a: \"))\n    b = float(input(\"Enter leg b: \"))\n    c = math.sqrt(a**2 + b**2)\n    print(f\"Hypotenuse c = {c}\")\nelif choice == 2:\n    b = float(input(\"Enter leg b: \"))\n    c = float(input(\"Enter hypotenuse c: \"))\n    a = math.sqrt(c**2 - b**2)\n    print(f\"Leg a = {a}\")\nelif choice == 3:\n    a = float(input(\"Enter leg a: \"))\n    c = float(input(\"Enter hypotenuse c: \"))\n    b = math.sqrt(c**2 - a**2)\n    print(f\"Leg b = {b}\")\nelse:\n    print(\"Invalid choice\")"
     },
     {
       "id": "p27",
       "name": "Bar Graph Data Plotter",
       "category": "input_output_conditionals_loops",
-      "class_level": [6, 7, 8],
+      "class_level": [
+        6,
+        7,
+        8
+      ],
       "subject": "Mathematics",
       "topic": "Data Handling",
       "difficulty": 3,
       "description": "Write a program that takes N data points and prints a simple text-based bar graph.",
       "hint": "Take N values. Find the maximum value. Scale each value. Print bars using '*' characters in proportion to the values.",
-      "prerequisites": ["print", "input", "loops", "comparison operators"],
+      "prerequisites": [
+        "print",
+        "input",
+        "loops",
+        "comparison operators"
+      ],
       "learning_objectives": [
         "Visualize data",
         "Scale and normalize data"
-      ]
+      ],
+      "code": "# Bar Graph Data Plotter\nn = [[int]]([[input]](\"How many data points? \"))\ndata = []\nfor i in range(n):\n    val = [[float]](input(f\"Enter value {i+1}: \"))\n    data.append(val)\nmax_val = max(data)\nscale = 50 / max_val if max_val != 0 else 1\n[[print]](\"\\nBar Graph:\")\nfor i, val in enumerate(data):\n    bar_length = int(val * scale)\n    print(f\"{i+1}: {'*' * bar_length} ({val})\")"
     },
     {
       "id": "p28",
       "name": "Temperature Converter (All Scales)",
       "category": "input_output_conditionals",
-      "class_level": [7, 8],
+      "class_level": [
+        7,
+        8
+      ],
       "subject": "Science",
       "topic": "Heat (Physics)",
       "difficulty": 2,
       "description": "Write a program that converts temperature between Celsius, Fahrenheit, and Kelvin.",
       "hint": "Ask user for scale to convert from and to. Apply formulas: C = (F - 32) * 5/9, K = C + 273.15.",
-      "prerequisites": ["print", "input", "if-elif-else", "arithmetic operators"],
+      "prerequisites": [
+        "print",
+        "input",
+        "if-elif-else",
+        "arithmetic operators"
+      ],
       "learning_objectives": [
         "Apply multiple conversion formulas",
         "Understand temperature scales"
-      ]
+      ],
+      "code": "# Temperature Converter (All Scales)\n[[print]](\"Convert from: C, F, K\")\nfrom_scale = [[input]](\"From scale: \").upper()\ntemp = [[float]](input(\"Enter temperature: \"))\nprint(\"Convert to: C, F, K\")\nto_scale = input(\"To scale: \").upper()\n# Convert to Celsius first\n[[if]] from_scale == 'C':\n    c = temp\nelif from_scale == 'F':\n    c = (temp - 32) * 5/9\nelif from_scale == 'K':\n    c = temp - 273.15\nelse:\n    print(\"Invalid from scale\")\n    c = None\nif c is not None:\n    if to_scale == 'C':\n        result = c\n    elif to_scale == 'F':\n        result = c * 9/5 + 32\n    elif to_scale == 'K':\n        result = c + 273.15\n    else:\n        print(\"Invalid to scale\")\n        result = None\n    if result is not None:\n        print(f\"Result: {result} {to_scale}\")"
     },
     {
       "id": "p29",
       "name": "Average Speed Calculator (Multiple Legs)",
       "category": "input_output_conditionals_loops",
-      "class_level": [7, 8],
+      "class_level": [
+        7,
+        8
+      ],
       "subject": "Science",
       "topic": "Motion (Physics)",
       "difficulty": 3,
       "description": "Write a program that takes multiple distance-time pairs and calculates total average speed.",
       "hint": "Use a loop to take distances and times for each leg. Calculate total distance and total time. Average speed = total distance / total time.",
-      "prerequisites": ["print", "input", "for loop", "accumulator pattern"],
+      "prerequisites": [
+        "print",
+        "input",
+        "for loop",
+        "accumulator pattern"
+      ],
       "learning_objectives": [
         "Aggregate data from multiple legs",
         "Understand average speed concept"
-      ]
+      ],
+      "code": "# Average Speed Calculator (Multiple Legs)\nlegs = [[int]]([[input]](\"Enter number of legs: \"))\ntotal_dist = 0\ntotal_time = 0\nfor i in range(legs):\n    d = [[float]](input(f\"Distance for leg {i+1} (km): \"))\n    t = float(input(f\"Time for leg {i+1} (h): \"))\n    total_dist += d\n    total_time += t\nif total_time != 0:\n    avg_speed = total_dist / total_time\n    [[print]](f\"Total distance = {total_dist} km\")\n    print(f\"Total time = {total_time} h\")\n    print(f\"Average speed = {avg_speed} km/h\")\nelse:\n    print(\"Total time is zero, cannot calculate speed.\")"
     },
     {
       "id": "p30",
       "name": "Electricity Units Usage Calculator",
       "category": "input_output_conditionals_loops",
-      "class_level": [7, 8],
+      "class_level": [
+        7,
+        8
+      ],
       "subject": "Science",
       "topic": "Electricity (Physics)",
       "difficulty": 3,
       "description": "Write a program that takes power rating and usage time for multiple appliances and calculates total units consumed.",
       "hint": "For each appliance, ask power (W) and time (h). Calculate units = power * time / 1000. Sum all units. Print total units.",
-      "prerequisites": ["print", "input", "for loop", "accumulator"],
+      "prerequisites": [
+        "print",
+        "input",
+        "for loop",
+        "accumulator"
+      ],
       "learning_objectives": [
         "Apply power consumption formula",
         "Calculate total usage",
         "Real-world electricity calculation"
-      ]
+      ],
+      "code": "# Electricity Units Usage Calculator\nappliances = [[int]]([[input]](\"Number of appliances: \"))\ntotal_units = 0\nfor i in range(appliances):\n    power = [[float]](input(f\"Power of appliance {i+1} (W): \"))\n    time = float(input(f\"Usage time (hours): \"))\n    units = power * time / 1000\n    total_units += units\n    [[print]](f\"Appliance {i+1}: {units} units\")\nprint(f\"Total units consumed = {total_units} kWh\")"
     },
     {
       "id": "p31",
       "name": "Quadratic Equation Solver",
       "category": "input_output_conditionals",
-      "class_level": [8],
+      "class_level": [
+        8
+      ],
       "subject": "Mathematics",
       "topic": "Algebra / Quadratic Equations",
       "difficulty": 4,
       "description": "Write a program that solves a quadratic equation ax² + bx + c = 0.",
       "hint": "Take a, b, c. Calculate discriminant = b² - 4ac. If positive, two real roots. If zero, one root. If negative, complex roots. Use math.sqrt().",
-      "prerequisites": ["print", "input", "if-elif-else", "math.sqrt", "complex numbers concept"],
+      "prerequisites": [
+        "print",
+        "input",
+        "if-elif-else",
+        "math.sqrt",
+        "complex numbers concept"
+      ],
       "learning_objectives": [
         "Apply quadratic formula",
         "Handle multiple cases",
         "Use discriminant concept"
-      ]
+      ],
+      "code": "# Quadratic Equation Solver\nimport math\na = [[float]]([[input]](\"Enter coefficient a: \"))\nb = float(input(\"Enter coefficient b: \"))\nc = float(input(\"Enter coefficient c: \"))\ndiscriminant = b**2 - 4*a*c\n[[if]] a == 0:\n    [[print]](\"This is not a quadratic equation (a=0)\")\nelif discriminant > 0:\n    root1 = (-b + math.sqrt(discriminant)) / (2*a)\n    root2 = (-b - math.sqrt(discriminant)) / (2*a)\n    print(f\"Two real roots: {root1} and {root2}\")\nelif discriminant == 0:\n    root = -b / (2*a)\n    print(f\"One real root (double): {root}\")\nelse:\n    real = -b / (2*a)\n    imag = math.sqrt(-discriminant) / (2*a)\n    print(f\"Complex roots: {real} + {imag}i and {real} - {imag}i\")"
     },
     {
       "id": "p32",
       "name": "Solar System Distance Calculator",
       "category": "input_output_conditionals",
-      "class_level": [8],
+      "class_level": [
+        8
+      ],
       "subject": "Science",
       "topic": "Stars & Solar System",
       "difficulty": 2,
       "description": "Write a program that takes planet name and prints its distance from the Sun.",
       "hint": "Use if-elif-else or dictionary to map planet names to distances (in million km). Print the distance.",
-      "prerequisites": ["print", "input", "if-elif-else"],
+      "prerequisites": [
+        "print",
+        "input",
+        "if-elif-else"
+      ],
       "learning_objectives": [
         "Learn planetary distances",
         "Work with data mapping"
-      ]
+      ],
+      "code": "# Solar System Distance Calculator\nplanet = [[input]](\"Enter planet name: \").lower()\ndistances = {\n    \"mercury\": 57.9,\n    \"venus\": 108.2,\n    \"earth\": 149.6,\n    \"mars\": 227.9,\n    \"jupiter\": 778.6,\n    \"saturn\": 1433.5,\n    \"uranus\": 2872.5,\n    \"neptune\": 4495.1\n}\n[[if]] planet in distances:\n    [[print]](f\"{planet.capitalize()} is {distances[planet]} million km from the Sun.\")\n[[else]]:\n    print(\"Planet not found in the database.\")"
     },
     {
       "id": "p33",
       "name": "Ratio and Proportion Solver",
       "category": "input_output",
-      "class_level": [6, 7, 8],
+      "class_level": [
+        6,
+        7,
+        8
+      ],
       "subject": "Mathematics",
       "topic": "Ratio & Proportion",
       "difficulty": 2,
       "description": "Write a program that takes two ratios and checks if they are in proportion.",
       "hint": "Take a:b and c:d. Check if a*d == b*c. Print whether they are proportional.",
-      "prerequisites": ["print", "input", "if-else", "arithmetic operators"],
+      "prerequisites": [
+        "print",
+        "input",
+        "if-else",
+        "arithmetic operators"
+      ],
       "learning_objectives": [
         "Understand proportion concept",
         "Apply cross multiplication"
-      ]
+      ],
+      "code": "# Ratio and Proportion Solver\na = [[float]]([[input]](\"Enter a (of a:b): \"))\nb = float(input(\"Enter b (of a:b): \"))\nc = float(input(\"Enter c (of c:d): \"))\nd = float(input(\"Enter d (of c:d): \"))\n[[if]] a*d == b*c:\n    [[print]](\"The ratios are in proportion.\")\nelse:\n    print(\"The ratios are NOT in proportion.\")"
     },
     {
       "id": "p34",
       "name": "Gravity Weight Calculator",
       "category": "input_output",
-      "class_level": [8],
+      "class_level": [
+        8
+      ],
       "subject": "Science",
       "topic": "Force & Pressure / Gravitation",
       "difficulty": 2,
       "description": "Write a program that takes mass and calculates weight on Earth and Moon.",
       "hint": "Take mass (kg). Weight on Earth = mass * 9.8. Weight on Moon = weight_on_earth / 6. Print both.",
-      "prerequisites": ["print", "input", "arithmetic operators"],
+      "prerequisites": [
+        "print",
+        "input",
+        "arithmetic operators"
+      ],
       "learning_objectives": [
         "Understand weight vs mass",
         "Apply gravitational concepts"
-      ]
+      ],
+      "code": "# Gravity Weight Calculator\n[[mass]] = [[float]]([[input]](\"Enter mass in kg: \"))\nweight_earth = mass * 9.8\nweight_moon = weight_earth / 6\n[[print]](f\"Weight on Earth: {weight_earth} N\")\nprint(f\"Weight on Moon: {weight_moon} N\")"
+    },
+    {
+      "id": "p35",
+      "name": "Welcome Message Printer",
+      "category": "output",
+      "class_level": [
+        5,
+        6
+      ],
+      "subject": "Computer Science",
+      "topic": "Output Statements",
+      "difficulty": 1,
+      "description": "Write a program that prints a friendly welcome message and a short learning goal.",
+      "hint": "Use print() statements with fixed text. No input is needed.",
+      "prerequisites": [
+        "print"
+      ],
+      "learning_objectives": [
+        "Use print() to display text",
+        "Write multiple output lines"
+      ],
+      "code": "# Welcome Message Printer\n[[print]](\"Welcome to Python class!\")\nprint(\"Today we will learn to display output.\")\nprint(\"Let us begin with print statements.\")"
+    },
+    {
+      "id": "p36",
+      "name": "School Timetable Display",
+      "category": "output",
+      "class_level": [
+        5,
+        6
+      ],
+      "subject": "Computer Science",
+      "topic": "Formatted Output",
+      "difficulty": 1,
+      "description": "Write a program that prints a simple three-period school timetable.",
+      "hint": "Use print() with fixed strings for each row of the timetable.",
+      "prerequisites": [
+        "print"
+      ],
+      "learning_objectives": [
+        "Display organized text",
+        "Practice readable output labels"
+      ],
+      "code": "# School Timetable Display\n[[print]](\"Period 1: Mathematics\")\nprint(\"Period 2: Science\")\nprint(\"Period 3: Computer Science\")"
+    },
+    {
+      "id": "p37",
+      "name": "Rectangle Formula Poster",
+      "category": "output",
+      "class_level": [
+        5,
+        6
+      ],
+      "subject": "Mathematics",
+      "topic": "Mensuration",
+      "difficulty": 1,
+      "description": "Write a program that prints the area and perimeter formulas for a rectangle.",
+      "hint": "Print the formulas as text. No calculation from user input is required.",
+      "prerequisites": [
+        "print"
+      ],
+      "learning_objectives": [
+        "Connect math formulas with output",
+        "Use print() for study notes"
+      ],
+      "code": "# Rectangle Formula Poster\n[[print]](\"Rectangle Formulas\")\nprint(\"Area = length * breadth\")\nprint(\"Perimeter = 2 * (length + breadth)\")"
+    },
+    {
+      "id": "p38",
+      "name": "Fixed Rectangle Calculator",
+      "category": "output",
+      "class_level": [
+        5,
+        6
+      ],
+      "subject": "Mathematics",
+      "topic": "Area and Perimeter",
+      "difficulty": 1,
+      "description": "Write a program that calculates area and perimeter for a rectangle with fixed length and breadth.",
+      "hint": "Store fixed values in variables, calculate area and perimeter, and print the results.",
+      "prerequisites": [
+        "print",
+        "variables",
+        "arithmetic operators"
+      ],
+      "learning_objectives": [
+        "Use variables with fixed values",
+        "Apply arithmetic operators without input"
+      ],
+      "code": "# Fixed Rectangle Calculator\n[[length]] = 8\nbreadth = 5\narea = length * breadth\nperimeter = 2 * (length + breadth)\n[[print]](f\"Area = {area}\")\nprint(f\"Perimeter = {perimeter}\")"
+    },
+    {
+      "id": "p39",
+      "name": "Planet Facts Display",
+      "category": "output",
+      "class_level": [
+        5,
+        6,
+        7
+      ],
+      "subject": "Science",
+      "topic": "Earth and Space",
+      "difficulty": 1,
+      "description": "Write a program that prints three simple facts about Earth.",
+      "hint": "Use print() statements with fixed science facts.",
+      "prerequisites": [
+        "print"
+      ],
+      "learning_objectives": [
+        "Display science facts",
+        "Practice multiple print statements"
+      ],
+      "code": "# Planet Facts Display\n[[print]](\"Earth is the third planet from the Sun.\")\nprint(\"Earth has one natural satellite: the Moon.\")\nprint(\"Earth takes about 365 days to orbit the Sun.\")"
+    },
+    {
+      "id": "p40",
+      "name": "Water Cycle Steps",
+      "category": "output",
+      "class_level": [
+        5,
+        6,
+        7
+      ],
+      "subject": "Science",
+      "topic": "Water Cycle",
+      "difficulty": 1,
+      "description": "Write a program that prints the main steps of the water cycle.",
+      "hint": "Print each step of the cycle in order.",
+      "prerequisites": [
+        "print"
+      ],
+      "learning_objectives": [
+        "Sequence science concepts",
+        "Use output lines for ordered steps"
+      ],
+      "code": "# Water Cycle Steps\n[[print]](\"1. Evaporation\")\nprint(\"2. Condensation\")\nprint(\"3. Precipitation\")\nprint(\"4. Collection\")"
+    },
+    {
+      "id": "p41",
+      "name": "Fixed Temperature Conversion",
+      "category": "output",
+      "class_level": [
+        7,
+        8
+      ],
+      "subject": "Science",
+      "topic": "Heat",
+      "difficulty": 1,
+      "description": "Write a program that converts a fixed Celsius temperature to Fahrenheit.",
+      "hint": "Use a fixed Celsius value. Fahrenheit = (Celsius * 9/5) + 32.",
+      "prerequisites": [
+        "print",
+        "variables",
+        "arithmetic operators"
+      ],
+      "learning_objectives": [
+        "Apply a conversion formula",
+        "Calculate using fixed values"
+      ],
+      "code": "# Fixed Temperature Conversion\n[[celsius]] = 25\nfahrenheit = (celsius * 9 / 5) + 32\n[[print]](f\"{celsius}°C = {fahrenheit}°F\")"
+    },
+    {
+      "id": "p42",
+      "name": "Simple Interest Example",
+      "category": "output",
+      "class_level": [
+        7,
+        8
+      ],
+      "subject": "Mathematics",
+      "topic": "Simple Interest",
+      "difficulty": 1,
+      "description": "Write a program that calculates simple interest using fixed principal, rate, and time.",
+      "hint": "Use SI = (P * R * T) / 100 with fixed values.",
+      "prerequisites": [
+        "print",
+        "variables",
+        "arithmetic operators"
+      ],
+      "learning_objectives": [
+        "Use a financial formula",
+        "Print calculated output"
+      ],
+      "code": "# Simple Interest Example\n[[principal]] = 1000\nrate = 5\ntime = 2\nsimple_interest = (principal * rate * time) / 100\n[[print]](f\"Simple Interest = Rs. {simple_interest}\")"
+    },
+    {
+      "id": "p43",
+      "name": "Multiplication Facts Display",
+      "category": "output",
+      "class_level": [
+        5,
+        6
+      ],
+      "subject": "Mathematics",
+      "topic": "Multiplication",
+      "difficulty": 1,
+      "description": "Write a program that prints a few multiplication facts for the number 6.",
+      "hint": "Use print() with fixed multiplication expressions or calculated values.",
+      "prerequisites": [
+        "print",
+        "arithmetic operators"
+      ],
+      "learning_objectives": [
+        "Display arithmetic facts",
+        "Practice multiplication expressions"
+      ],
+      "code": "# Multiplication Facts Display\n[[print]](f\"6 x 1 = {6 * 1}\")\nprint(f\"6 x 2 = {6 * 2}\")\nprint(f\"6 x 3 = {6 * 3}\")\nprint(f\"6 x 4 = {6 * 4}\")"
+    },
+    {
+      "id": "p44",
+      "name": "Average Marks Example",
+      "category": "output",
+      "class_level": [
+        6,
+        7
+      ],
+      "subject": "Mathematics",
+      "topic": "Data Handling",
+      "difficulty": 1,
+      "description": "Write a program that calculates the average of three fixed marks.",
+      "hint": "Store three fixed marks, calculate their average, and print it.",
+      "prerequisites": [
+        "print",
+        "variables",
+        "arithmetic operators"
+      ],
+      "learning_objectives": [
+        "Compute average with fixed values",
+        "Use multiple variables"
+      ],
+      "code": "# Average Marks Example\n[[math_marks]] = 82\nscience_marks = 90\nenglish_marks = 88\naverage = (math_marks + science_marks + english_marks) / 3\n[[print]](f\"Average marks = {average}\")"
+    },
+    {
+      "id": "p45",
+      "name": "Force Formula Example",
+      "category": "output",
+      "class_level": [
+        8
+      ],
+      "subject": "Science",
+      "topic": "Force and Pressure",
+      "difficulty": 1,
+      "description": "Write a program that calculates force using fixed mass and acceleration.",
+      "hint": "Use Force = mass * acceleration with fixed values.",
+      "prerequisites": [
+        "print",
+        "variables",
+        "arithmetic operators"
+      ],
+      "learning_objectives": [
+        "Apply a science formula",
+        "Use fixed numeric values in code"
+      ],
+      "code": "# Force Formula Example\n[[mass]] = 10\nacceleration = 9.8\nforce = mass * acceleration\n[[print]](f\"Force = {force} N\")"
+    },
+    {
+      "id": "p46",
+      "name": "Python Escape Characters Demo",
+      "category": "output",
+      "class_level": [
+        6,
+        7
+      ],
+      "subject": "Computer Science",
+      "topic": "Output Formatting",
+      "difficulty": 1,
+      "description": "Write a program that prints text using newline and tab escape characters.",
+      "hint": "Use escape characters like \\n and \\t inside strings.",
+      "prerequisites": [
+        "print",
+        "escape characters"
+      ],
+      "learning_objectives": [
+        "Use escape characters in output",
+        "Format text with print()"
+      ],
+      "code": "# Python Escape Characters Demo\n[[print]](\"Name:\\tAnaya\")\nprint(\"Class:\\t6\")\nprint(\"Favorite subject:\\nComputer Science\")"
     }
   ]
 }

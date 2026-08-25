@@ -9,6 +9,8 @@ const isMobileDevice = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/
 
 let onConsoleInputRequested = null;
 let pendingConsoleInputResolver = null;
+let pendingConsoleInputRejecter = null;
+let queuedConsoleInputRequests = [];
 let jediAvailable = false;
 let pyodideReady = false;
 let isVirtualKeyboardEnabled = false; // Track virtual keyboard state
@@ -82,12 +84,15 @@ function updateEditorKeyboardMode(editor, virtualKeyboardEnabled) {
 
 function requestConsoleInput(promptText = "") {
   return new Promise((resolve, reject) => {
+    const queuedRequest = { resolve, reject, promptText };
+
     if (pendingConsoleInputResolver) {
-      reject(new Error("Another input() request is already pending."));
+      queuedConsoleInputRequests.push(queuedRequest);
       return;
     }
 
     pendingConsoleInputResolver = resolve;
+    pendingConsoleInputRejecter = reject;
 
     if (onConsoleInputRequested) {
       onConsoleInputRequested(String(promptText ?? ""));
@@ -95,6 +100,28 @@ function requestConsoleInput(promptText = "") {
   });
 }
 
+function activateQueuedConsoleInputRequest() {
+  if (pendingConsoleInputResolver) {
+    return;
+  }
+
+  const nextRequest = queuedConsoleInputRequests.shift();
+  if (!nextRequest) {
+    return;
+  }
+
+  pendingConsoleInputResolver = nextRequest.resolve;
+  pendingConsoleInputRejecter = nextRequest.reject;
+
+  if (onConsoleInputRequested) {
+    onConsoleInputRequested(String(nextRequest.promptText ?? ""));
+  }
+}
+
+function clearPendingConsoleInputRequest() {
+  pendingConsoleInputResolver = null;
+  pendingConsoleInputRejecter = null;
+}
 
 // Helper function to clean common invalid characters from code
 function sanitizeCode(code) {
@@ -1140,8 +1167,10 @@ window.pyodideInterop = {
     }
 
     const normalizedValue = String(value ?? "");
-    pendingConsoleInputResolver(normalizedValue);
-    pendingConsoleInputResolver = null;
+    const resolve = pendingConsoleInputResolver;
+    clearPendingConsoleInputRequest();
+    resolve(normalizedValue);
+    activateQueuedConsoleInputRequest();
   },
 
   init: (onOutput) => {
