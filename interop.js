@@ -1,5 +1,6 @@
 // --- Globals ---
 let monacoEditors = {}; // Object to store editor instances
+let executionLineDecorationIds = {};
 let pyodide;
 let monacoLoaded = false;
 let monacoLoadPromise = null;
@@ -339,6 +340,26 @@ function loadMonaco() {
 }
 
 console.log('Monaco Interop JavaScript loaded');
+
+function ensureExecutionLineStyles() {
+  if (document.getElementById("python-web-ide-execution-line-styles")) {
+    return;
+  }
+
+  const style = document.createElement("style");
+  style.id = "python-web-ide-execution-line-styles";
+  style.textContent = `
+    .python-web-ide-executed-line {
+      background: rgba(250, 204, 21, 0.26);
+      border-left: 4px solid #f59e0b;
+    }
+    .python-web-ide-next-line {
+      background: rgba(34, 197, 94, 0.20);
+      border-left: 4px solid #22c55e;
+    }
+  `;
+  document.head.appendChild(style);
+}
 
 // Pre-define Python suggestions for faster lookup (defined once globally)
 const pythonSuggestions = [
@@ -1020,6 +1041,59 @@ window.monacoInterop = {
       editor.revealPositionInCenter(position);
       editor.focus();
     }
+  },
+
+  setExecutionLines: (containerId, executedLine, nextLine) => {
+    const editor = monacoEditors[containerId];
+    if (!editor || !window.monaco) {
+      return;
+    }
+
+    ensureExecutionLineStyles();
+
+    const decorations = [];
+    const executed = Number(executedLine);
+    const next = Number(nextLine);
+
+    if (Number.isFinite(executed) && executed > 0) {
+      decorations.push({
+        range: new monaco.Range(executed, 1, executed, 1),
+        options: {
+          isWholeLine: true,
+          className: "python-web-ide-executed-line",
+          glyphMarginClassName: "python-web-ide-executed-glyph",
+          hoverMessage: { value: "Line that just ran" }
+        }
+      });
+    }
+
+    if (Number.isFinite(next) && next > 0 && next !== executed) {
+      decorations.push({
+        range: new monaco.Range(next, 1, next, 1),
+        options: {
+          isWholeLine: true,
+          className: "python-web-ide-next-line",
+          hoverMessage: { value: "Next line to run" }
+        }
+      });
+    }
+
+    executionLineDecorationIds[containerId] = editor.deltaDecorations(
+      executionLineDecorationIds[containerId] || [],
+      decorations
+    );
+  },
+
+  clearExecutionLines: (containerId) => {
+    const editor = monacoEditors[containerId];
+    if (!editor) {
+      return;
+    }
+
+    executionLineDecorationIds[containerId] = editor.deltaDecorations(
+      executionLineDecorationIds[containerId] || [],
+      []
+    );
   }
 };
 
