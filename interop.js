@@ -29,6 +29,51 @@ const preferredWebLlmModelIds = [
   "gemma-2-2b-it-q4f32_1-MLC",
 ];
 
+// Web equivalent of Android showSoftInputOnFocus. Keep focus and hardware
+// keyboard input available while suppressing the phone's on-screen keyboard.
+let systemKeyboardEnabled = true;
+const suppressedKeyboardInputs = new Map();
+function applySystemKeyboardMode(element) {
+  if (!element || !['INPUT', 'TEXTAREA'].includes(element.tagName)) return;
+  if (!systemKeyboardEnabled) {
+    if (!suppressedKeyboardInputs.has(element)) {
+      suppressedKeyboardInputs.set(element, element.getAttribute('inputmode'));
+    }
+    if (element.getAttribute('inputmode') !== 'none') {
+      element.setAttribute('inputmode', 'none');
+    }
+  }
+}
+window.setSystemKeyboardEnabled = function(enabled) {
+  systemKeyboardEnabled = enabled;
+  if (enabled) {
+    for (const [element, mode] of suppressedKeyboardInputs) {
+      if (mode === null) element.removeAttribute('inputmode');
+      else element.setAttribute('inputmode', mode);
+    }
+    suppressedKeyboardInputs.clear();
+  } else {
+    document.querySelectorAll('input, textarea').forEach(applySystemKeyboardMode);
+    const active = document.activeElement;
+    if (active && ['INPUT', 'TEXTAREA'].includes(active.tagName)) active.blur();
+  }
+};
+document.addEventListener('focusin', event => applySystemKeyboardMode(event.target), true);
+document.addEventListener('pointerdown', event => applySystemKeyboardMode(event.target), true);
+const systemKeyboardObserver = new MutationObserver(records => {
+  if (systemKeyboardEnabled) return;
+  for (const record of records) {
+    if (record.type === 'attributes') applySystemKeyboardMode(record.target);
+    for (const node of record.addedNodes || []) {
+      applySystemKeyboardMode(node);
+      node.querySelectorAll?.('input, textarea').forEach(applySystemKeyboardMode);
+    }
+  }
+});
+systemKeyboardObserver.observe(document.documentElement, {
+  childList: true, subtree: true, attributes: true, attributeFilter: ['inputmode'],
+});
+
 // Set virtual keyboard state from Flutter
 window.setVirtualKeyboardEnabled = function(enabled) {
   isVirtualKeyboardEnabled = enabled;
