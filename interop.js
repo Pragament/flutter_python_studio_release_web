@@ -324,16 +324,46 @@ black.format_str(source_code, mode=mode)
 
 // Function to initialize Monaco only once
 function loadMonaco() {
+  if (window.monaco?.editor) {
+    monacoLoaded = true;
+    return Promise.resolve();
+  }
   if (!monacoLoadPromise) {
-    monacoLoadPromise = new Promise((resolve) => {
-      require.config({
-        paths: { 'vs': 'https://unpkg.com/monaco-editor@0.41.0/min/vs' }
-      });
-
-      require(['vs/editor/editor.main'], () => {
-        monacoLoaded = true;
-        resolve();
-      });
+    monacoLoadPromise = (async () => {
+      if (typeof require !== 'function') {
+        throw new Error('Monaco loader is unavailable. Check your connection and reload.');
+      }
+      const sources = [
+        'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.41.0/min/vs',
+        'https://unpkg.com/monaco-editor@0.41.0/min/vs',
+      ];
+      let lastError;
+      for (const source of sources) {
+        try {
+          await new Promise((resolve, reject) => {
+            const timeout = setTimeout(() => reject(new Error('Editor download timed out')), 15000);
+            const finish = (error) => {
+              clearTimeout(timeout);
+              error ? reject(error) : resolve();
+            };
+            require.config({ paths: { vs: source }, waitSeconds: 15 });
+            // Remove failed AMD modules so another source (or Retry) can load them.
+            require(['vs/editor/editor.main'], () => finish(), (error) => {
+              for (const id of error.requireModules || []) require.undef(id);
+              finish(error);
+            });
+          });
+          monacoLoaded = true;
+          return;
+        } catch (error) {
+          lastError = error;
+          require.undef('vs/editor/editor.main');
+        }
+      }
+      throw lastError;
+    })().catch((error) => {
+      monacoLoadPromise = null;
+      throw error;
     });
   }
   return monacoLoadPromise;
