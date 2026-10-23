@@ -1,4 +1,5 @@
 // --- Globals ---
+const pendingMonacoValues = new Map();
 let monacoEditors = {}; // Object to store editor instances
 let executionLineDecorationIds = {};
 let pyodide;
@@ -657,7 +658,9 @@ window.monacoInterop = {
       }
 
       const editor = monaco.editor.create(container, {
-        value: initialCode,
+        value: pendingMonacoValues.has(containerId)
+          ? pendingMonacoValues.get(containerId)
+          : initialCode,
         language: 'python',
         theme: theme,
         fontSize: fontSize,
@@ -722,6 +725,7 @@ window.monacoInterop = {
 
       // Store the editor instance
       monacoEditors[containerId] = editor;
+      pendingMonacoValues.delete(containerId);
 
       // Register the Python completion provider globally (only once)
       registerPythonCompletionProvider();
@@ -815,6 +819,9 @@ window.monacoInterop = {
     const editor = monacoEditors[containerId];
     if (editor) {
       editor.setValue(content);
+      editor.layout();
+    } else {
+      pendingMonacoValues.set(containerId, content);
     }
   },
 
